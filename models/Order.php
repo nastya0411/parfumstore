@@ -47,6 +47,8 @@ class Order extends \yii\db\ActiveRecord
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategory::class, 'targetAttribute' => ['product_category_id' => 'id']],
+            ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
+
         ];
     }
 
@@ -56,17 +58,17 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_category_id' => 'Product Category ID',
-            'total_price' => 'Total Price',
-            'status_id' => 'Status ID',
-            'address' => 'Address',
-            'phone' => 'Phone',
-            'created_at' => 'Created At',
-            'date' => 'Date',
-            'time' => 'Time',
-            'other_reason' => 'Other Reason',
+            'id' => '№ заявки',
+            'user_id' => 'Клиент',
+            'product_category_id' => 'Заказ',
+            'total_price' => 'Полная цена заказа',
+            'status_id' => 'Статус заказа',
+            'address' => 'Адрес',
+            'phone' => 'Телефон',
+            'created_at' => 'Время создания',
+            'date' => 'Дата получения заказа',
+            'time' => 'Время получения заказа',
+            'other_reason' => 'Причина отмены заказа',
         ];
     }
 

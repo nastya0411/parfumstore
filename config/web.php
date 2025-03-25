@@ -47,11 +47,16 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'account' => [
+            'class' => 'app\modules\account\Module',
+            'defaultRoute' => 'order/index'
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
