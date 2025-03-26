@@ -25,6 +25,10 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+
+    const SCENARIO_ORDER = 'order';
+     const SCENARIO_CANCEL = 'cancel';
+     const SCENARIO_OTHER = 'other';
     /**
      * {@inheritdoc}
      */
@@ -39,15 +43,20 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'product_category_id', 'total_price', 'status_id', 'address', 'phone', 'date', 'time', 'other_reason'], 'required'],
-            [['user_id', 'product_category_id', 'status_id'], 'integer'],
+            [['user_id', 'product_category_id', 'total_price', 'status_id', 'address', 'phone', 'date', 'time', 'other_reason', 'pay_type_id'], 'required'],
+            [['user_id', 'product_category_id', 'status_id', 'pay_type_id',], 'integer'],
             [['total_price'], 'number'],
             [['created_at', 'date', 'time'], 'safe'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
+            [['pay_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PayType::class, 'targetAttribute' => ['pay_type_id' => 'id']],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategory::class, 'targetAttribute' => ['product_category_id' => 'id']],
             ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
+
+            ['order_id', 'required', 'on' => self::SCENARIO_ORDER],
+            ['check', 'boolean'],
+            ['other', 'required', 'on' => self::SCENARIO_OTHER],
 
         ];
     }
@@ -67,6 +76,7 @@ class Order extends \yii\db\ActiveRecord
             'phone' => 'Телефон',
             'created_at' => 'Время создания',
             'date' => 'Дата получения заказа',
+            'pay_type_id' => 'Тип оплаты',
             'time' => 'Время получения заказа',
             'other_reason' => 'Причина отмены заказа',
         ];

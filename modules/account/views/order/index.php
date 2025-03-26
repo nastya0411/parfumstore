@@ -12,12 +12,12 @@ use yii\widgets\Pjax;
 $this->title = 'Личный кабинет';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="order-index">
+<div class="application-index">
 
     <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
-        <?= Html::a('Создать заказ', ['create'], ['class' => 'btn btn-outline-success']) ?>
+        <?= Html::a('Создание заказа', ['create'], ['class' => 'btn btn-outline-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -25,9 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-        },
+        'itemView' => 'item'
     ]) ?>
 
     <?php Pjax::end(); ?>

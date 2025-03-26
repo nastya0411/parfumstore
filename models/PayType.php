@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "status".
+ * This is the model class for table "pay_type".
  *
  * @property int $id
  * @property string $title
  *
  * @property Order[] $orders
  */
-class Status extends \yii\db\ActiveRecord
+class PayType extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'status';
+        return 'pay_type';
     }
 
     /**
@@ -51,16 +51,10 @@ class Status extends \yii\db\ActiveRecord
      */
     public function getOrders()
     {
-        return $this->hasMany(Order::class, ['status_id' => 'id']);
+        return $this->hasMany(Order::class, ['pay_type_id' => 'id']);
     }
 
-    public static function getStatusId(string $title): int
-    {
-        return self::findOne(['title' => $title])->id;
-    }
-    
-    
-    public static function getStatuses()
+    public static function getPayTypes()
     {
         return self::find()
             ->select('title')
@@ -68,6 +62,4 @@ class Status extends \yii\db\ActiveRecord
             ->column()
             ;
     }
-
-
 }

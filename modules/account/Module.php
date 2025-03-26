@@ -10,14 +10,19 @@ use yii\filters\AccessControl;
  */
 class Module extends \yii\base\Module
 {
+    /**
+     * {@inheritdoc}
+     */
+    public $controllerNamespace = 'app\modules\account\controllers';
+
 
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => AccessControl::class,
+                'class' => AccessControl::class,                
                 'rules' => [
-                    [
+                    [                        
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => fn() => !Yii::$app->user->identity->isAdmin,
@@ -27,10 +32,7 @@ class Module extends \yii\base\Module
             ],
         ];
     }
-    /**
-     * {@inheritdoc}
-     */
-    public $controllerNamespace = 'app\modules\account\controllers';
+
 
     /**
      * {@inheritdoc}

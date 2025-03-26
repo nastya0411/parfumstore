@@ -39,6 +39,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['role_id'], 'integer'],
             [['login', 'password', 'full_name', 'email', 'phone', 'auth_key'], 'string', 'max' => 255],
             [['login'], 'unique'],
+            ['password', 'string', 'min' => 6],
+            ['password', 'safe'], 
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -50,11 +52,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
-            'password' => 'Password',
-            'full_name' => 'Full Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
+            'login' => 'Логин',
+            'password' => 'Пароль',
+            'full_name' => 'ФИО',
+            'email' => 'Адрес электронной почты',
+            'phone' => 'Телефон',
             'role_id' => 'Role ID',
             'auth_key' => 'Auth Key',
         ];

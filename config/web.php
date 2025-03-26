@@ -47,13 +47,21 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+
+                'account/profile/view' => 'account/profile/view',
+
+            ],
         ],
     ],
     'params' => $params,
     'modules' => [
         'account' => [
             'class' => 'app\modules\account\Module',
+            'defaultRoute' => 'order/index',
+        ],
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
             'defaultRoute' => 'order/index'
         ],
     ],
