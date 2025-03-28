@@ -11,7 +11,6 @@ use Yii;
  * @property string $title
  *
  * @property NotesProp[] $notesProps
- * @property ProductNotes[] $productNotes
  */
 class Notes extends \yii\db\ActiveRecord
 {
@@ -53,15 +52,5 @@ class Notes extends \yii\db\ActiveRecord
     public function getNotesProps()
     {
         return $this->hasMany(NotesProp::class, ['notes_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[ProductNotes]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductNotes()
-    {
-        return $this->hasMany(ProductNotes::class, ['notes_id' => 'id']);
     }
 }

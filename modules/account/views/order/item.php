@@ -12,8 +12,8 @@ use yii\bootstrap5\Html;
     <h5 class="card-title text-decoration-underline">Дата и время услуги: <?= Yii::$app->formatter->asDate($model->date, 'php:d.m.Y') . ' ' . $model->time ?></h5>
     <p class="card-text">Состав заказа: 
         <span class="fs-5">
-          <?= $model->service_id 
-              ? $model->service->title 
+          <?= $model->product_category_id 
+              ? $model->order->title 
               : $model->other
           ?>    
         </span>

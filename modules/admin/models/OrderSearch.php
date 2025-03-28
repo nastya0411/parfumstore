@@ -1,77 +1,61 @@
 <?php
- 
- namespace app\modules\admin\models;
- 
- use yii\base\Model;
- use yii\data\ActiveDataProvider;
- use app\models\Order;
- 
- /**
-  * OrderSearch represents the model behind the search form of `app\models\Application`.
-  */
- class OrderSearch extends Order
- {
-     /**
-      * {@inheritdoc}
-      */
-     public function rules()
-     {
-         return [
-             [['id', 'service_id', 'pay_type_id', 'status_id', 'user_id'], 'integer'],
-             [['address', 'phone', 'created_at', 'date', 'time', 'other'], 'safe'],
-         ];
-     }
- 
-     /**
-      * {@inheritdoc}
-      */
-     public function scenarios()
-     {
-         // bypass scenarios() implementation in the parent class
-         return Model::scenarios();
-     }
- 
-     /**
-      * Creates data provider instance with search query applied
-      *
-      * @param array $params
-      *
-      * @return ActiveDataProvider
-      */
-     public function search($params)
-     {
-         $query = Order::find();
- 
-         // add conditions that should always apply here
- 
-         $dataProvider = new ActiveDataProvider([
-             'query' => $query,
-         ]);
- 
-         $this->load($params);
- 
-         if (!$this->validate()) {
-             // uncomment the following line if you do not want to return any records when validation fails
-             // $query->where('0=1');
-             return $dataProvider;
-         }
- 
-         // grid filtering conditions
-         $query->andFilterWhere([
-             'id' => $this->id,
-             'created_at' => $this->created_at,
-             'date' => $this->date,
-             'time' => $this->time,
-             'service_id' => $this->service_id,
-             'pay_type_id' => $this->pay_type_id,
-             'status_id' => $this->status_id,
-             'user_id' => $this->user_id,
-         ]);
- 
-         $query->andFilterWhere(['like', 'address', $this->address])
-             ->andFilterWhere(['like', 'phone', $this->phone])
-             ->andFilterWhere(['like', 'other', $this->other]);
- 
-         return $dataProvider;
-     }
- }
+
+namespace app\modules\admin\models;
+
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
+use app\models\Order;
+
+class OrderSearch extends Order
+{
+    // Свойства для поиска
+    public $user_id;
+    public $status_id;
+    public $address;
+    public $phone;
+    public $date;
+    public $time;
+    public $product_category_id;
+    public $pay_type_id;
+    
+    public function rules()
+    {
+        return [
+            [['id', 'user_id', 'status_id', 'product_category_id', 'pay_type_id'], 'integer'],
+            [['address', 'phone', 'date', 'time'], 'safe'],
+        ];
+    }
+
+    public function search($params)
+    {
+        $query = Order::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC]
+            ]
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        // Условия фильтрации
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'product_category_id' => $this->product_category_id,
+            'pay_type_id' => $this->pay_type_id,
+            'status_id' => $this->status_id,
+            'user_id' => $this->user_id,
+            'DATE(date)' => $this->date ? date('Y-m-d', strtotime($this->date)) : null,
+        ]);
+
+        $query->andFilterWhere(['like', 'address', $this->address])
+              ->andFilterWhere(['like', 'phone', $this->phone]);
+
+        return $dataProvider;
+    }
+}

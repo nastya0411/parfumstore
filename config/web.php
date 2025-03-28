@@ -64,6 +64,15 @@ $config = [
             'class' => 'app\modules\admin\Module',
             'defaultRoute' => 'order/index'
         ],
+        'notes' => [
+            'class' => 'app\modules\notes\Module',
+            'defaultRoute' => 'notes'
+        ],
+
+        'category' => [
+                'class' => 'app\modules\category\Module',
+                'defaultRoute' => 'category'
+        ],
     ],
 ];
 

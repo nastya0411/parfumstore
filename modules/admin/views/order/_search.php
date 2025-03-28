@@ -32,7 +32,7 @@
  
      <?php // echo $form->field($model, 'other') ?>
  
-     <?php // echo $form->field($model, 'service_id') ?>
+     <?php // echo $form->field($model, 'product_category_id') ?>
  
      <?php // echo $form->field($model, 'pay_type_id') ?>
  

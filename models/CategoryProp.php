@@ -30,8 +30,8 @@ class CategoryProp extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'value', 'category_id'], 'required'],
-            [['category_id'], 'integer'],
+            [['id', 'title', 'value', 'category_id'], 'required'],
+            [['id', 'category_id'], 'integer'],
             [['title', 'value'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
         ];

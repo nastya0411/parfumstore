@@ -11,7 +11,6 @@ use Yii;
  * @property string $title
  *
  * @property CategoryProp[] $categoryProps
- * @property ProductCategory[] $productCategories
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -53,15 +52,5 @@ class Category extends \yii\db\ActiveRecord
     public function getCategoryProps()
     {
         return $this->hasMany(CategoryProp::class, ['category_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[ProductCategories]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductCategories()
-    {
-        return $this->hasMany(ProductCategory::class, ['category_id' => 'id']);
     }
 }

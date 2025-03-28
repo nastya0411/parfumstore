@@ -24,7 +24,7 @@
  
      <?= $form->field($model, 'other_reason')->textInput(['maxlength' => true]) ?>
  
-     <?= $form->field($model, 'service_id')->textInput() ?>
+     <?= $form->field($model, 'product_category_id')->textInput() ?>
  
      <?= $form->field($model, 'pay_type_id')->textInput() ?>
  

@@ -35,9 +35,9 @@ use yii\widgets\Pjax;
         <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, [
         'mask' => '+7(999)-999-99-99',]) ?> 
 
-        <?= $form->field($model, 'check')->checkbox() ?>
+        <?#= $form->field($model, 'check')->checkbox() ?>
 
-        <?= $form->field($model, 'other_reason')->textInput(['maxlength' => true, 'disabled' => !$model->check]) ?>
+        <?#= $form->field($model, 'other_reason')->textInput(['maxlength' => true, 'disabled' => !$model->check]) ?>
 
         <?= $form->field($model, 'pay_type_id')->dropDownList(PayType::getPayTypes(), ['prompt' => 'Выберете тип оплаты']) ?>
 
