@@ -13,7 +13,6 @@ use Yii;
  * @property string $created_at
  * @property string $date
  * @property string $time
- * @property int $product_category_id
  * @property int $pay_type_id
  * @property int $status_id
  * @property int $user_id
@@ -21,9 +20,8 @@ use Yii;
  * @property float $cost
  * @property string $other_reason
  *
- * @property OrderShopItem[] $orderShopItems
+ * @property OrderItem[] $orderItems
  * @property PayType $payType
- * @property ProductCategory $productCategory
  * @property Status $status
  * @property User $user
  */
@@ -43,14 +41,13 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['address', 'phone', 'date', 'time', 'product_category_id', 'pay_type_id', 'status_id', 'user_id', 'other_reason'], 'required'],
+            [['address', 'phone', 'date', 'time', 'pay_type_id', 'status_id', 'user_id', 'other_reason'], 'required'],
             [['created_at', 'date', 'time'], 'safe'],
-            [['product_category_id', 'pay_type_id', 'status_id', 'user_id', 'amount'], 'integer'],
+            [['pay_type_id', 'status_id', 'user_id', 'amount'], 'integer'],
             [['cost'], 'number'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategory::class, 'targetAttribute' => ['product_category_id' => 'id']],
             [['pay_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PayType::class, 'targetAttribute' => ['pay_type_id' => 'id']],
         ];
     }
@@ -67,7 +64,6 @@ class Order extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'date' => 'Date',
             'time' => 'Time',
-            'product_category_id' => 'Product Category ID',
             'pay_type_id' => 'Pay Type ID',
             'status_id' => 'Status ID',
             'user_id' => 'User ID',
@@ -78,13 +74,13 @@ class Order extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[OrderShopItems]].
+     * Gets query for [[OrderItems]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrderShopItems()
+    public function getOrderItems()
     {
-        return $this->hasMany(OrderShopItem::class, ['order_id' => 'id']);
+        return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
     }
 
     /**
@@ -95,16 +91,6 @@ class Order extends \yii\db\ActiveRecord
     public function getPayType()
     {
         return $this->hasOne(PayType::class, ['id' => 'pay_type_id']);
-    }
-
-    /**
-     * Gets query for [[ProductCategory]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductCategory()
-    {
-        return $this->hasOne(ProductCategory::class, ['id' => 'product_category_id']);
     }
 
     /**

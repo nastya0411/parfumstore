@@ -17,6 +17,9 @@
      <h3><?= Html::encode($this->title) ?></h3>
  
      <?php Pjax::begin(); ?>
+     <p>
+     <?= Html::a('Интернет-магазин', ['/admin/shop'], ['class' => 'btn btn-outline-primary'])?>
+     </p>
  
      <?= ListView::widget([
          'dataProvider' => $dataProvider,

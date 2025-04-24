@@ -14,7 +14,7 @@ use Yii;
  * @property int $count
  *
  * @property CartItem[] $cartItems
- * @property OrderShopItem[] $orderShopItems
+ * @property OrderItem[] $orderItems
  * @property Photo[] $photos
  * @property ProductCategory[] $productCategories
  * @property ProductNoteLevel[] $productNoteLevels
@@ -69,13 +69,13 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[OrderShopItems]].
+     * Gets query for [[OrderItems]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrderShopItems()
+    public function getOrderItems()
     {
-        return $this->hasMany(OrderShopItem::class, ['product_id' => 'id']);
+        return $this->hasMany(OrderItem::class, ['product_id' => 'id']);
     }
 
     /**

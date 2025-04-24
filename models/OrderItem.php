@@ -5,23 +5,25 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "product_category".
+ * This is the model class for table "order_item".
  *
  * @property int $id
+ * @property int $order_id
  * @property int $product_id
- * @property int $category_id
+ * @property int $amount
+ * @property float $cost
  *
- * @property Category $category
+ * @property Order $order
  * @property Product $product
  */
-class ProductCategory extends \yii\db\ActiveRecord
+class OrderItem extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'product_category';
+        return 'order_item';
     }
 
     /**
@@ -30,10 +32,11 @@ class ProductCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'category_id'], 'required'],
-            [['product_id', 'category_id'], 'integer'],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['order_id', 'product_id'], 'required'],
+            [['order_id', 'product_id', 'amount'], 'integer'],
+            [['cost'], 'number'],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::class, 'targetAttribute' => ['order_id' => 'id']],
         ];
     }
 
@@ -44,19 +47,21 @@ class ProductCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'order_id' => 'Order ID',
             'product_id' => 'Product ID',
-            'category_id' => 'Category ID',
+            'amount' => 'Amount',
+            'cost' => 'Cost',
         ];
     }
 
     /**
-     * Gets query for [[Category]].
+     * Gets query for [[Order]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getOrder()
     {
-        return $this->hasOne(Category::class, ['id' => 'category_id']);
+        return $this->hasOne(Order::class, ['id' => 'order_id']);
     }
 
     /**
