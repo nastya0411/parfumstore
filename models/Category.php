@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  *
- * @property CategoryProp[] $categoryProps
+ * @property ProductCategory[] $productCategories
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -45,12 +45,12 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CategoryProps]].
+     * Gets query for [[ProductCategories]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCategoryProps()
+    public function getProductCategories()
     {
-        return $this->hasMany(CategoryProp::class, ['category_id' => 'id']);
+        return $this->hasMany(ProductCategory::class, ['category_id' => 'id']);
     }
 }

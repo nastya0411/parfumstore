@@ -53,17 +53,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     ? ['label' => 'Мой профиль', 'url' => ['/account/profile/view']]
                     : '',
 
-                !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Ноты форма', 'url' => ['/notes']]
-                    : '',
 
                 !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
                     ? ['label' => 'Панель управления', 'url' => ['/admin']]
                     : '',
 
-                !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Категории форма', 'url' => ['/category']]
-                    : '',
 
                 ['label' => 'Главная', 'url' => ['/site/index']],
                 ['label' => 'О нас', 'url' => ['/site/about']],

@@ -1,8 +1,11 @@
 <?php
+
 namespace app\models;
-use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+
+
+use Yii;
 
 /**
  * This is the model class for table "user".
@@ -16,6 +19,7 @@ use yii\web\IdentityInterface;
  * @property int $role_id
  * @property string|null $auth_key
  *
+ * @property Cart[] $carts
  * @property Order[] $orders
  * @property Role $role
  */
@@ -39,8 +43,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['role_id'], 'integer'],
             [['login', 'password', 'full_name', 'email', 'phone', 'auth_key'], 'string', 'max' => 255],
             [['login'], 'unique'],
-            ['password', 'string', 'min' => 6],
-            ['password', 'safe'], 
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -52,14 +54,24 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'login' => 'Логин',
-            'password' => 'Пароль',
-            'full_name' => 'ФИО',
-            'email' => 'Адрес электронной почты',
-            'phone' => 'Телефон',
+            'login' => 'Login',
+            'password' => 'Password',
+            'full_name' => 'Full Name',
+            'email' => 'Email',
+            'phone' => 'Phone',
             'role_id' => 'Role ID',
             'auth_key' => 'Auth Key',
         ];
+    }
+
+    /**
+     * Gets query for [[Carts]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarts()
+    {
+        return $this->hasMany(Cart::class, ['user_id' => 'id']);
     }
 
     /**
@@ -80,18 +92,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getRole()
     {
         return $this->hasOne(Role::class, ['id' => 'role_id']);
-    }
-
-    public static function findByUsername(string $login): null|object
-    {
-        return self::findOne(['login' =>$login]);
-
-    }
-
-    public function validatePassword(string $password): bool
-    {
-        return Yii::$app->security->validatePassword($password, $this->password);
-        
     }
 
     public static function findIdentity($id)
@@ -133,6 +133,18 @@ class User extends ActiveRecord implements IdentityInterface
     public function validateAuthKey($authKey)
     {
         return $this->getAuthKey() === $authKey;
+    }
+
+    public static function findByUsername(string $login): null|object
+    {
+        return self::findOne(['login' =>$login]);
+
+    }
+
+    public function validatePassword(string $password): bool
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+        
     }
 
     public function getIsAdmin(): bool

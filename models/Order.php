@@ -8,25 +8,27 @@ use Yii;
  * This is the model class for table "order".
  *
  * @property int $id
- * @property int $user_id
- * @property int $product_category_id
- * @property float $total_price
- * @property int $status_id
  * @property string $address
  * @property string $phone
  * @property string $created_at
  * @property string $date
  * @property string $time
+ * @property int $product_category_id
+ * @property int $pay_type_id
+ * @property int $status_id
+ * @property int $user_id
+ * @property int $amount
+ * @property float $cost
  * @property string $other_reason
  *
+ * @property OrderShopItem[] $orderShopItems
+ * @property PayType $payType
  * @property ProductCategory $productCategory
  * @property Status $status
  * @property User $user
  */
 class Order extends \yii\db\ActiveRecord
 {
-
-    const SCENARIO_ORDER = 'order';
     /**
      * {@inheritdoc}
      */
@@ -41,29 +43,17 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            // Обязательные поля (без корзины)
-            [['user_id', 'product_category_id', 'address', 'phone'], 'required', 'on' => self::SCENARIO_ORDER],
-            [['total_price'], 'number', 'min' => 0], // Пока можно оставить 0 или вручную
-            ['phone', 'match', 'pattern' => '/^\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}$/'],
-            // Удаляем всё про check/other (они тебе не нужны)
+            [['address', 'phone', 'date', 'time', 'product_category_id', 'pay_type_id', 'status_id', 'user_id', 'other_reason'], 'required'],
+            [['created_at', 'date', 'time'], 'safe'],
+            [['product_category_id', 'pay_type_id', 'status_id', 'user_id', 'amount'], 'integer'],
+            [['cost'], 'number'],
+            [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
+            [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategory::class, 'targetAttribute' => ['product_category_id' => 'id']],
+            [['pay_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PayType::class, 'targetAttribute' => ['pay_type_id' => 'id']],
         ];
     }
-
-    // public function rules()
-    // {
-    //     return [
-    //         [['user_id', 'product_category_id', 'total_price', 'status_id', 'address', 'phone', 'date', 'time', 'other_reason', 'pay_type_id'], 'required'],
-    //         [['user_id', 'product_category_id', 'status_id', 'pay_type_id',], 'integer'],
-    //         [['total_price'], 'number'],
-    //         [['created_at', 'date', 'time'], 'safe'],
-    //         [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
-    //         [['pay_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => PayType::class, 'targetAttribute' => ['pay_type_id' => 'id']],
-    //         [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
-    //         [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-    //         [['product_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductCategory::class, 'targetAttribute' => ['product_category_id' => 'id']],
-    //         ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
-    //     ];
-    // }
 
     /**
      * {@inheritdoc}
@@ -71,19 +61,40 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => '№ заказа',
-            'user_id' => 'Клиент',
-            'product_category_id' => 'Парфюм',
-            'total_price' => 'Полная цена заказа',
-            'status_id' => 'Статус заказа',
-            'address' => 'Адрес',
-            'phone' => 'Телефон',
-            'created_at' => 'Время создания',
-            'date' => 'Дата получения заказа',
-            'pay_type_id' => 'Тип оплаты',
-            'time' => 'Время получения заказа',
-            'other_reason' => 'Причина отмены заказа',
+            'id' => 'ID',
+            'address' => 'Address',
+            'phone' => 'Phone',
+            'created_at' => 'Created At',
+            'date' => 'Date',
+            'time' => 'Time',
+            'product_category_id' => 'Product Category ID',
+            'pay_type_id' => 'Pay Type ID',
+            'status_id' => 'Status ID',
+            'user_id' => 'User ID',
+            'amount' => 'Amount',
+            'cost' => 'Cost',
+            'other_reason' => 'Other Reason',
         ];
+    }
+
+    /**
+     * Gets query for [[OrderShopItems]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderShopItems()
+    {
+        return $this->hasMany(OrderShopItem::class, ['order_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[PayType]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPayType()
+    {
+        return $this->hasOne(PayType::class, ['id' => 'pay_type_id']);
     }
 
     /**

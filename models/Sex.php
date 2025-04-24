@@ -5,21 +5,21 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "status".
+ * This is the model class for table "sex".
  *
  * @property int $id
  * @property string $title
  *
- * @property Order[] $orders
+ * @property Product[] $products
  */
-class Status extends \yii\db\ActiveRecord
+class Sex extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'status';
+        return 'sex';
     }
 
     /**
@@ -45,12 +45,12 @@ class Status extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Orders]].
+     * Gets query for [[Products]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getOrders()
+    public function getProducts()
     {
-        return $this->hasMany(Order::class, ['status_id' => 'id']);
+        return $this->hasMany(Product::class, ['sex_id' => 'id']);
     }
 }
