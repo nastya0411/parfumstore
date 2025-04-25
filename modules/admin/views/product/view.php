@@ -20,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Изменить товар', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
-        <?= Html::a('Удалить товар', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-outline-danger',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить товар?',
