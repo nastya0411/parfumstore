@@ -70,8 +70,12 @@ $config = [
         ],
 
         'category' => [
-                'class' => 'app\modules\category\Module',
-                'defaultRoute' => 'category'
+            'class' => 'app\modules\category\Module',
+            'defaultRoute' => 'category'
+        ],
+        'shop' => [
+            'class' => 'app\modules\shop\Module',
+            'defaultRoute' => 'catalog'
         ],
     ],
 ];
