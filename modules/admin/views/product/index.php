@@ -11,7 +11,7 @@ use yii\widgets\Pjax;
 /** @var app\modules\admin\models\ProductSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Products';
+$this->title = 'Товары';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Назад', ['/admin/shop'], ['class' => 'btn btn-outline-info']) ?>
 
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-outline-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

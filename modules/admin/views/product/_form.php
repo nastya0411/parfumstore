@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\Html;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var app\models\Product $model */
@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'count')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-outline-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
