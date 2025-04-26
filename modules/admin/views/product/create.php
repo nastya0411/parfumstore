@@ -13,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-    <?= Html::a('Назад', ['/admin/product'], ['class' => 'btn btn-outline-info']) ?>
-
+        <?= Html::a('Назад', ['/admin/product'], ['class' => 'btn btn-outline-info']) ?>
     </p>
 
     <?= $this->render('_form', [
         'model' => $model,
+        'categories' => $categories,
     ]) ?>
 
 </div>

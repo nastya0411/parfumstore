@@ -22,6 +22,12 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+    public $photoProduct;
+
+    public $categories;
+
+
     /**
      * {@inheritdoc}
      */
@@ -36,11 +42,14 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'price', 'sex_id', 'count'], 'required'],
+            [['title', 'price', 'sex_id', 'count', 'categories'], 'required'],
             [['price'], 'number'],
             [['sex_id', 'count'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['sex_id'], 'exist', 'skipOnError' => true, 'targetClass' => Sex::class, 'targetAttribute' => ['sex_id' => 'id']],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['categories'], 'safe'],
+
         ];
     }
 
@@ -55,6 +64,8 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'sex_id' => 'Для кого',
             'count' => 'Количество',
+            'imageFile' => 'Изображение товара',
+            'productCategories' => 'Категория товара',
         ];
     }
 
@@ -116,5 +127,21 @@ class Product extends \yii\db\ActiveRecord
     public function getSex()
     {
         return $this->hasOne(Sex::class, ['id' => 'sex_id']);
+    }
+
+
+
+    public function upload()
+    {
+        if ($this->validate()) {
+            if ($this->imageFile) {
+
+                $this->photoProduct = time() . '_' . Yii::$app->security->generateRandomString() . '.' . $this->imageFile->extension;
+                $this->imageFile->saveAs('img/' . $this->photoProduct);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

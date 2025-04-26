@@ -19,6 +19,9 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'sex_id')->textInput() ?>
 
     <?= $form->field($model, 'count')->textInput() ?>
+    <?= $form->field($model, 'categories')->checkboxList($categories) ?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-outline-success']) ?>

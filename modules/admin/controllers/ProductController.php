@@ -2,11 +2,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Category;
+use app\models\Photo;
 use app\models\Product;
+use app\models\ProductCategory;
 use app\modules\admin\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -70,8 +74,26 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->upload()) {
+                    if ($model->save(false)) {
+                        $photo = new Photo();
+                        $photo->product_id = $model->id;
+                        $photo->photo = $model->photoProduct;
+                        $photo->save();
+
+                        if ($model->categories) {
+                            foreach ($model->categories as $val) {
+                                $productCategory = new ProductCategory();
+                                $productCategory->category_id = $val;
+                                $productCategory->product_id = $model->id;
+                                $productCategory->save();
+                            }
+                        }
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    };
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -79,6 +101,7 @@ class ProductController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'categories' => Category::getCategories(),
         ]);
     }
 
