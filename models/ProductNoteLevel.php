@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "product_note_level".
@@ -100,25 +101,74 @@ class ProductNoteLevel extends \yii\db\ActiveRecord
         //         2 => '7'
         //     ]
         //     ]
+        try {
+            $transation = Yii::$app->db->beginTransaction();
+            
+            $productNoteLevelDb = ProductNoteLevel::find()
+                ->select('note_level_id')
+                ->where(['product_id' => $model->id])
+                ->indexBy('id')
+                ->column();
 
-        if (!empty($model->noteLevels)) {
-            foreach ($model->noteLevels as $levelId => $noteIds) {
-                if (!empty($noteIds)) {
-                    $level = new ProductNoteLevel([
+            if ($productNoteLevelDb) {
+                if ($diff = array_diff($productNoteLevelDb, array_keys($model->noteLevels))) {
+                    ProductNoteLevel::deleteAll([
                         'product_id' => $model->id,
-                        'note_level_id' => $levelId
+                        'note_level_id' => array_values($diff)
                     ]);
+                } else {
+                    foreach ($productNoteLevelDb as $pr_n_l_id => $level) {
+                        $productNoteLevelItemDb = ProductNoteLevelItem::find()
+                            ->select('note_id')
+                            ->where(['product_note_level_id' => $pr_n_l_id])
+                            ->indexBy('id')
+                            ->column();
 
-                    if ($level->save()) {
-                        foreach ($noteIds as $noteId) {
-                            (new ProductNoteLevelItem([
-                                'product_note_level_id' => $level->id,
-                                'note_id' => $noteId
-                            ]))->save();
+                        $level_user = isset($model->noteLevels[$level]) && !empty($model->noteLevels[$level])
+                            ? $model->noteLevels[$level]
+                            : [];
+
+                        if ($diff = array_diff($productNoteLevelItemDb, $level_user)) {
+                            ProductNoteLevelItem::deleteAll([
+                                'id' => array_keys($productNoteLevelItemDb)
+                            ]);
                         }
                     }
                 }
             }
+
+            if (!empty($model->noteLevels)) {
+                foreach ($model->noteLevels as $levelId => $noteIds) {
+                    if (!empty($noteIds)) {
+                        $level = ProductNoteLevel::findOne([
+                            'product_id' => $model->id,
+                            'note_level_id' => $levelId
+                        ]);
+
+                        if (!$level) {
+                            $level = new ProductNoteLevel([
+                                'product_id' => $model->id,
+                                'note_level_id' => $levelId
+                            ]);
+
+                            $level->save();
+                        }
+
+                        foreach ($noteIds as $noteId) {
+                            if (!ProductNoteLevelItem::findOne(['product_note_level_id' => $level->id, 'note_id' => $noteId])) {
+                                (new ProductNoteLevelItem([
+                                    'product_note_level_id' => $level->id,
+                                    'note_id' => $noteId
+                                ]))->save();
+                            }
+                        }
+                    }
+                }
+            }
+            
+            $transation->commit();
+        } catch (\Exception $e) {
+            $transation->rollBack();
         }
     }
 }

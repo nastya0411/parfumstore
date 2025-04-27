@@ -134,14 +134,9 @@ class ProductController extends Controller
                 if ($model->imageFile && $model->upload()) {
                     Photo::setProductPhoto($model);
                 }
-                ProductCategory::deleteAll(['product_id' => $model->id]);
-                if (!empty($model->categories)) {
-                    ProductCategory::setProductCategory($model);
-                }
-                ProductNoteLevel::deleteAll(['product_id' => $model->id]);
-                if (!empty($model->noteLevels)) {
-                    ProductNoteLevel::setProductNoteLevelItems($model);
-                }
+                
+                ProductCategory::setProductCategory($model);
+                ProductNoteLevel::setProductNoteLevelItems($model);
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }

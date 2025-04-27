@@ -24,7 +24,7 @@ class Product extends \yii\db\ActiveRecord
 {
     public $imageFile;
     public $photoProduct;
-    public $categories;
+    public $categories = [];
     // public $allNotes;
     public $noteLevels = [];    
 
@@ -43,6 +43,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            
             [['title', 'price', 'sex_id', 'count', 'categories'], 'required'],
             [['price'], 'number'],
             [['sex_id', 'count'], 'integer'],
