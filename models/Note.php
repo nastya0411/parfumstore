@@ -53,4 +53,12 @@ class Note extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductNoteLevelItem::class, ['note_id' => 'id']);
     }
+
+    public static function getNotes()
+    {
+        return self::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
+    }
 }

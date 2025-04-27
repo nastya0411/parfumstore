@@ -60,7 +60,37 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $html;
                     }
                 }
-            ]
+            ],
+            
+        [
+            'label' => 'Ноты',
+            'format' => 'raw',
+            'value' => function($model) {
+                $html = '';
+                $productNoteLevels = $model->productNoteLevels;
+                $levels = [];
+                foreach ($productNoteLevels as $productNoteLevel) {
+                    $levelName = $productNoteLevel->noteLevel->title;
+                    $notes = [];
+                    
+                    foreach ($productNoteLevel->productNoteLevelItems as $item) {
+                        $notes[] = $item->note->title;
+                    }
+                    
+                    if (!empty($notes)) {
+                        $levels[$levelName] = implode(', ', $notes);
+                    }
+                }
+                
+                foreach (['Верхние ноты', 'Средние ноты', 'Базовые ноты'] as $level) {
+                    if (isset($levels[$level])) {
+                        $html .= "<div><strong>{$level}:</strong> {$levels[$level]}</div>";
+                    }
+                }
+                
+                return $html ?: '-';
+            }
+        ],
         ],
     ]) ?>
 

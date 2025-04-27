@@ -3,13 +3,19 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Category;
+use app\models\Note;
+use app\models\NoteLevel;
 use app\models\Photo;
 use app\models\Product;
 use app\models\ProductCategory;
+use app\models\ProductNoteLevel;
+use app\models\ProductNoteLevelItem;
 use app\modules\admin\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\UploadedFile;
 
 /**
@@ -72,36 +78,35 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
-
+        $allNotes = Note::getNotes(); 
+        $noteLevels = NoteLevel::getNoteLevels();
+    
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 if ($model->upload()) {
                     if ($model->save(false)) {
-                        $photo = new Photo();
-                        $photo->product_id = $model->id;
-                        $photo->photo = $model->photoProduct;
-                        $photo->save();
-
+                        Photo::setProductPhoto($model);
+                        
                         if ($model->categories) {
-                            foreach ($model->categories as $val) {
-                                $productCategory = new ProductCategory();
-                                $productCategory->category_id = $val;
-                                $productCategory->product_id = $model->id;
-                                $productCategory->save();
-                            }
+                            ProductCategory::setProductCategory($model);
                         }
+                        // VarDumper::dump($this->request->post(),10, true);
+                        ProductNoteLevel::setProductNoteLevelItems($model);
+
                         return $this->redirect(['view', 'id' => $model->id]);
-                    };
+                    }
                 }
             }
         } else {
             $model->loadDefaultValues();
         }
-
+    
         return $this->render('create', [
             'model' => $model,
             'categories' => Category::getCategories(),
+            'allNotes' => $allNotes,
+            'noteLevels' => NoteLevel::getNoteLevels(),
         ]);
     }
 

@@ -1,7 +1,9 @@
 <?php
 
+use yii\bootstrap5\Accordion;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var app\models\Product $model */
@@ -19,7 +21,37 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'sex_id')->textInput() ?>
 
     <?= $form->field($model, 'count')->textInput() ?>
-    <?= $form->field($model, 'categories')->checkboxList($categories) ?>
+
+    <?= Accordion::widget([
+        'items' => [
+            [
+                'label' => 'Категории',
+                'content' => $form->field($model, 'categories')->checkboxList($categories),
+                // 'headerOptions' => ['tag' => 'h3'],
+                'options' => ['tag' => 'div'],
+            ],
+            [
+                'label' => 'Верхние ноты',
+                // 'headerOptions' => ['tag' => 'h3'],
+                'content' => $form->field($model, 'noteLevels[1]')->checkboxList($allNotes)->label('Верхние ноты'),
+                'options' => ['tag' => 'div'],
+            ],
+            [
+                'label' => 'Средние ноты',
+                // 'headerOptions' => ['tag' => 'h3'],
+                'content' => $form->field($model, 'noteLevels[2]')->checkboxList($allNotes)->label('Средние ноты'),
+                'options' => ['tag' => 'div'],
+            ],
+            [
+                'label' => 'Базовые ноты',
+                // 'headerOptions' => ['tag' => 'h3'],
+                'content' => $form->field($model, 'noteLevels[3]')->checkboxList($allNotes)->label('Базовые ноты'),
+                'options' => ['tag' => 'div'],
+            ],
+        ],
+    ]); ?>
+
+
 
     <?= $form->field($model, 'imageFile')->fileInput() ?>
 

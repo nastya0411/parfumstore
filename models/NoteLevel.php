@@ -53,4 +53,12 @@ class NoteLevel extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductNoteLevel::class, ['note_level_id' => 'id']);
     }
+
+    public static function getNoteLevels()
+    {
+        return self::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
+    }
 }

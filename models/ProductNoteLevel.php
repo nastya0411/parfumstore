@@ -79,4 +79,46 @@ class ProductNoteLevel extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductNoteLevelItem::class, ['product_note_level_id' => 'id']);
     }
+
+    public static function setProductNoteLevelItems($model)
+    {
+
+        // 'noteLevels' => [
+        //     1 => [
+        //         0 => '1'
+        //         1 => '7'
+        //         2 => '9'
+        //     ]
+        //     2 => [
+        //         0 => '1'
+        //         1 => '7'
+        //         2 => '9'
+        //     ]
+        //     3 => [
+        //         0 => '1'
+        //         1 => '2'
+        //         2 => '7'
+        //     ]
+        //     ]
+
+        if (!empty($model->noteLevels)) {
+            foreach ($model->noteLevels as $levelId => $noteIds) {
+                if (!empty($noteIds)) {
+                    $level = new ProductNoteLevel([
+                        'product_id' => $model->id,
+                        'note_level_id' => $levelId
+                    ]);
+
+                    if ($level->save()) {
+                        foreach ($noteIds as $noteId) {
+                            (new ProductNoteLevelItem([
+                                'product_note_level_id' => $level->id,
+                                'note_id' => $noteId
+                            ]))->save();
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

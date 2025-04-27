@@ -24,12 +24,13 @@ class Product extends \yii\db\ActiveRecord
 {
     public $imageFile;
     public $photoProduct;
-
     public $categories;
+    // public $allNotes;
+    public $noteLevels = [];    
 
 
     /**
-     * {@inheritdoc}
+     * {@inheritdoc}            
      */
     public static function tableName()
     {
@@ -49,6 +50,8 @@ class Product extends \yii\db\ActiveRecord
             [['sex_id'], 'exist', 'skipOnError' => true, 'targetClass' => Sex::class, 'targetAttribute' => ['sex_id' => 'id']],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['categories'], 'safe'],
+            [['noteLevels'], 'safe'],
+            // [['allNotes'], 'safe'],
 
         ];
     }
@@ -65,7 +68,7 @@ class Product extends \yii\db\ActiveRecord
             'sex_id' => 'Для кого',
             'count' => 'Количество',
             'imageFile' => 'Изображение товара',
-            'productCategories' => 'Категория товара',
+            'categories' => 'Категория товара', 
         ];
     }
 
@@ -142,6 +145,28 @@ class Product extends \yii\db\ActiveRecord
             return true;
         } else {
             return false;
+        }
+    }
+
+
+    public function saveNotes()
+    {
+        if (!empty($this->noteLevels)) {
+            foreach ($this->noteLevels as $levelId => $noteIds) {
+                if (!empty($noteIds)) {
+                    $productNoteLevel = new ProductNoteLevel();
+                    $productNoteLevel->product_id = $this->id;
+                    $productNoteLevel->note_level_id = $levelId;
+                    if ($productNoteLevel->save()) {
+                        foreach ($noteIds as $noteId) {
+                            $item = new ProductNoteLevelItem();
+                            $item->product_note_level_id = $productNoteLevel->id;
+                            $item->note_id = $noteId;
+                            $item->save();
+                        }
+                    }
+                }
+            }
         }
     }
 }

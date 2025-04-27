@@ -57,4 +57,12 @@ class Photo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::class, ['id' => 'product_id']);
     }
+
+    public static function setProductPhoto($model)
+    {
+        $photo = new Photo();
+        $photo->product_id = $model->id;
+        $photo->photo = $model->photoProduct;
+        return $photo->save();
+    }
 }
