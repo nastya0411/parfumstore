@@ -53,4 +53,13 @@ class Sex extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Product::class, ['sex_id' => 'id']);
     }
+
+    
+    public static function getSexes()
+    {
+        return self::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
+    }
 }

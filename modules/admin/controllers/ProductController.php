@@ -78,16 +78,16 @@ class ProductController extends Controller
     public function actionCreate()
     {
         $model = new Product();
-        $allNotes = Note::getNotes(); 
+        $allNotes = Note::getNotes();
         $noteLevels = NoteLevel::getNoteLevels();
-    
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 if ($model->upload()) {
                     if ($model->save(false)) {
                         Photo::setProductPhoto($model);
-                        
+
                         if ($model->categories) {
                             ProductCategory::setProductCategory($model);
                         }
@@ -101,7 +101,7 @@ class ProductController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-    
+
         return $this->render('create', [
             'model' => $model,
             'categories' => Category::getCategories(),
@@ -120,13 +120,38 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->categories = ArrayHelper::getColumn($model->productCategories, 'category_id');
+        $model->noteLevels = [];
+        foreach ($model->productNoteLevels as $level) {
+            $model->noteLevels[$level->note_level_id] = ArrayHelper::getColumn(
+                $level->productNoteLevelItems,
+                'note_id'
+            );
+        }
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->save()) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->imageFile && $model->upload()) {
+                    Photo::setProductPhoto($model);
+                }
+                ProductCategory::deleteAll(['product_id' => $model->id]);
+                if (!empty($model->categories)) {
+                    ProductCategory::setProductCategory($model);
+                }
+                ProductNoteLevel::deleteAll(['product_id' => $model->id]);
+                if (!empty($model->noteLevels)) {
+                    ProductNoteLevel::setProductNoteLevelItems($model);
+                }
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'categories' => Category::getCategories(),
+            'allNotes' => Note::getNotes(),
+            'noteLevels' => NoteLevel::getNoteLevels(),
         ]);
     }
 

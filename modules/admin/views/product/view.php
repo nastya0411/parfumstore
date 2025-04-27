@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Sex;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -36,61 +37,91 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'price',
-            'sex_id',
-            'count',
             [
-                'label' => 'Изображение товара ',
+                'attribute' => 'sex_id',
+                'value' => Sex::getSexes()[$model->sex_id]
+            ],
+            'count',
+            // [
+            //     'label' => 'Изображение товара ',
+            //     'format' => 'html',
+            //     'value' =>  function ($model) {
+            //         if ($model->getPhotos()->count()) {
+            //             return Html::img('/img/' . $model->photos[0]->photo);
+            //         }
+            //         return Html::img('/img/no_photo.jpg');
+            //     }
+            // ],
+
+            [
+                'label' => 'Изображение товара',
                 'format' => 'html',
-                'value' =>  function ($model) {
-                    if ($model->getPhotos()->count()) {
-                        return Html::img('/img/' . $model->photos[0]->photo);
-                    }
-                    return Html::img('/img/no_photo.jpg');
+                'value' => function ($model) {
+                    $photoPath = $model->getPhotos()->count() 
+                        ? '/img/' . $model->photos[0]->photo 
+                        : '/img/no_photo.jpg';
+                    
+                    return Html::img($photoPath, ['style' => 'max-width: 400px; height: auto;']);
                 }
             ],
+            // [
+            //     'label' => 'Категории товара',
+            //     'format' => 'html',
+            //     'value' => function ($model) {
+            //         if ($model->getProductCategories()->count()) {
+            //             $html = "";
+            //             foreach ($model->productCategories as $val) {
+            //                 $html .= "<span>" . $val->category->title . " <br></span>";
+            //             }
+            //             return $html;
+            //         }
+            //     }
+            // ],
+
+
             [
                 'label' => 'Категории товара',
                 'format' => 'html',
                 'value' => function ($model) {
                     if ($model->getProductCategories()->count()) {
-                        $html = "";
+                        $categories = [];
                         foreach ($model->productCategories as $val) {
-                            $html .= "<span>" . $val->category->title . " <br></span>";
+                            $categories[] = $val->category->title;
                         }
-                        return $html;
+                        return implode(', ', $categories);
                     }
+                    return '-';
                 }
             ],
-            
-        [
-            'label' => 'Ноты',
-            'format' => 'raw',
-            'value' => function($model) {
-                $html = '';
-                $productNoteLevels = $model->productNoteLevels;
-                $levels = [];
-                foreach ($productNoteLevels as $productNoteLevel) {
-                    $levelName = $productNoteLevel->noteLevel->title;
-                    $notes = [];
-                    
-                    foreach ($productNoteLevel->productNoteLevelItems as $item) {
-                        $notes[] = $item->note->title;
+            [
+                'label' => 'Ноты',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $html = '';
+                    $productNoteLevels = $model->productNoteLevels;
+                    $levels = [];
+                    foreach ($productNoteLevels as $productNoteLevel) {
+                        $levelName = $productNoteLevel->noteLevel->title;
+                        $notes = [];
+
+                        foreach ($productNoteLevel->productNoteLevelItems as $item) {
+                            $notes[] = $item->note->title;
+                        }
+
+                        if (!empty($notes)) {
+                            $levels[$levelName] = implode(', ', $notes);
+                        }
                     }
-                    
-                    if (!empty($notes)) {
-                        $levels[$levelName] = implode(', ', $notes);
+
+                    foreach (['Верхние ноты', 'Средние ноты', 'Базовые ноты'] as $level) {
+                        if (isset($levels[$level])) {
+                            $html .= "<div><strong>{$level}:</strong> {$levels[$level]}</div>";
+                        }
                     }
+
+                    return $html ?: '-';
                 }
-                
-                foreach (['Верхние ноты', 'Средние ноты', 'Базовые ноты'] as $level) {
-                    if (isset($levels[$level])) {
-                        $html .= "<div><strong>{$level}:</strong> {$levels[$level]}</div>";
-                    }
-                }
-                
-                return $html ?: '-';
-            }
-        ],
+            ],
         ],
     ]) ?>
 

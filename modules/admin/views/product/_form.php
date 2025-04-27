@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Sex;
 use yii\bootstrap5\Accordion;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
@@ -18,7 +19,7 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'sex_id')->textInput() ?>
+    <?= $form->field($model, 'sex_id')->dropDownList(Sex::getSexes(),['prompt' => 'Выберете для кого предназначен товар'])?>
 
     <?= $form->field($model, 'count')->textInput() ?>
 
