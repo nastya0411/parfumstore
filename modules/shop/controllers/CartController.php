@@ -169,6 +169,13 @@ class CartController extends Controller
         }
     }
 
+    public function actionItemRemove($id)
+    {
+        if($model = CartItem::findOne($id)){
+            
+        }
+    }
+
     /**
      * Finds the Cart model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
