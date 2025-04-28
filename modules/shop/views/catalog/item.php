@@ -1,37 +1,36 @@
 <?php
- 
- use yii\bootstrap5\Html;
- 
- ?>
- <div class="card" style="width: 18rem; height: 33rem;">
-   <!-- <img src="/img/<#?= $model->photo ? $model->photo : '1.png' ?>" class="card-img-top" alt="photo"> -->
- 
-   <div class="card-body">    
-     <div class="my-2 mb-3">
-       <h4><?= Html::a($model->title, ['view', 'id' => $model->id],  ['class' => 'text-decoration-none']) ?></h4>
-     </div>
- 
-     <div class="my-2">
-         <!-- Состав: <#?= $model->note ?> -->
-     </div>
-     <div class="d-flex justify-content-between">
-         <!-- <div class="my-2">
-             (<#?= $model->amount ?>)  -->
-        <!-- <#?= $model->cost ?> -->
 
-         <div class="my-2">
-             (<?= $model->price ?>) 
-         </div>    
-         <div class="my-2 fs-4 fw-bold">
-             <?= $model->count ?>
-         </div>
-     </div>
-     
-     <div>
-     <?= Html::a('Просмотр', ['view', 'id' => $model->id], ['class' => 'btn btn-outline-info w-100']) ?>
+use yii\bootstrap5\Html;
 
-     <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) ?>
-     </div>
- 
-   </div>
- </div>
+?>
+<div class="card text-center" style="width: 260px; height: 450px; cursor: pointer;"
+  onclick="window.location='<?= \yii\helpers\Url::to(['view', 'id' => $model->id]) ?>'">
+  <img
+    src="<?= $model->getPhotos()->count() ? '/img/' . $model->photos[0]->photo : '/img/no_photo.jpg' ?>"
+    class="card-img-top"
+    alt="<?= Html::encode($model->title) ?>"
+    style="height: 250px; width: auto; object-fit: contain;">
+
+  <div class="card-body">
+    <div class="my-2 mb-3 ">
+      <h4><?= Html::a($model->title, ['view', 'id' => $model->id],  ['class' => 'text-decoration-none']) ?></h4>
+    </div>
+    <div class="text-center my-2">
+      <div class="d-inline-block bg-light rounded-pill">
+        <i class="bi bi-check-circle-fill text-success me-1"></i>
+        <span class="text-muted">В наличии:</span>
+        <span class="fw-bold mx-1"><?= $model->count ?></span>
+        <span class="text-muted">шт.</span>
+      </div>
+    </div>
+
+    <div class="fs-4 fw-bold my-2">
+      <?= Yii::$app->formatter->asDecimal($model->price, 2) ?> <span class="ruble-symbol">₽</span>
+    </div>
+
+    <div>
+      <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) ?>
+    </div>
+
+  </div>
+</div>
