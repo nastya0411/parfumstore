@@ -24,7 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin([
-        'id' => 'catalog-pjax'
+        'id' => 'catalog-pjax',
+        'enablePushState' => false,
+        'timeout' => 5000,
     ]); ?>
     <?= ListView::widget([
         'dataProvider' => $dataProvider,

@@ -5,8 +5,8 @@ use yii\bootstrap5\Accordion;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
- use mihaildev\elfinder\ElFinder;
-use yii\helpers\ArrayHelper;
+use mihaildev\elfinder\ElFinder;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Product $model */

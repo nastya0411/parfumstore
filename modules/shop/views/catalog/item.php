@@ -1,10 +1,10 @@
 <?php
 
 use yii\bootstrap5\Html;
+use yii\helpers\Url;
 
 ?>
-<div class="card text-center" style="width: 260px; height: 450px; cursor: pointer;"
-  onclick="window.location='<?= \yii\helpers\Url::to(['view', 'id' => $model->id]) ?>'">
+<div class="card text-center product-card" style="width: 260px; height: 450px; cursor: pointer;" data-url="<?= Url::to(['view', 'id' => $model->id]) ?>">
   <img
     src="<?= $model->getPhotos()->count() ? '/img/' . $model->photos[0]->photo : '/img/no_photo.jpg' ?>"
     class="card-img-top"
@@ -36,7 +36,7 @@ use yii\bootstrap5\Html;
       <?= (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin)
         ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
           'class' => 'btn btn-outline-success w-100 btn-add-cart',
-          'onclick' => 'event.stopPropagation();'
+          'data-pjax' => 0,
         ])
         : "" ?>
     </div>
