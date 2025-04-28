@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin([
+        'id' => 'catalog-pjax'
+    ]); ?>
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item my-3 col-md-3 col-sm-6 mb-4'],

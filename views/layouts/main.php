@@ -9,6 +9,8 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\web\JqueryAsset;
+use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
@@ -76,7 +78,27 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     . Html::endForm()
                     . '</li>'
             ]
-        ]);
+        ]); ?>
+
+        <?php
+
+        if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
+            <div class="position-relative" style="display: inline-block;">
+                <?= Html::a(
+                    Html::img('/img/backet.png', [
+                        'alt' => 'Корзина',
+                        'style' => 'width:24px;height:24px'
+                    ]),
+                    ['/shop/cart'],
+                    [
+                        'class' => 'text-decoration-none',
+                        'style' => 'display:block'
+                    ]
+                ) ?>
+                <div id="cart-item-count" class="text-white" style="position:absolute;top:-8px;right:-8px"></div>
+            </div>
+        <?php $this->registerJsFile('/js/cart.js', ['depends' => JqueryAsset::class]);
+        endif;
         NavBar::end();
         ?>
     </header>

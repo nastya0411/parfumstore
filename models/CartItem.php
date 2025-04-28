@@ -32,6 +32,8 @@ class CartItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['amount', 'default', 'value' => 0],
+            ['cost', 'default', 'value' => 0.0],
             [['cart_id', 'product_id', 'cost'], 'required'],
             [['cart_id', 'product_id', 'amount'], 'integer'],
             [['cost'], 'number'],

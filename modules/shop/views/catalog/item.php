@@ -28,9 +28,17 @@ use yii\bootstrap5\Html;
       <?= Yii::$app->formatter->asDecimal($model->price, 2) ?> <span class="ruble-symbol">₽</span>
     </div>
 
+    <!-- <div>
+      <? #= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) 
+      ?>
+    </div> -->
     <div>
-      <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) ?>
+      <?= (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin)
+        ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
+          'class' => 'btn btn-outline-success w-100 btn-add-cart',
+          'onclick' => 'event.stopPropagation();'
+        ])
+        : "" ?>
     </div>
-
   </div>
 </div>
