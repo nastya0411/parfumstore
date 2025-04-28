@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 27 2025 г., 14:36
+-- Время создания: Апр 28 2025 г., 23:13
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -34,6 +34,14 @@ CREATE TABLE `cart` (
   `cost` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Дамп данных таблицы `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `amount`, `cost`) VALUES
+(1, 17, 7, '46.00'),
+(2, 16, 8, '58.00');
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,18 @@ CREATE TABLE `cart_item` (
   `amount` int UNSIGNED NOT NULL DEFAULT '0',
   `cost` decimal(10,2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `cart_item`
+--
+
+INSERT INTO `cart_item` (`id`, `cart_id`, `product_id`, `amount`, `cost`) VALUES
+(1, 1, 6, 1, '1.00'),
+(2, 1, 7, 3, '9.00'),
+(3, 2, 6, 1, '1.00'),
+(4, 2, 12, 4, '48.00'),
+(5, 2, 7, 3, '9.00'),
+(6, 1, 12, 3, '36.00');
 
 -- --------------------------------------------------------
 
@@ -184,7 +204,8 @@ CREATE TABLE `photo` (
 
 INSERT INTO `photo` (`id`, `photo`, `product_id`) VALUES
 (2, '1745747810_RgEUFMQ5bkqoFnHLMSqomusxOZlTgbmx.png', 11),
-(3, '1745749284_fU0h4U-j2YGn0hdxLH_0U_f1Wh0Jt3g9.png', 12);
+(3, '1745749284_fU0h4U-j2YGn0hdxLH_0U_f1Wh0Jt3g9.png', 12),
+(4, '1745842056_4yNYd5Kc7WQOe8r4u5zj0VdTdawIVIsh.png', 14);
 
 -- --------------------------------------------------------
 
@@ -211,7 +232,9 @@ INSERT INTO `product` (`id`, `title`, `price`, `sex_id`, `count`) VALUES
 (9, '5', '4', 1, 6),
 (10, '1', '1', 1, 1),
 (11, '1', '1', 1, 1),
-(12, 'Товар', '12', 2, 1);
+(12, 'Товар', '12', 2, 1444),
+(13, '1', '1221', 2, 3333),
+(14, '12', '122', 1, 212);
 
 -- --------------------------------------------------------
 
@@ -241,7 +264,10 @@ INSERT INTO `product_category` (`id`, `product_id`, `category_id`) VALUES
 (25, 10, 8),
 (47, 12, 6),
 (48, 12, 7),
-(49, 12, 8);
+(49, 12, 8),
+(50, 13, 6),
+(51, 13, 7),
+(52, 14, 7);
 
 -- --------------------------------------------------------
 
@@ -273,7 +299,10 @@ INSERT INTO `product_note_level` (`id`, `product_id`, `note_level_id`) VALUES
 (20, 10, 3),
 (42, 12, 1),
 (43, 12, 2),
-(44, 12, 3);
+(44, 12, 3),
+(45, 13, 1),
+(46, 13, 2),
+(47, 13, 3);
 
 -- --------------------------------------------------------
 
@@ -313,21 +342,17 @@ INSERT INTO `product_note_level_item` (`id`, `product_note_level_id`, `note_id`)
 (43, 19, 9),
 (44, 20, 7),
 (45, 20, 9),
-(148, 42, 1),
-(149, 42, 2),
-(150, 42, 7),
-(151, 42, 9),
-(152, 42, 10),
-(153, 43, 1),
-(154, 43, 2),
-(155, 43, 7),
-(156, 43, 9),
-(157, 43, 10),
-(158, 44, 1),
-(159, 44, 2),
-(160, 44, 7),
-(161, 44, 9),
-(162, 44, 10);
+(163, 42, 1),
+(164, 42, 2),
+(165, 44, 11),
+(166, 44, 12),
+(167, 43, 9),
+(168, 45, 11),
+(169, 45, 12),
+(170, 46, 9),
+(171, 46, 10),
+(172, 47, 7),
+(173, 47, 9);
 
 -- --------------------------------------------------------
 
@@ -413,7 +438,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `login`, `password`, `full_name`, `email`, `phone`, `role_id`, `auth_key`) VALUES
 (4, 'admin', '$2y$13$urCIM33CEMNSTRM8AsTbuOkLxs.NOIpcbD7YEATJ0iyjt10QFGv/u', 'админ', 'admin@d.d', '+7(323)-323-23-23', 1, 'YxgxrZSN1QLODDraiyq6yLMReO1KWuOl'),
 (15, '1', '$2y$13$jF/.2Obs6pW5T9ONyuoElukPgVOXiLJBTbK8u.jo9B8Lg680cdqqS', 'ыф', 'q@q.q', '+7(434)-534-55-53', 2, 'ZlJYRJP1CMYYPZARW9a4R-bVlA_ENyoz'),
-(16, 'q', '$2y$13$8aqoaorslzxkIQ9Kw8ZgseUnEDoQxE8xDBMorA3Nso9IV9VcB8vW2', 'й', 'q@q.q', '+7(323)-233-23-32', 2, 'QEhGFvH6CTM7_dJmwCjF4G6TPXU-37FE');
+(16, 'q', '$2y$13$8aqoaorslzxkIQ9Kw8ZgseUnEDoQxE8xDBMorA3Nso9IV9VcB8vW2', 'й', 'q@q.q', '+7(323)-233-23-32', 2, 'QEhGFvH6CTM7_dJmwCjF4G6TPXU-37FE'),
+(17, 'user', '$2y$13$3Fr9xFcDhMcgVwv0DQc9YOqUa3XuBNNqzOA9FrLkEdZLLZODZUaWy', 'у', 'q@q.q', '+7(111)-111-11-11', 2, 'QlccMsYbjt4KJVGjnGVyfdrpjsEXMy6A');
 
 --
 -- Индексы сохранённых таблиц
@@ -547,13 +573,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -595,31 +621,31 @@ ALTER TABLE `pay_type`
 -- AUTO_INCREMENT для таблицы `photo`
 --
 ALTER TABLE `photo`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT для таблицы `product_note_level`
 --
 ALTER TABLE `product_note_level`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT для таблицы `product_note_level_item`
 --
 ALTER TABLE `product_note_level_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT для таблицы `role`
@@ -643,7 +669,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
