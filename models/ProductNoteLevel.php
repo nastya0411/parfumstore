@@ -101,9 +101,8 @@ class ProductNoteLevel extends \yii\db\ActiveRecord
         //         2 => '7'
         //     ]
         //     ]
-        try {
-            $transation = Yii::$app->db->beginTransaction();
-            
+        $transation = ProductNoteLevel::getDb()->beginTransaction();
+        try {            
             $productNoteLevelDb = ProductNoteLevel::find()
                 ->select('note_level_id')
                 ->where(['product_id' => $model->id])
