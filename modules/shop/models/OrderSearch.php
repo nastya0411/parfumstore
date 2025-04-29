@@ -4,15 +4,12 @@ namespace app\modules\shop\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Cart;
-use app\models\CartItem;
-use Yii;
-use yii\db\Query;
+use app\models\Order;
 
 /**
- * CartSearch represents the model behind the search form of `app\models\Cart`.
+ * OrderSearch represents the model behind the search form of `app\models\Order`.
  */
-class CartSearch extends Cart
+class OrderSearch extends Order
 {
     /**
      * {@inheritdoc}
@@ -20,7 +17,8 @@ class CartSearch extends Cart
     public function rules()
     {
         return [
-            [['id', 'user_id', 'amount'], 'integer'],
+            [['id', 'pay_type_id', 'status_id', 'user_id', 'amount', 'pay_receipt'], 'integer'],
+            [['address', 'phone', 'created_at', 'date', 'time', 'other_reason'], 'safe'],
             [['cost'], 'number'],
         ];
     }
@@ -43,24 +41,9 @@ class CartSearch extends Cart
      */
     public function search($params)
     {
-        $query = (new Query())
-        ->select([
-            'cart.id as cart_id', 
-            'cart.amount as cart_amount', 
-            'cart.cost as cart_cost',
-            'cart_item.id as item_id',
-            'cart_item.amount as item_amount',
-            'cart_item.cost as item_cost',
-            'product.id as product_id',
-            'product.title as product_title',
-            'product.volume as product_volume',
-            'product.price as product_price',
-            '(SELECT photo FROM photo WHERE product_id = product.id LIMIT 1) as product_photo'
-        ])
-        ->from('cart')
-        ->innerJoin('cart_item', 'cart.id = cart_item.cart_id')
-        ->innerJoin('product', 'product.id = cart_item.product_id')
-        ->where(['cart.user_id' => Yii::$app->user->id]);
+        $query = Order::find();
+
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -77,10 +60,20 @@ class CartSearch extends Cart
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'created_at' => $this->created_at,
+            'date' => $this->date,
+            'time' => $this->time,
+            'pay_type_id' => $this->pay_type_id,
+            'status_id' => $this->status_id,
             'user_id' => $this->user_id,
             'amount' => $this->amount,
             'cost' => $this->cost,
+            'pay_receipt' => $this->pay_receipt,
         ]);
+
+        $query->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'other_reason', $this->other_reason]);
 
         return $dataProvider;
     }

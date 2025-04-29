@@ -4,9 +4,8 @@ use app\models\Sex;
 use yii\bootstrap5\Accordion;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
-use mihaildev\ckeditor\CKEditor;
- use mihaildev\elfinder\ElFinder;
-use yii\helpers\ArrayHelper;
+
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Product $model */
@@ -21,12 +20,15 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
 
-    <?#= $form->field($model, 'composition')->widget(CKEditor::class, [
+    <?= $form->field($model, 'volume')->textInput(['maxlength' => true]) ?>
+
+
+    <?#= $form->field($model, 'description')->widget(CKEditor::class, [
     //     'editorOptions' => ElFinder::ckeditorOptions([
     //         'elfinder',
     //         [
-    //             'preset' => 'full', //разработанны стандартные настройки basic, standard, full данную возможность не обязательно использовать
-    //             'inline' => false, //по умолчанию false
+    //             'preset' => 'full', 
+    //             'inline' => false,
     //         ],
     //     ])
     // ]) 

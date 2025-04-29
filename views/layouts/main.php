@@ -83,19 +83,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         <?php
 
         if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
-            <div class="position-relative" style="display: inline-block;">
+            <div class="position-relative">
                 <?= Html::a(
-                    Html::img('/img/backet.png', [
-                        'alt' => 'Корзина',
-                        'style' => 'width:24px;height:24px'
-                    ]),
+                    Html::img('/img/backet.png', ['alt' => 'Корзина']),
                     ['/shop/cart'],
-                    [
-                        'class' => 'text-decoration-none',
-                        'style' => 'display:block'
-                    ]
+                    ['class' => 'text-decoration-none']
                 ) ?>
-                <div id="cart-item-count" class="text-white" style="position:absolute;top:-8px;right:-8px"></div>
+                <div id="cart-item-count" class="text-white"></div>
             </div>
         <?php $this->registerJsFile('/js/cart.js', ['depends' => JqueryAsset::class]);
         endif;

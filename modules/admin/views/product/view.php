@@ -37,21 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'price',
+            'volume',
+            // 'description:html',
             [
                 'attribute' => 'sex_id',
                 'value' => Sex::getSexes()[$model->sex_id]
             ],
             'count',
-            // [
-            //     'label' => 'Изображение товара ',
-            //     'format' => 'html',
-            //     'value' =>  function ($model) {
-            //         if ($model->getPhotos()->count()) {
-            //             return Html::img('/img/' . $model->photos[0]->photo);
-            //         }
-            //         return Html::img('/img/no_photo.jpg');
-            //     }
-            // ],
 
             [
                 'label' => 'Изображение товара',
@@ -64,21 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($photoPath, ['style' => 'max-width: 400px; height: auto;']);
                 }
             ],
-            // [
-            //     'label' => 'Категории товара',
-            //     'format' => 'html',
-            //     'value' => function ($model) {
-            //         if ($model->getProductCategories()->count()) {
-            //             $html = "";
-            //             foreach ($model->productCategories as $val) {
-            //                 $html .= "<span>" . $val->category->title . " <br></span>";
-            //             }
-            //             return $html;
-            //         }
-            //     }
-            // ],
-
-
             [
                 'label' => 'Категории товара',
                 'format' => 'html',

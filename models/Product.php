@@ -12,6 +12,8 @@ use Yii;
  * @property float $price
  * @property int $sex_id
  * @property int $count
+ * @property int $volume 
+ * @property string $description
  *
  * @property CartItem[] $cartItems
  * @property OrderItem[] $orderItems
@@ -26,7 +28,7 @@ class Product extends \yii\db\ActiveRecord
     public $photoProduct;
     public $categories = [];
     // public $allNotes;
-    public $noteLevels = [];    
+    public $noteLevels = [];
 
 
     /**
@@ -43,10 +45,11 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            
-            [['title', 'price', 'sex_id', 'count', 'categories'], 'required'],
+
+            [['title', 'price', 'sex_id', 'count', 'categories', 'volume', 'description'], 'required'],
             [['price'], 'number'],
-            [['sex_id', 'count'], 'integer'],
+            [['sex_id', 'count', 'volume'], 'integer'],
+            [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['sex_id'], 'exist', 'skipOnError' => true, 'targetClass' => Sex::class, 'targetAttribute' => ['sex_id' => 'id']],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
@@ -69,7 +72,9 @@ class Product extends \yii\db\ActiveRecord
             'sex_id' => 'Для кого',
             'count' => 'Количество',
             'imageFile' => 'Изображение товара',
-            'categories' => 'Категория товара', 
+            'categories' => 'Категория товара',
+            'volume' => 'Объем товара в мл',
+            'description' => 'Описание товара'
         ];
     }
 

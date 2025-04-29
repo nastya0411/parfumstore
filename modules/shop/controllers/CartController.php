@@ -19,20 +19,20 @@ class CartController extends Controller
     /**
      * @inheritDoc
      */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
+    // public function behaviors()
+    // {
+    //     return array_merge(
+    //         parent::behaviors(),
+    //         [
+    //             'verbs' => [
+    //                 'class' => VerbFilter::className(),
+    //                 'actions' => [
+    //                     'delete' => ['POST'],
+    //                 ],
+    //             ],
+    //         ]
+    //     );
+    // }
 
     /**
      * Lists all Cart models.
@@ -112,11 +112,13 @@ class CartController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionClear($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        if ($model = $this->findModel($id)) {
+            $model->delete();
+            return $this->asJson(true);
+        }
+        return $this->asJson(false);
     }
 
 
@@ -156,7 +158,7 @@ class CartController extends Controller
             }
 
             if ($product->count < $cartItem->amount + 1) {
-                return false;
+                return $this->asJson(false);
             }
             $cartItem->amount++;
             $cartItem->cost += $product->price;
@@ -167,13 +169,53 @@ class CartController extends Controller
             $model->save();
             return $this->asJson(true);
         }
+        return $this->asJson(false);
     }
 
     public function actionItemRemove($id)
     {
-        if($model = CartItem::findOne($id)){
-            
+        if ($model = CartItem::findOne($id)) {
+            $model->delete();
+            return $this->asJson(true);
+        } else {
+            return $this->asJson(false);
         }
+    }
+
+
+    public function actionItemAdd($id)
+    {
+        return $this->actionAdd($id);
+    }
+
+    public function actionItemDel($id)
+    {
+        $model = Cart::findOne(['user_id' => Yii::$app->user->id]);
+        $product = Product::findOne($id);
+
+        if ($model && $product) {
+            if (!$model) {
+                $model = new Cart();
+                $model->user_id = Yii::$app->user->id;
+                $model->save();
+            }
+
+            $cartItem = CartItem::findOne(['cart_id' => $model->id, 'product_id' => $id]);
+
+            $cartItem->amount--;
+            $cartItem->cost -= $product->price;
+            $cartItem->save();
+
+            if ($cartItem->amount == 0) {
+                $cartItem->delete();
+            }
+
+            $model->amount--;
+            $model->cost -= $product->price;
+            $model->save();
+            return $this->asJson(true);
+        }
+        return $this->asJson(false);
     }
 
     /**

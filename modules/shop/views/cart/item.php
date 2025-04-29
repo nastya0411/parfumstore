@@ -18,13 +18,16 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
                     alt="<?= Html::encode($model['product_title']) ?>"
                     style="height: 80px; width: auto; object-fit: contain;">
             </div>
-            <div  class="card-text">
+            <div class="card-text d-flex flex-column align-items-center text-center">
                 <?= Html::a(
                     Html::encode($model['product_title']),
                     ['/shop/catalog/view', 'id' => $model['product_id']],
                     ['class' => 'text-decoration-none']
                 ) ?>
-            </div >
+                <div class="my-2 fs-8 fw-bold">
+                    <?= $model['product_volume'] ?> мл
+                </div>
+            </div>
 
             <div class="my-2 fs-4 fw-bold">
                 <?= Yii::$app->formatter->asDecimal($model['product_price'], 2) ?> ₽

@@ -20,6 +20,9 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'count')->textInput() ?>
 
+    <?= $form->field($model, 'volume')->textInput() ?>
+
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-outline-success']) ?>
     </div>

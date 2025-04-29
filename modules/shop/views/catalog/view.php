@@ -48,6 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
+                'attribute' => 'volume',
+                'value' => $model->volume,
+            ],
+            [
                 'attribute' => 'sex_id',
                 'value' => Sex::getSexes()[$model->sex_id]
             ],

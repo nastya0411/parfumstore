@@ -48,11 +48,10 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-        $model->scenario = Order::SCENARIO_DEFAULT; // Используем сценарий
+        $model->scenario = Order::SCENARIO_DEFAULT; 
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                // Автоматически устанавливаем статус "Новый" для новых заказов
                 if ($model->isNewRecord) {
                     $model->status_id = Status::getStatusId('Новый');
                 }
