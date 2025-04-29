@@ -139,7 +139,7 @@ class CartController extends Controller
     }
 
     public function actionAdd($id)
-    {
+    {        
         $model = Cart::findOne(['user_id' => Yii::$app->user->id]);
         $product = Product::findOne($id);
 

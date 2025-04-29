@@ -71,3 +71,6 @@ $(() => {
 
   cartCountReload();
 });
+
+  cartCountReload();
+});
