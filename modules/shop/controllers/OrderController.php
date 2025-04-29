@@ -2,7 +2,11 @@
 
 namespace app\modules\shop\controllers;
 
+use app\models\Cart;
+use app\models\CartItem;
 use app\models\Order;
+use app\models\OrderItem;
+use app\models\Status;
 use app\modules\shop\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,22 +69,41 @@ class OrderController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new Order();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    public function actionCreate($cart_id)
+     {
+         $model = new Order();        
+         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
+ 
+         if ($this->request->isPost) {
+             
+             if ($model->load($this->request->post()) ) {
+                 $cart = Cart::findOne($cart_id);
+                 $model->status_id = Status::getStatusId('Новый');
+                 $model->load($cart->attributes, '');
+                 $model->save();
+                 $cartItems = CartItem::find()
+                     ->where(['cart_id' => $cart->id])
+                     ->all();
+                 foreach($cartItems as $cartItem) {
+                     $shopItem = new OrderItem();
+                     $shopItem->load($cartItem->attributes, '');
+                     $shopItem->order_id = $model->id;
+                     $shopItem->save();
+                 }
+ 
+ 
+ 
+                 return $this->redirect(['view', 'id' => $model->id]);
+             }
+         } else {
+             $model->loadDefaultValues();
+         }
+ 
+         return $this->render('create', [
+             'model' => $model,
+             'dataProvider' => $dataProvider,
+         ]);
+     }
 
     /**
      * Updates an existing Order model.

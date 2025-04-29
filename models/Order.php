@@ -19,7 +19,8 @@ use Yii;
  * @property int $amount
  * @property float $cost
  * @property string $other_reason
- *
+* @property int|null $pay_receipt
+
  * @property OrderItem[] $orderItems
  * @property PayType $payType
  * @property Status $status
@@ -43,7 +44,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             [['address', 'phone', 'date', 'time', 'pay_type_id', 'status_id', 'user_id', 'other_reason'], 'required'],
             [['created_at', 'date', 'time'], 'safe'],
-            [['pay_type_id', 'status_id', 'user_id', 'amount'], 'integer'],
+            [['pay_type_id', 'status_id', 'user_id', 'amount', 'pay_receipt'], 'integer'],
             [['cost'], 'number'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
@@ -70,6 +71,7 @@ class Order extends \yii\db\ActiveRecord
             'amount' => 'Amount',
             'cost' => 'Cost',
             'other_reason' => 'Other Reason',
+            'pay_receipt' => 'Оплата при получении', 
         ];
     }
 

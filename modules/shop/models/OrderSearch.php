@@ -5,6 +5,8 @@ namespace app\modules\shop\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Order;
+use Yii;
+use yii\db\Query;
 
 /**
  * OrderSearch represents the model behind the search form of `app\models\Order`.
@@ -74,6 +76,35 @@ class OrderSearch extends Order
         $query->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'other_reason', $this->other_reason]);
+
+        return $dataProvider;
+    }
+
+
+    public function orderCreate($id)
+    {
+        $query = (new Query())
+        ->select([
+            'cart.id as cart_id', 
+            'cart.amount as cart_amount', 
+            'cart.cost as cart_cost',
+            'cart_item.id as item_id',
+            'cart_item.amount as item_amount',
+            'cart_item.cost as item_cost',
+            'product.id as product_id',
+            'product.title as product_title',
+            'product.volume as product_volume',
+            'product.price as product_price',
+            '(SELECT photo FROM photo WHERE product_id = product.id LIMIT 1) as product_photo'
+        ])
+        ->from('cart')
+        ->innerJoin('cart_item', 'cart.id = cart_item.cart_id')
+        ->innerJoin('product', 'product.id = cart_item.product_id')
+        ->where(['cart_id' => $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
         return $dataProvider;
     }

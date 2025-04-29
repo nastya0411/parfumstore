@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 28 2025 г., 23:13
+-- Время создания: Апр 29 2025 г., 23:48
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `diplom`
 --
+CREATE DATABASE IF NOT EXISTS `diplom` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `diplom`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `cart`
 --
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int UNSIGNED NOT NULL,
   `user_id` int UNSIGNED NOT NULL,
@@ -39,8 +42,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `amount`, `cost`) VALUES
-(1, 17, 7, '46.00'),
-(2, 16, 8, '58.00');
+(2, 16, 8, '58.00'),
+(10, 17, 2, '144.00');
 
 -- --------------------------------------------------------
 
@@ -48,6 +51,7 @@ INSERT INTO `cart` (`id`, `user_id`, `amount`, `cost`) VALUES
 -- Структура таблицы `cart_item`
 --
 
+DROP TABLE IF EXISTS `cart_item`;
 CREATE TABLE `cart_item` (
   `id` int UNSIGNED NOT NULL,
   `cart_id` int UNSIGNED NOT NULL,
@@ -61,12 +65,11 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`id`, `cart_id`, `product_id`, `amount`, `cost`) VALUES
-(1, 1, 6, 1, '1.00'),
-(2, 1, 7, 3, '9.00'),
 (3, 2, 6, 1, '1.00'),
 (4, 2, 12, 4, '48.00'),
 (5, 2, 7, 3, '9.00'),
-(6, 1, 12, 3, '36.00');
+(35, 10, 15, 1, '22.00'),
+(36, 10, 14, 1, '122.00');
 
 -- --------------------------------------------------------
 
@@ -74,6 +77,7 @@ INSERT INTO `cart_item` (`id`, `cart_id`, `product_id`, `amount`, `cost`) VALUES
 -- Структура таблицы `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -94,6 +98,7 @@ INSERT INTO `category` (`id`, `title`) VALUES
 -- Структура таблицы `note`
 --
 
+DROP TABLE IF EXISTS `note`;
 CREATE TABLE `note` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -118,6 +123,7 @@ INSERT INTO `note` (`id`, `title`) VALUES
 -- Структура таблицы `note_level`
 --
 
+DROP TABLE IF EXISTS `note_level`;
 CREATE TABLE `note_level` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
@@ -138,6 +144,7 @@ INSERT INTO `note_level` (`id`, `title`) VALUES
 -- Структура таблицы `order`
 --
 
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int UNSIGNED NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -150,7 +157,8 @@ CREATE TABLE `order` (
   `user_id` int UNSIGNED NOT NULL,
   `amount` int UNSIGNED NOT NULL DEFAULT '0',
   `cost` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `other_reason` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `other_reason` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `pay_receipt` tinyint UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -159,6 +167,7 @@ CREATE TABLE `order` (
 -- Структура таблицы `order_item`
 --
 
+DROP TABLE IF EXISTS `order_item`;
 CREATE TABLE `order_item` (
   `id` int UNSIGNED NOT NULL,
   `order_id` int UNSIGNED NOT NULL,
@@ -173,6 +182,7 @@ CREATE TABLE `order_item` (
 -- Структура таблицы `pay_type`
 --
 
+DROP TABLE IF EXISTS `pay_type`;
 CREATE TABLE `pay_type` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -192,6 +202,7 @@ INSERT INTO `pay_type` (`id`, `title`) VALUES
 -- Структура таблицы `photo`
 --
 
+DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
   `id` int UNSIGNED NOT NULL,
   `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -213,28 +224,32 @@ INSERT INTO `photo` (`id`, `photo`, `product_id`) VALUES
 -- Структура таблицы `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `price` decimal(10,0) UNSIGNED NOT NULL,
   `sex_id` int UNSIGNED NOT NULL,
-  `count` int UNSIGNED NOT NULL
+  `count` int UNSIGNED NOT NULL,
+  `volume` int UNSIGNED NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `product`
 --
 
-INSERT INTO `product` (`id`, `title`, `price`, `sex_id`, `count`) VALUES
-(6, '1', '1', 1, 1),
-(7, '3', '3', 3, 3),
-(8, '3', '3', 3, 3),
-(9, '5', '4', 1, 6),
-(10, '1', '1', 1, 1),
-(11, '1', '1', 1, 1),
-(12, 'Товар', '12', 2, 1444),
-(13, '1', '1221', 2, 3333),
-(14, '12', '122', 1, 212);
+INSERT INTO `product` (`id`, `title`, `price`, `sex_id`, `count`, `volume`, `description`) VALUES
+(6, '1', '1', 1, 1, 0, ''),
+(7, '3', '3', 3, 3, 0, ''),
+(8, '3', '3', 3, 3, 0, ''),
+(9, '5', '4', 1, 6, 0, ''),
+(10, '1', '1', 1, 1, 0, ''),
+(11, '1', '1', 1, 1, 0, ''),
+(12, 'Товар', '12', 2, 1444, 0, ''),
+(13, '1', '1221', 2, 3333, 0, ''),
+(14, '12', '122', 1, 212, 0, ''),
+(15, '22', '22', 1, 22, 1222, '');
 
 -- --------------------------------------------------------
 
@@ -242,6 +257,7 @@ INSERT INTO `product` (`id`, `title`, `price`, `sex_id`, `count`) VALUES
 -- Структура таблицы `product_category`
 --
 
+DROP TABLE IF EXISTS `product_category`;
 CREATE TABLE `product_category` (
   `id` int UNSIGNED NOT NULL,
   `product_id` int UNSIGNED NOT NULL,
@@ -267,7 +283,8 @@ INSERT INTO `product_category` (`id`, `product_id`, `category_id`) VALUES
 (49, 12, 8),
 (50, 13, 6),
 (51, 13, 7),
-(52, 14, 7);
+(52, 14, 7),
+(53, 15, 6);
 
 -- --------------------------------------------------------
 
@@ -275,6 +292,7 @@ INSERT INTO `product_category` (`id`, `product_id`, `category_id`) VALUES
 -- Структура таблицы `product_note_level`
 --
 
+DROP TABLE IF EXISTS `product_note_level`;
 CREATE TABLE `product_note_level` (
   `id` int UNSIGNED NOT NULL,
   `product_id` int UNSIGNED NOT NULL,
@@ -302,7 +320,10 @@ INSERT INTO `product_note_level` (`id`, `product_id`, `note_level_id`) VALUES
 (44, 12, 3),
 (45, 13, 1),
 (46, 13, 2),
-(47, 13, 3);
+(47, 13, 3),
+(48, 15, 1),
+(49, 15, 2),
+(50, 15, 3);
 
 -- --------------------------------------------------------
 
@@ -310,6 +331,7 @@ INSERT INTO `product_note_level` (`id`, `product_id`, `note_level_id`) VALUES
 -- Структура таблицы `product_note_level_item`
 --
 
+DROP TABLE IF EXISTS `product_note_level_item`;
 CREATE TABLE `product_note_level_item` (
   `id` int UNSIGNED NOT NULL,
   `product_note_level_id` int UNSIGNED NOT NULL,
@@ -352,7 +374,12 @@ INSERT INTO `product_note_level_item` (`id`, `product_note_level_id`, `note_id`)
 (170, 46, 9),
 (171, 46, 10),
 (172, 47, 7),
-(173, 47, 9);
+(173, 47, 9),
+(174, 48, 12),
+(175, 49, 10),
+(176, 49, 12),
+(177, 50, 10),
+(178, 50, 11);
 
 -- --------------------------------------------------------
 
@@ -360,6 +387,7 @@ INSERT INTO `product_note_level_item` (`id`, `product_note_level_id`, `note_id`)
 -- Структура таблицы `role`
 --
 
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -379,6 +407,7 @@ INSERT INTO `role` (`id`, `title`) VALUES
 -- Структура таблицы `sex`
 --
 
+DROP TABLE IF EXISTS `sex`;
 CREATE TABLE `sex` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
@@ -399,6 +428,7 @@ INSERT INTO `sex` (`id`, `title`) VALUES
 -- Структура таблицы `status`
 --
 
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `id` int UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
@@ -420,6 +450,7 @@ INSERT INTO `status` (`id`, `title`) VALUES
 -- Структура таблицы `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int UNSIGNED NOT NULL,
   `login` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -573,13 +604,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -627,25 +658,25 @@ ALTER TABLE `photo`
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT для таблицы `product_note_level`
 --
 ALTER TABLE `product_note_level`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT для таблицы `product_note_level_item`
 --
 ALTER TABLE `product_note_level_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- AUTO_INCREMENT для таблицы `role`

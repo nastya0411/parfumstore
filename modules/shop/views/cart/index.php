@@ -1,7 +1,7 @@
 <?php
 
 use app\models\Cart;
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\widgets\ListView;
@@ -17,6 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="cart-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $dataProvider->totalCount
+        ? Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-primary'])
+        : ''
+    ?>
 
 
     <?php Pjax::begin([

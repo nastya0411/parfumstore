@@ -44,5 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'pay_receipt',
         ],
     ]) ?>
+    <div>
+        Состав заказа:
+    </div>
+
+    <?php foreach($model->orderItems as $item): ?>
+        <?= $this->render('item-view', ['model' => $item])   ?>
+    <?php endforeach ?>
 
 </div>
