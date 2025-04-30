@@ -14,16 +14,16 @@ use yii\db\Query;
  */
 class CartSearch extends Cart
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'user_id', 'amount'], 'integer'],
-            [['cost'], 'number'],
-        ];
-    }
+    // /**
+    //  * {@inheritdoc}
+    //  */
+    // public function rules()
+    // {
+    //     return [
+    //         [['id', 'user_id', 'amount'], 'integer'],
+    //         [['cost'], 'number'],
+    //     ];
+    // }
 
     /**
      * {@inheritdoc}
@@ -44,23 +44,23 @@ class CartSearch extends Cart
     public function search($params)
     {
         $query = (new Query())
-        ->select([
-            'cart.id as cart_id', 
-            'cart.amount as cart_amount', 
-            'cart.cost as cart_cost',
-            'cart_item.id as item_id',
-            'cart_item.amount as item_amount',
-            'cart_item.cost as item_cost',
-            'product.id as product_id',
-            'product.title as product_title',
-            'product.volume as product_volume',
-            'product.price as product_price',
-            '(SELECT photo FROM photo WHERE product_id = product.id LIMIT 1) as product_photo'
-        ])
-        ->from('cart')
-        ->innerJoin('cart_item', 'cart.id = cart_item.cart_id')
-        ->innerJoin('product', 'product.id = cart_item.product_id')
-        ->where(['cart.user_id' => Yii::$app->user->id]);
+            ->select([
+                'cart.id as cart_id',
+                'cart.amount as cart_amount',
+                'cart.cost as cart_cost',
+                'cart_item.id as item_id',
+                'cart_item.amount as item_amount',
+                'cart_item.cost as item_cost',
+                'product.id as product_id',
+                'product.title as product_title',
+                'product.volume as product_volume',
+                'product.price as product_price',
+                '(SELECT photo FROM photo WHERE product_id = product.id LIMIT 1) as product_photo'
+            ])
+            ->from('cart')
+            ->where(['cart.user_id' => Yii::$app->user->id])
+            ->innerJoin('cart_item', 'cart.id = cart_item.cart_id')
+            ->innerJoin('product', 'product.id = cart_item.product_id');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -75,12 +75,12 @@ class CartSearch extends Cart
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'amount' => $this->amount,
-            'cost' => $this->cost,
-        ]);
+        // $query->andFilterWhere([
+        //     'id' => $this->id,
+        //     'user_id' => $this->user_id,
+        //     'amount' => $this->amount,
+        //     'cost' => $this->cost,
+        // ]);
 
         return $dataProvider;
     }

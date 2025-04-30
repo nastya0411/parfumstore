@@ -30,6 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => '{items}'
     ]) ?>
 
+
+
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+    
+
     <div class="d-flex justify-content-end gap-3 fs-4 my-3">
         <div>
             <span>
@@ -39,11 +47,4 @@ $this->params['breadcrumbs'][] = $this->title;
             </span>
         </div>
     </div>
-
-
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
 </div>

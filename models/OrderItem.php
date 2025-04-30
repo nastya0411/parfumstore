@@ -32,7 +32,7 @@ class OrderItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id'], 'required'],
+            [['order_id', 'product_id', 'cost'], 'required'],
             [['order_id', 'product_id', 'amount'], 'integer'],
             [['cost'], 'number'],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::class, 'targetAttribute' => ['product_id' => 'id']],

@@ -37,7 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'time',
             'pay_type_id',
             'status_id',
-            'user_id',
             'amount',
             'cost',
             'other_reason',

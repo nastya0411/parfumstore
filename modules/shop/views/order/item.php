@@ -42,12 +42,6 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
                     сумма - <span class="fw-bold"><?= Yii::$app->formatter->asDecimal($model['item_cost'], 2) ?> ₽</span>
                 </span>
             </div>
-            <div class="d-flex justify-content-end gap-3">
-                <?= Html::a('-', ['item-del', 'id' => $model['product_id']], ['class' => 'btn btn-danger btn-item-del']) ?>
-                <span class='fs-4'><?= $model['item_amount'] ?></span>
-                <?= Html::a('+', ['add', 'id' => $model['product_id']], ['class' => 'btn btn-success btn-item-add']) ?>
-                <?= Html::a('Удалить', ['item-remove', 'id' => $model['item_id']], ['class' => 'btn btn-outline-danger btn-item-remove']) ?>
-            </div>
         </div>
     </div>
 </div>

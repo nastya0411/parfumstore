@@ -127,19 +127,20 @@ class CartController extends Controller
         if ($model = Cart::findOne(['user_id' => Yii::$app->user->id])) {
             return $this->asJson([
                 'status' => true,
-                'value' => (int)CartItem::find()
+                'value' => CartItem::find()
                     ->where(['cart_id' => $model->id])
                     ->sum('amount')
             ]);
+        } else {
+            return $this->asJson([
+                'status' => true,
+                'value' => 0
+            ]);
         }
-        return $this->asJson([
-            'status' => true,
-            'value' => 0
-        ]);
     }
 
     public function actionAdd($id)
-    {        
+    {
         $model = Cart::findOne(['user_id' => Yii::$app->user->id]);
         $product = Product::findOne($id);
 
@@ -169,7 +170,7 @@ class CartController extends Controller
             $model->save();
             return $this->asJson(true);
         }
-        return $this->asJson(false);
+        // return $this->asJson(false);
     }
 
     public function actionItemRemove($id)
@@ -213,6 +214,7 @@ class CartController extends Controller
             $model->amount--;
             $model->cost -= $product->price;
             $model->save();
+            
             return $this->asJson(true);
         }
         return $this->asJson(false);

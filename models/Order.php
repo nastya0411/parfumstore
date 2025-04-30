@@ -46,6 +46,7 @@ class Order extends \yii\db\ActiveRecord
             [['created_at', 'date', 'time'], 'safe'],
             [['pay_type_id', 'status_id', 'user_id', 'amount', 'pay_receipt'], 'integer'],
             [['cost'], 'number'],
+            ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -59,18 +60,18 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'address' => 'Address',
-            'phone' => 'Phone',
-            'created_at' => 'Created At',
-            'date' => 'Date',
-            'time' => 'Time',
-            'pay_type_id' => 'Pay Type ID',
-            'status_id' => 'Status ID',
-            'user_id' => 'User ID',
-            'amount' => 'Amount',
-            'cost' => 'Cost',
-            'other_reason' => 'Other Reason',
+            'id' => 'Заказ №',
+            'address' => 'Адрес доставки заказа',
+            'phone' => 'Телефон получателя',
+            'created_at' => 'Дата создания заказа',
+            'date' => 'Дата получания заказа',
+            'time' => 'Время получания заказа',
+            'pay_type_id' => 'Способ оплаты',
+            'status_id' => 'Статус заказа',
+            'user_id' => 'Клиент',
+            'amount' => 'Количество товаров в заказе',
+            'cost' => 'Полная цена заказа',
+            'other_reason' => 'Причина отмены заказа',
             'pay_receipt' => 'Оплата при получении', 
         ];
     }

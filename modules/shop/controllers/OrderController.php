@@ -11,6 +11,7 @@ use app\modules\shop\models\OrderSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 
 /**
  * OrderController implements the CRUD actions for Order model.
@@ -70,40 +71,43 @@ class OrderController extends Controller
      * @return string|\yii\web\Response
      */
     public function actionCreate($cart_id)
-     {
-         $model = new Order();        
-         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
- 
-         if ($this->request->isPost) {
-             
-             if ($model->load($this->request->post()) ) {
-                 $cart = Cart::findOne($cart_id);
-                 $model->status_id = Status::getStatusId('Новый');
-                 $model->load($cart->attributes, '');
-                 $model->save();
-                 $cartItems = CartItem::find()
-                     ->where(['cart_id' => $cart->id])
-                     ->all();
-                 foreach($cartItems as $cartItem) {
-                     $shopItem = new OrderItem();
-                     $shopItem->load($cartItem->attributes, '');
-                     $shopItem->order_id = $model->id;
-                     $shopItem->save();
-                 }
- 
- 
- 
-                 return $this->redirect(['view', 'id' => $model->id]);
-             }
-         } else {
-             $model->loadDefaultValues();
-         }
- 
-         return $this->render('create', [
-             'model' => $model,
-             'dataProvider' => $dataProvider,
-         ]);
-     }
+    {
+        $model = new Order();
+        $dataProvider = (new OrderSearch())->orderCreate($cart_id);
+        
+        if ($this->request->isPost) {
+            
+            if ($model->load($this->request->post())) {
+                VarDumper::dump($model->attributes, 10, true); die;
+                $cart = Cart::findOne($cart_id);
+                $model->status_id = Status::getStatusId('Новый');
+                $model->load($cart->attributes, '');
+                $model->save();
+                $cartItems = CartItem::find()
+                    ->where(['cart_id' => $cart->id])
+                    ->all();
+                foreach ($cartItems as $cartItem) {
+                    $shopItem = new OrderItem();
+                    $shopItem->load($cartItem->attributes, '');
+                    $shopItem->order_id = $model->id;
+                    $shopItem->save();
+                    // VarDumper::dump($cart->attributes, 10, true);
+
+                }
+
+                // $cart->delete();
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Updates an existing Order model.
