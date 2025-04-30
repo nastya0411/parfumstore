@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'price',
             'volume',
-            // 'description:html',
+            'description:html',
             [
                 'attribute' => 'sex_id',
                 'value' => Sex::getSexes()[$model->sex_id]

@@ -1,11 +1,12 @@
 <?php
 
 use app\models\Sex;
+use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 use yii\bootstrap5\Accordion;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
-use mihaildev\ckeditor\CKEditor;
-use mihaildev\elfinder\ElFinder;
+
 
 
 /** @var yii\web\View $this */
@@ -24,15 +25,15 @@ use mihaildev\elfinder\ElFinder;
     <?= $form->field($model, 'volume')->textInput(['maxlength' => true]) ?>
 
 
-    <?#= $form->field($model, 'description')->widget(CKEditor::class, [
-    //     'editorOptions' => ElFinder::ckeditorOptions([
-    //         'elfinder',
-    //         [
-    //             'preset' => 'full', 
-    //             'inline' => false,
-    //         ],
-    //     ])
-    // ]) 
+    <?= $form->field($model, 'description')->widget(CKEditor::class, [
+        'editorOptions' => ElFinder::ckeditorOptions([
+            'elfinder',
+            [
+                'preset' => 'full', 
+                'inline' => false,
+            ],
+        ])
+    ]) 
     ?>
 
     <?= $form->field($model, 'sex_id')->dropDownList(Sex::getSexes(), ['prompt' => 'Выберете для кого предназначен товар']) ?>

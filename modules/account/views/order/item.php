@@ -10,14 +10,16 @@ use yii\bootstrap5\Html;
   </div>
   <div class="card-body">
     <h5 class="card-title text-decoration-underline">Дата и время услуги: <?= Yii::$app->formatter->asDate($model->date, 'php:d.m.Y') . ' ' . $model->time ?></h5>
-    <p class="card-text">Состав заказа: 
+    <!-- <p class="card-text">Состав заказа: 
         <span class="fs-5">
-          <?= $model->product_category_id 
-              ? $model->order->title 
-              : $model->other
+          <?php 
+            /* $model->product->title
+              ? $model->product->title 
+              : ""
+            */
           ?>    
         </span>
-    </p>
+    </p> -->
     <p class="card-text fs-5"><span class="text-black-50">Статус: </span><?= $model->status->title ?></p>
     
     <?= Html::a('Просмотр', ['view', 'id' => $model->id], ['class' => "btn btn-outline-primary"]) ?>

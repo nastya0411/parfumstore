@@ -8,6 +8,7 @@ use app\models\Order;
 use app\models\OrderItem;
 use app\models\Status;
 use app\modules\shop\models\OrderSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -75,27 +76,34 @@ class OrderController extends Controller
         $model = new Order();
         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
         
+        $model->user_id = Yii::$app->user->id;
+        $model->status_id = Status::getStatusId('Новый');
+        $model->cost = 0; 
+        
         if ($this->request->isPost) {
             
             if ($model->load($this->request->post())) {
-                VarDumper::dump($model->attributes, 10, true); die;
                 $cart = Cart::findOne($cart_id);
                 $model->status_id = Status::getStatusId('Новый');
                 $model->load($cart->attributes, '');
-                $model->save();
-                $cartItems = CartItem::find()
-                    ->where(['cart_id' => $cart->id])
-                    ->all();
-                foreach ($cartItems as $cartItem) {
-                    $shopItem = new OrderItem();
-                    $shopItem->load($cartItem->attributes, '');
-                    $shopItem->order_id = $model->id;
-                    $shopItem->save();
-                    // VarDumper::dump($cart->attributes, 10, true);
-
+                
+                // VarDumper::dump($model->attributes, 10, true); die;
+                if ($model->save()) {
+                    $cartItems = CartItem::find()
+                        ->where(['cart_id' => $cart->id])
+                        ->all();
+                    foreach ($cartItems as $cartItem) {
+                        $shopItem = new OrderItem();
+                        $shopItem->load($cartItem->attributes, '');
+                        $shopItem->order_id = $model->id;
+                        $shopItem->save();
+                        // VarDumper::dump($cart->attributes, 10, true);    
+                    }
+                } else {
+                    VarDumper::dump($model->errors, 10, true); die;                    
                 }
 
-                // $cart->delete();
+                 $cart->delete();
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
