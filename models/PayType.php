@@ -14,6 +14,13 @@ use Yii;
  */
 class PayType extends \yii\db\ActiveRecord
 {
+    // public static function getPaymentTypesList()
+    // {
+    //     return [
+    //         1 => 'Онлайн оплата',
+    //         2 => 'Оплата при получении'
+    //     ];
+    // }
     /**
      * {@inheritdoc}
      */

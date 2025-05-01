@@ -41,8 +41,7 @@ class OrderController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Order::find()
-                ->where(['user_id' => Yii::$app->user->id]),
+            'query' => Order::find()->where(['user_id' => Yii::$app->user->id]),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -82,7 +81,6 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-        $model->scenario = Order::SCENARIO_ORDER;
         $model->user_id = Yii::$app->user->id;
         $model->status_id = Status::getStatusId('Новый');
         $model->total_price = 0; 

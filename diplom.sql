@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 29 2025 г., 23:48
+-- Время создания: Май 01 2025 г., 22:55
 -- Версия сервера: 8.0.30
--- Версия PHP: 8.1.9
+-- Версия PHP: 8.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,8 +42,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `amount`, `cost`) VALUES
-(2, 16, 8, '58.00'),
-(10, 17, 2, '144.00');
+(30, 17, 8, '25.00');
 
 -- --------------------------------------------------------
 
@@ -65,11 +64,7 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`id`, `cart_id`, `product_id`, `amount`, `cost`) VALUES
-(3, 2, 6, 1, '1.00'),
-(4, 2, 12, 4, '48.00'),
-(5, 2, 7, 3, '9.00'),
-(35, 10, 15, 1, '22.00'),
-(36, 10, 14, 1, '122.00');
+(75, 30, 8, 3, '9.00');
 
 -- --------------------------------------------------------
 
@@ -157,9 +152,25 @@ CREATE TABLE `order` (
   `user_id` int UNSIGNED NOT NULL,
   `amount` int UNSIGNED NOT NULL DEFAULT '0',
   `cost` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `other_reason` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `other_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pay_receipt` tinyint UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `order`
+--
+
+INSERT INTO `order` (`id`, `address`, `phone`, `created_at`, `date`, `time`, `pay_type_id`, `status_id`, `user_id`, `amount`, `cost`, `other_reason`, `pay_receipt`) VALUES
+(1, 'ропр', '+7(656)-757-67-56', '2025-05-01 13:22:19', '2025-05-07', '07:05:00', 1, 1, 17, 7, '21.00', NULL, 0),
+(2, '34345', '+7(333)-333-33-33', '2025-05-01 13:35:28', '2025-04-29', '04:05:00', 2, 1, 17, 1, '22.00', NULL, 0),
+(3, 'еннге', '+7(544)-444-44-44', '2025-05-01 14:00:05', '2025-05-07', '04:56:00', 2, 1, 17, 2, '6.00', NULL, 1),
+(4, '65657', '+7(567)-567-56-75', '2025-05-01 14:01:52', '2025-05-06', '05:07:00', 1, 1, 16, 8, '58.00', NULL, 0),
+(5, 'орпр', '+7(555)-555-55-55', '2025-05-01 17:50:36', '2025-05-01', '06:57:00', 1, 1, 16, 3, '9.00', NULL, 0),
+(6, '45', '+7(444)-444-44-44', '2025-05-01 17:56:37', '2025-05-06', '04:05:00', 1, 7, 16, 1, '3.00', NULL, 0),
+(7, 'укеку', '+7(333)-333-33-33', '2025-05-01 18:24:10', '2025-05-08', '02:23:00', 2, 7, 16, 2, '24.00', NULL, 0),
+(8, 'кеекн', '+7(555)-555-55-55', '2025-05-01 18:27:20', '2025-05-22', '05:05:00', 2, 7, 16, 2, '6.00', NULL, 0),
+(9, '232', '+7(222)-222-22-22', '2025-05-01 18:27:44', '2025-05-07', '23:04:00', 1, 8, 16, 1, '3.00', NULL, 1),
+(10, '3', '+7(333)-333-33-33', '2025-05-01 18:36:15', '0003-03-31', '03:03:00', 2, 7, 16, 1, '3.00', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -175,6 +186,26 @@ CREATE TABLE `order_item` (
   `amount` int UNSIGNED NOT NULL DEFAULT '0',
   `cost` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `order_item`
+--
+
+INSERT INTO `order_item` (`id`, `order_id`, `product_id`, `amount`, `cost`) VALUES
+(1, 1, 7, 3, '9.00'),
+(2, 2, 15, 1, '22.00'),
+(3, 3, 7, 1, '3.00'),
+(4, 3, 8, 1, '3.00'),
+(5, 4, 6, 1, '1.00'),
+(6, 4, 12, 4, '48.00'),
+(7, 4, 7, 3, '9.00'),
+(8, 5, 7, 3, '9.00'),
+(9, 6, 7, 1, '3.00'),
+(10, 7, 12, 2, '24.00'),
+(11, 8, 7, 1, '3.00'),
+(12, 8, 8, 1, '3.00'),
+(13, 9, 8, 1, '3.00'),
+(14, 10, 7, 1, '3.00');
 
 -- --------------------------------------------------------
 
@@ -216,7 +247,8 @@ CREATE TABLE `photo` (
 INSERT INTO `photo` (`id`, `photo`, `product_id`) VALUES
 (2, '1745747810_RgEUFMQ5bkqoFnHLMSqomusxOZlTgbmx.png', 11),
 (3, '1745749284_fU0h4U-j2YGn0hdxLH_0U_f1Wh0Jt3g9.png', 12),
-(4, '1745842056_4yNYd5Kc7WQOe8r4u5zj0VdTdawIVIsh.png', 14);
+(4, '1745842056_4yNYd5Kc7WQOe8r4u5zj0VdTdawIVIsh.png', 14),
+(5, '1746098751_cPMrmQ42stG6hRmzY9W0ilKU3ofLrHLF.png', 15);
 
 -- --------------------------------------------------------
 
@@ -249,7 +281,7 @@ INSERT INTO `product` (`id`, `title`, `price`, `sex_id`, `count`, `volume`, `des
 (12, 'Товар', '12', 2, 1444, 0, ''),
 (13, '1', '1221', 2, 3333, 0, ''),
 (14, '12', '122', 1, 212, 0, ''),
-(15, '22', '22', 1, 22, 1222, '');
+(15, '22', '22', 1, 22, 1222, '<p><span style=\"font-family:times new roman,times,serif\"><span style=\"font-size:20px\">Окунитесь в мир непревзойденной роскоши с Luxurious Elixir, изысканным ароматом, который сплетает чарующую симфонию золота и роскоши. Этот позолоченный эликсир - это праздник изысканности, созданный с использованием лучших эссенций и наполненный очарованием драгоценных золотых оттенков.</span></span></p>\r\n');
 
 -- --------------------------------------------------------
 
@@ -439,10 +471,13 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id`, `title`) VALUES
-(1, 'Новый'),
+(1, 'Создан'),
 (2, 'В работе'),
 (3, 'Выполнен'),
-(4, 'Отменен');
+(4, 'Отменен'),
+(6, 'Оплачен'),
+(7, 'Ожидает оплаты'),
+(8, 'Оплата при получении');
 
 -- --------------------------------------------------------
 
@@ -604,13 +639,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -634,13 +669,13 @@ ALTER TABLE `note_level`
 -- AUTO_INCREMENT для таблицы `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `pay_type`
@@ -652,7 +687,7 @@ ALTER TABLE `pay_type`
 -- AUTO_INCREMENT для таблицы `photo`
 --
 ALTER TABLE `photo`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
@@ -694,7 +729,7 @@ ALTER TABLE `sex`
 -- AUTO_INCREMENT для таблицы `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `user`

@@ -45,13 +45,17 @@ class OrderController extends Controller
     public function actionIndex()
     {
         $searchModel = new OrderSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $params = $this->request->queryParams;
+        $params['OrderSearch']['user_id'] = Yii::$app->user->id;
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
 
     /**
      * Displays a single Order model.
@@ -75,18 +79,21 @@ class OrderController extends Controller
     {
         $model = new Order();
         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
-        
         $model->user_id = Yii::$app->user->id;
-        $model->status_id = Status::getStatusId('Новый');
-        $model->cost = 0; 
-        
+        // $model->status_id = Status::getStatusId('Новый');
+        $model->cost = 0;
+
         if ($this->request->isPost) {
-            
+
             if ($model->load($this->request->post())) {
                 $cart = Cart::findOne($cart_id);
-                $model->status_id = Status::getStatusId('Новый');
+                $isPaymentOnDelivery = (bool)$model->pay_receipt;
+                $model->status_id = $isPaymentOnDelivery
+                    ? Status::getStatusId('Оплата при получении')
+                    : Status::getStatusId('Ожидает оплаты');
+                // $model->status_id = Status::getStatusId('Новый');
                 $model->load($cart->attributes, '');
-                
+
                 // VarDumper::dump($model->attributes, 10, true); die;
                 if ($model->save()) {
                     $cartItems = CartItem::find()
@@ -99,11 +106,17 @@ class OrderController extends Controller
                         $shopItem->save();
                         // VarDumper::dump($cart->attributes, 10, true);    
                     }
+                    // $model->status_id = Status::getStatusId('Создан');
+                    $model->save();
                 } else {
-                    VarDumper::dump($model->errors, 10, true); die;                    
+                    VarDumper::dump($model->errors, 10, true);
+                    die;
                 }
 
-                 $cart->delete();
+                $cart->delete();
+                return $isPaymentOnDelivery
+                ? $this->redirect(['view', 'id' => $model->id])
+                : $this->redirect(['payment', 'id' => $model->id]);
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -135,6 +148,22 @@ class OrderController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionPayment($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('payment', ['model' => $model]);
+    }
+    
+    public function actionPaymentSuccess($id)
+    {
+        $model = $this->findModel($id);
+        $model->status_id = Status::getStatusId('Оплачен');
+        $model->save();
+        
+        Yii::$app->session->setFlash('success', 'Платеж успешно проведен!');
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

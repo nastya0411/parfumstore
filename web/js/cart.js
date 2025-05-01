@@ -23,7 +23,7 @@ $(() => {
   //     e.preventDefault();
 
   //   });
-  const productAdd = (el) =>
+  const productAdd = (el) => 
     $.ajax({
       url: el.attr("href"),
       success(data) {
@@ -73,3 +73,4 @@ $(() => {
 
   cartCountReload();
 });
+

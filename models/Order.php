@@ -28,6 +28,7 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -46,6 +47,7 @@ class Order extends \yii\db\ActiveRecord
             [['created_at', 'date', 'time'], 'safe'],
             [['pay_type_id', 'status_id', 'user_id', 'amount', 'pay_receipt'], 'integer'],
             [['cost'], 'number'],
+            ['pay_receipt', 'boolean'],
             ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
