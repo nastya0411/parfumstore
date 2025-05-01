@@ -214,7 +214,7 @@ class CartController extends Controller
             $model->amount--;
             $model->cost -= $product->price;
             $model->save();
-            
+
             return $this->asJson(true);
         }
         return $this->asJson(false);

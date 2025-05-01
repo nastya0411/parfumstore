@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
                 </span>
             </div>
-            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-danger btn-cart-clear']) ?>
+            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-danger btn-cart-clear']) ?> 
         </div>
     <?php else: ?>
         <div class="alert alert-primary" role="alert">

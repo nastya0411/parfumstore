@@ -43,10 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status_id',
                 'value' => Status::getStatuses()[$model->status_id],
             ],            
-            [
-                'attribute' => 'other_reason',
-                'visible' => (bool)$model->reason,
-            ],
+            // [
+            //     'attribute' => 'other_reason',
+            //     'visible' => (bool)$model->reason,
+            // ],
         ],
     ]) ?>
 
