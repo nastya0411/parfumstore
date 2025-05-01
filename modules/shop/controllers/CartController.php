@@ -115,7 +115,7 @@ class CartController extends Controller
     public function actionClear($id)
     {
         if ($model = $this->findModel($id)) {
-            $model->delete();
+            $model->delete();            
             return $this->asJson(true);
         }
         return $this->asJson(false);

@@ -16,10 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cart-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <?= $dataProvider->totalCount
-        ? Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-primary'])
+        ? Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-primary btn-order-create my-3'])
         : ''
     ?>
 
@@ -28,14 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'cart-pjax',
         'enablePushState' => false,
         'timeout' => 5000,
-
     ]); ?>
 
-    <? #php echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
-
     <?php if ($dataProvider->totalCount): ?>
-
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
             'itemOptions' => ['class' => 'item'],
@@ -52,13 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
                 </span>
             </div>
-            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-danger btn-cart-clear']) ?> 
+            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-danger btn-cart-clear', 'data-pjax' => "0"]) ?> 
         </div>
     <?php else: ?>
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-primary mt-3 alert-cart-empty" role="alert">
             Ваша корзина пуста!
         </div>
-
     <?php endif ?>
 
     <?php Pjax::end(); ?>

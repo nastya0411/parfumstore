@@ -46,30 +46,25 @@ $(() => {
 
 
 
-  $("#cart-pjax").on('click', ".btn-item-remove, .btn-item-add, .btn-item-del, .btn-item-clear", function (e) {
+  $("#cart-pjax").on('click', ".btn-item-remove, .btn-item-add, .btn-item-del, .btn-item-clear, .btn-cart-clear", function (e) {
     e.preventDefault();
     $.ajax({
       url: $(this).attr('href'),
-      success(data) {
+      success(data) {      
         if (data) {
-
           cartReload();
-
         }
       }
     })
   })
 
 
-
-
-
-  $("#cart-pjax").on('pjax:end', () => cartCountReload())
-
-
-
-
-
+  $("#cart-pjax").on('pjax:end', () => {
+    cartCountReload();
+    if ($(".alert-cart-empty").length) {
+      $(".btn-order-create").addClass("d-none");
+    }
+  })
 
   cartCountReload();
 });
