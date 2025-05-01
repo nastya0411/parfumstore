@@ -37,6 +37,7 @@ class PayType extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
+            [['online', 'place'], 'integer'], 
         ];
     }
 
@@ -48,6 +49,8 @@ class PayType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'online' => 'Choice Online', 
+            'place' => 'Choice Place', 
         ];
     }
 
@@ -61,11 +64,25 @@ class PayType extends \yii\db\ActiveRecord
         return $this->hasMany(Order::class, ['pay_type_id' => 'id']);
     }
 
-    public static function getPayTypes()
+   
+
+    public static function getPayTypesOnline()
     {
         return self::find()
         ->select('title')
+        ->where(['online' => 1])
         ->indexBy('id')
         ->column();
     }
+
+    public static function getPayTypesPlace()
+    {
+        return self::find()
+        ->select('title')
+        ->where(['place' => 1])
+        ->indexBy('id')
+        ->column();
+    }
+
+    
 }

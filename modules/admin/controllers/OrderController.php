@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Order;
+use app\models\PayType;
 use app\models\Status;
 use app\modules\admin\models\OrderSearch;
 use Yii;
@@ -86,6 +87,10 @@ class OrderController extends Controller
             'model' => $model,
         ]);
     }
+
+
+    
+
 
     public function actionDelete($id)
     {

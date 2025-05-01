@@ -3,6 +3,8 @@
 use app\models\PayType;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\helpers\Url;
+use yii\web\JqueryAsset;
 
 /** @var yii\web\View $this */
 /** @var app\models\Order $model */
@@ -25,9 +27,13 @@ use yii\bootstrap5\ActiveForm;
         
     </div>
 
-    <?= $form->field($model, 'pay_receipt')->checkbox() ?>
+    <?= $form->field($model, 'pay_receipt')->checkbox([
+        'data-on-filter' => 'place',
+        'data-off-filter' => 'online',
+        'data-url' => Url::to(['pay-type'])
+    ]) ?>
 
-    <?= $form->field($model, 'pay_type_id')->dropDownList(PayType::getPayTypes(), ['prompt' => 'Выберете тип оплаты:']) ?>
+    <?= $form->field($model, 'pay_type_id')->dropDownList(PayType::getPayTypesOnline(), ['prompt' => 'Выберете тип оплаты:']) ?>
 
     <div class="form-group d-flex justify-content-end">
         <?= Html::submitButton('Создать заказа', ['class' => 'btn btn-outline-success']) ?>
@@ -36,3 +42,8 @@ use yii\bootstrap5\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?php
+    
+    $this->registerJsFile("/js/order.js", ['depends' =>JqueryAsset::class]);
+?>

@@ -6,6 +6,7 @@ use app\models\Cart;
 use app\models\CartItem;
 use app\models\Order;
 use app\models\OrderItem;
+use app\models\PayType;
 use app\models\Status;
 use app\modules\shop\models\OrderSearch;
 use Yii;
@@ -69,6 +70,28 @@ class OrderController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+
+    public function actionPayType(string $type)
+    {
+        if ($this->request->isPost && $this->request->isAjax) {
+            if ($type == 'online') {
+                return $this->asJson([
+                    "status" => true,
+                    "options" => PayType::getPayTypesOnline()
+                ]);
+            } else {
+                return $this->asJson([
+                    "status" => true,
+                    "options" => PayType::getPayTypesPlace()
+                ]);
+            }
+        }
+        return [
+            "status" => false
+        ];
+    }
+
 
     /**
      * Creates a new Order model.
