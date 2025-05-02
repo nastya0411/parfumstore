@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Status;
 use yii\bootstrap5\Html;
 
 ?>
@@ -14,8 +15,47 @@ use yii\bootstrap5\Html;
     <h5 class="card-title">Статус заказа: <?= $model->status->title ?></h5>
     <p class="card-text">Количество товаров: <?= $model->amount ?> </p>
     <p class="card-text">Сумма заказа: <?= $model->cost ?> Р </p>
-    <div class="d-flex justify-content-end">
-      <?= Html::a('Просмотреть заказ',['/shop/order/view', 'id' => $model->id],['class' => 'btn btn-outline-primary']) ?>
+    <div class="d-flex justify-content-start gap-2">
+
+      <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
+        ? Html::a('В работе', ['work', 'id' => $model->id], ['class' =>
+        'btn btn-outline-primary', 'data-method' => 'post', 'data-pjax' => 0])
+        . Html::a('Отменен', ['cancel', 'id' => $model->id], ['class' =>
+        'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+        : ''
+      ?>
+
+
+      <?= $model->status_id == Status::getStatusId('Создан')
+        ? Html::a('В работе', ['work', 'id' => $model->id], ['class' =>
+        'btn btn-outline-primary', 'data-method' => 'post', 'data-pjax' => 0])
+        . Html::a('Отменен', ['cancel', 'id' => $model->id], ['class' =>
+        'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+        : ''
+      ?>
+
+      <?= $model->status_id == Status::getStatusId('Оплачен онлайн')
+        ? Html::a('В работе', ['work', 'id' => $model->id], ['class' =>
+        'btn btn-outline-primary', 'data-method' => 'post', 'data-pjax' => 0])
+        . Html::a('Отменен', ['cancel', 'id' => $model->id], ['class' =>
+        'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+        : ''
+      ?>
+
+      <?= $model->status_id == Status::getStatusId('Ожидает оплаты')
+        ? Html::a('Отменен', ['cancel', 'id' => $model->id], ['class' =>
+        'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+        : ''
+      ?>
+
+      <?= $model->status_id == Status::getStatusId('В работе')
+        ? Html::a('Доставлен', ['apply', 'id' => $model->id], ['class' =>
+        'btn btn-outline-success', 'data-method' => 'post', 'data-pjax' => 0])
+        : ''
+      ?>
+
+      <?= Html::a('Просмотреть заказ', ['/shop/order/view', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
     </div>
+
   </div>
 </div>

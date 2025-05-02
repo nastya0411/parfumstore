@@ -32,6 +32,7 @@ class Order extends \yii\db\ActiveRecord
     public $expiry;
     public $cvv;
     public $cardHolder;
+    const SCENARIO_CANCEL = 'cancel';
 
     /**
      * {@inheritdoc}
@@ -62,6 +63,7 @@ class Order extends \yii\db\ActiveRecord
             [['expiry'], 'string', 'length' => 5],
             [['cvv'], 'string', 'length' => 3],
             [['cardHolder'], 'string', 'max' => 255],
+            ['other_reason', 'required', 'on' => self::SCENARIO_CANCEL]
         ];
     }
 

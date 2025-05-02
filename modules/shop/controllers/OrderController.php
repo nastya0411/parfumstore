@@ -183,7 +183,7 @@ class OrderController extends Controller
     public function actionPaymentSuccess($id)
     {
         $model = $this->findModel($id);
-        $model->status_id = Status::getStatusId('Оплачен');
+        $model->status_id = Status::getStatusId('Оплачен онлайн');
         $model->save();
         
         Yii::$app->session->setFlash('success', 'Платеж успешно проведен!');
