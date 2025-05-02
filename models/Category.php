@@ -10,10 +10,15 @@ use Yii;
  * @property int $id
  * @property string $title
  *
- * @property ProductCategory[] $productCategories
+ * @property ProductCategory[] $productCategories 
+ * @property Photo[] $photos
  */
 class Category extends \yii\db\ActiveRecord
 {
+
+    public $imageFile;
+    public $photoCategories;
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +35,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -41,6 +47,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Название',
+            'imageFile' => 'Изображение категории',
         ];
     }
 
@@ -54,6 +61,12 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(ProductCategory::class, ['category_id' => 'id']);
     }
 
+    public function getPhotos()
+    {
+        return $this->hasMany(PhotoCategory::class, ['category_id' => 'id']);
+    }
+
+
     public static function getCategories()
     {
         return self::find()
@@ -62,4 +75,17 @@ class Category extends \yii\db\ActiveRecord
             ->column();
     }
 
+    public function upload()
+    {
+        if ($this->validate()) {
+            if ($this->imageFile) {
+
+                $this->photoCategories = time() . '_' . Yii::$app->security->generateRandomString() . '.' . $this->imageFile->extension;
+                $this->imageFile->saveAs('img/' . $this->photoCategories);
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

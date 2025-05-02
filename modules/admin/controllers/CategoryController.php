@@ -3,10 +3,12 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Category;
+use app\models\PhotoCategory;
 use app\modules\admin\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -68,15 +70,21 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
-
+    
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->upload()) {
+                    if ($model->save(false)) {
+                        PhotoCategory::setCategoryPhoto($model);
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }
             }
         } else {
             $model->loadDefaultValues();
         }
-
+    
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -92,11 +100,17 @@ class CategoryController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->save()) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->imageFile && $model->upload()) {
+                    PhotoCategory::setCategoryPhoto($model);
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-
+    
         return $this->render('update', [
             'model' => $model,
         ]);

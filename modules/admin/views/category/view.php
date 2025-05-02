@@ -34,7 +34,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
+            [
+                'label' => 'Изображение товара',
+                'format' => 'html',
+                'value' => function ($model) {
+                    $photoPath = $model->getPhotos()->count() 
+                        ? '/img/' . $model->photos[0]->photo 
+                        : '/img/no_photo.jpg';
+                    
+                    return Html::img($photoPath, ['style' => 'max-width: 400px; height: auto;']);
+                }
+            ],
         ],
     ]) ?>
+    
 
 </div>
