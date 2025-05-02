@@ -8,8 +8,8 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Order $model */
 
-$this->title = 'Заказ № '.$model->id.' от '. 
-Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s');
+$this->title = 'Заказ № ' . $model->id . ' от ' .
+    Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s');
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -18,7 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Назад', ['index'], ['class' => 'btn btn-outline-info']) ?>
+        <?= Html::a('Назад', (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin)
+            ? ['/admin']
+            : ['index'], ['class' => 'btn btn-outline-info']) ?> 
     </p>
 
     <?= DetailView::widget([
@@ -39,10 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'time',
                 'value' => Yii::$app->formatter->asTime($model->time, 'php:H:i')
             ],
-            [
-                'attribute' => 'pay_type_id',
-                'value' => PayType::getPayTypes()[$model->pay_type_id]
-            ],
+            // [
+            //     'attribute' => 'pay_type_id',
+            //     'value' => PayType::getPayTypesOnline()[$model->pay_type_id]
+            // ],
             [
                 'attribute' => 'status_id',
                 'value' => Status::getStatuses()[$model->status_id]
@@ -51,8 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'cost',
             [
                 'attribute' => 'other_reason',
-                'value' => !empty($model->other_reason)
+                'format' => 'ntext',
+                'value' => $model->other_reason,
+                'visible' => (bool)$model->other_reason,
+
             ],
+
+
             // 'pay_receipt',
         ],
     ]) ?>
@@ -60,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Состав заказа:
     </div>
 
-    <?php foreach($model->orderItems as $item): ?>
+    <?php foreach ($model->orderItems as $item): ?>
         <?= $this->render('item-view', ['model' => $item])   ?>
     <?php endforeach ?>
 

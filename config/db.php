@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',    
-    'dsn' => 'mysql:host=MariaDB-11.2;dbname=diplom_parfum',
+    'dsn' => 'mysql:host=localhost;dbname=diplom_parfum',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

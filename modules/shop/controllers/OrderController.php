@@ -112,7 +112,7 @@ class OrderController extends Controller
                 $cart = Cart::findOne($cart_id);
                 $isPaymentOnDelivery = (bool)$model->pay_receipt;
                 $model->status_id = $isPaymentOnDelivery
-                    ? Status::getStatusId('Оплата при получении')
+                    ? Status::getStatusId('Создан')
                     : Status::getStatusId('Ожидает оплаты');
                 // $model->status_id = Status::getStatusId('Новый');
                 $model->load($cart->attributes, '');
@@ -176,6 +176,7 @@ class OrderController extends Controller
     public function actionPayment($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'payment'; 
         return $this->render('payment', ['model' => $model]);
     }
     
