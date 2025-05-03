@@ -4,23 +4,21 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Product;
+use app\models\Category;
 
 /**
- * ProductSearch represents the model behind the search form of `app\models\Product`.
+ * CategorySearch represents the model behind the search form of `app\models\Category`.
  */
-class ProductSearch extends Product
+class CategorySearch extends Category
 {
-    public $category_id;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'sex_id', 'count', 'category_id'], 'integer'],
+            [['id'], 'integer'],
             [['title'], 'safe'],
-            [['price'], 'number'],
         ];
     }
 
@@ -40,39 +38,31 @@ class ProductSearch extends Product
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $categoryId = null)
+    public function search($params)
     {
-        $query = Product::find();
-    
-        $query->innerJoinWith(['productCategories']); 
-    
+        $query = Category::find();
+
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-    
+
         $this->load($params);
-    
-        if ($categoryId !== null) {
-            $this->category_id = $categoryId;
-        }
-    
+
         if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
-    
+
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
-            'sex_id' => $this->sex_id,
-            'count' => $this->count,
         ]);
-    
+
         $query->andFilterWhere(['like', 'title', $this->title]);
-    
-        if (!empty($this->category_id)) {
-            $query->andWhere(['product_category.category_id' => $this->category_id]);
-        }
-    
+
         return $dataProvider;
     }
 }

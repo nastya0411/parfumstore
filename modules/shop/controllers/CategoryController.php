@@ -1,11 +1,13 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\shop\controllers;
 
 use app\models\Category;
 use app\models\PhotoCategory;
+use app\models\Product;
 use app\modules\admin\models\CategorySearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -70,28 +72,28 @@ class CategoryController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new Category();
+    // public function actionCreate()
+    // {
+    //     $model = new Category();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                if ($model->upload()) {
-                    if ($model->save(false)) {
-                        PhotoCategory::setCategoryPhoto($model);
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }
-                }
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+    //     if ($this->request->isPost) {
+    //         if ($model->load($this->request->post())) {
+    //             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+    //             if ($model->upload()) {
+    //                 if ($model->save(false)) {
+    //                     PhotoCategory::setCategoryPhoto($model);
+    //                     return $this->redirect(['view', 'id' => $model->id]);
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         $model->loadDefaultValues();
+    //     }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('create', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Updates an existing Category model.
@@ -100,24 +102,24 @@ class CategoryController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+    // public function actionUpdate($id)
+    // {
+    //     $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            if ($model->save()) {
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                if ($model->imageFile && $model->upload()) {
-                    PhotoCategory::setCategoryPhoto($model);
-                }
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
+    //     if ($this->request->isPost && $model->load($this->request->post())) {
+    //         if ($model->save()) {
+    //             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+    //             if ($model->imageFile && $model->upload()) {
+    //                 PhotoCategory::setCategoryPhoto($model);
+    //             }
+    //             return $this->redirect(['view', 'id' => $model->id]);
+    //         }
+    //     }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('update', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Deletes an existing Category model.
@@ -126,12 +128,12 @@ class CategoryController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
+    // public function actionDelete($id)
+    // {
+    //     $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+    //     return $this->redirect(['index']);
+    // }
 
     /**
      * Finds the Category model based on its primary key value.
@@ -151,13 +153,32 @@ class CategoryController extends Controller
 
     public function actionProducts($id)
     {
-        $searchModel = new \app\modules\admin\models\ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $id);
-
-        return $this->render('products', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'categoryId' => $id,
+        $category = $this->findCategory($id);
+        
+        $query = Product::find()
+            ->joinWith('productCategories')
+            ->where(['product_category.category_id' => $id])
+            ->with('photos');
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
         ]);
+    
+        return $this->render('@app/modules/shop/views/category/products', [
+            'category' => $category,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    protected function findCategory($id)
+    {
+        if (($model = Category::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('Категория не найдена.');
     }
 }

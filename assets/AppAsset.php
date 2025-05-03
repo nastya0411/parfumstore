@@ -23,6 +23,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/style.css',
         'css/header.css',
+        'css/category-card.css',
+        'css/product-cards.css',
 
 
     ];

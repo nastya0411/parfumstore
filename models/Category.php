@@ -65,6 +65,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PhotoCategory::class, ['category_id' => 'id']);
     }
+    
 
 
     public static function getCategories()
