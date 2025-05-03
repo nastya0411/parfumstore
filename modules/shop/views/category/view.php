@@ -37,7 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'volume',
-                'value' => $model->volume,
+                'value' => function($model) {
+                    return isset($model->volume) ? $model->volume . ' мл' : 'Не указан';
+                },
             ],
             [
                 'attribute' => 'sex_id',

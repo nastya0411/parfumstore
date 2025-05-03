@@ -158,8 +158,8 @@ class CategoryController extends Controller
         $query = Product::find()
             ->joinWith('productCategories')
             ->where(['product_category.category_id' => $id])
-            ->with('photos');
-        
+            ->with(['photos', 'productCategories.category'])
+            ->select(['product.*']); 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -167,7 +167,7 @@ class CategoryController extends Controller
             ],
         ]);
     
-        return $this->render('@app/modules/shop/views/category/products', [
+        return $this->render('products', [
             'category' => $category,
             'dataProvider' => $dataProvider,
         ]);

@@ -4,7 +4,7 @@ use yii\bootstrap5\Html;
 use yii\helpers\Url;
 
 ?>
-<div class="card text-center product-card" style="width: 260px; height: 450px; cursor: pointer;" data-url="<?= Url::to(['view', 'id' => $model->id]) ?>">
+<div class="card text-center product-card" style="width: 260px; height: 450px; cursor: pointer;" data-url="<?= Url::to(['\shop\views\catalog\view', 'id' => $model->id]) ?>">
   <img
     src="<?= $model->getPhotos()->count() ? '/img/' . $model->photos[0]->photo : '/img/no_photo.jpg' ?>"
     class="card-img-top"
@@ -13,7 +13,7 @@ use yii\helpers\Url;
 
   <div class="card-body">
     <div class="my-2 mb-3 ">
-      <h4><?= Html::a($model->title, ['view', 'id' => $model->id],  ['class' => 'text-decoration-none']) ?></h4>
+      <h4><?= Html::a($model->title, ['\shop\views\catalog\view', 'id' => $model->id],  ['class' => 'text-decoration-none']) ?></h4>
     </div>
     <div class="text-center my-2">
       <div class="d-inline-block bg-light rounded-pill">

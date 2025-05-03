@@ -14,7 +14,6 @@ $this->registerCssFile('@web/css/product-cards.css', [
 <div class="category-products">
     <h1><?= $this->title ?></h1>
 
-    
     <?php Pjax::begin([
         'id' => 'catalog-pjax',
         'enablePushState' => false,
@@ -28,4 +27,6 @@ $this->registerCssFile('@web/css/product-cards.css', [
         'options' => ['class' => 'products-grid'],
         'itemOptions' => ['class' => 'product-card'],
     ]) ?>
+
+    <?php Pjax::end(); ?>
 </div>

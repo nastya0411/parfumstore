@@ -5,14 +5,14 @@ use yii\helpers\Url;
 /** @var \app\models\Product $model */
 ?>
 
-<div class="product-card" data-url="<?= Url::to(['view', 'id' => $model->id]) ?>">
+<div class="product-card" data-url="<?= Url::to(['/shop/catalog/view', 'id' => $model->id]) ?>">
     <img src="<?= $model->getPhotos()->count() ? '/img/' . $model->photos[0]->photo : '/img/no_photo.jpg' ?>"
          class="product-card-img"
          alt="<?= Html::encode($model->title) ?>">
 
     <div class="product-card-body">
         <h4 class="product-title">
-            <?= Html::a($model->title, ['view', 'id' => $model->id], ['class' => 'product-title-link']) ?>
+            <?= Html::a($model->title, ['/shop/catalog/view', 'id' => $model->id], ['class' => 'product-title-link']) ?>
         </h4>
         
         <div class="stock-badge">
