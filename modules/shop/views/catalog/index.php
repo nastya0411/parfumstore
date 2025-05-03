@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Product;
+use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -16,22 +17,41 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <p>
-        <? #= Html::a('Создать товар', ['create'], ['class' => 'btn btn-outline-success']) 
-        ?>
-    </p>
 
     <?php Pjax::begin([
         'id' => 'catalog-pjax',
-        'enablePushState' => false,
-        'timeout' => 5000,
+        // 'enablePushState' => false,
+        // 'timeout' => 5000,
     ]); ?>
+    <p>
+        <?php $form = ActiveForm::begin([
+            // 'id' => 'catalog-search-form',
+            'action' => ['index'],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
+
+        <?= $form->field($searchModel, 'product')->textInput() ?>
+
+        <?= $form->field($searchModel, 'category_id')->dropDownList($categories, ['prompt' => "Выберете категорию"]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Сброс', ['index'], ['class' => 'btn btn-primary']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+    </p>
+    <?php Yii::debug(Yii::$app->request->queryParams) ?>
+
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item my-3 col-md-3 col-sm-6 mb-4'],
-        'layout' => '<div class="row">{items}</div>{pager}', 
+        'layout' => '<div class="row">{items}</div>{pager}',
         'itemView' => 'item',
         'pager' => [
             'class' => LinkPager::class
