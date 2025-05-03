@@ -56,7 +56,7 @@ class OrderController extends Controller
     //             if ($model->isNewRecord) {
     //                 $model->status_id = Status::getStatusId('Создан');
     //             }
-                
+
     //             if ($model->save()) {
     //                 Yii::$app->session->setFlash('success', 'Заказ успешно создан');
     //                 return $this->redirect(['view', 'id' => $model->id]);
@@ -79,7 +79,7 @@ class OrderController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->status_id = Status::getStatusId('Отменен');
             if ($model->save())
-            Yii::$app->session->setFlash('warning','Заказ отменена');
+                Yii::$app->session->setFlash('warning', 'Заказ отменена');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,7 +90,7 @@ class OrderController extends Controller
         return $this->redirect('@app/modules/shop/views/order/view');
     }
 
-    
+
     public function actionWork($id)
     {
         $model = $this->findModel($id);
@@ -109,9 +109,14 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost) {
-            $model->status_id = Status::getStatusId('Доставлен');
-            if ($model->save()) {
+            if ($model->pay_receipt) {
+                $model->status_id = Status::getStatusId('Заказ выдан');
+                Yii::$app->session->setFlash('success', 'Заказ успешно выдан!');
+            } else {
+                $model->status_id = Status::getStatusId('Доставлен');
                 Yii::$app->session->setFlash('success', 'Заказ успешно доставлен!');
+            }
+            if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -131,7 +136,7 @@ class OrderController extends Controller
     }
 
 
-    
+
 
 
     public function actionDelete($id)

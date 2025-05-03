@@ -42,7 +42,7 @@ class OrderController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Order::find()->where(['user_id' => Yii::$app->user->id]),
-            /*
+
             'pagination' => [
                 'pageSize' => 50
             ],
@@ -51,7 +51,7 @@ class OrderController extends Controller
                     'id' => SORT_DESC,
                 ]
             ],
-            */
+
         ]);
 
         return $this->render('index', [
@@ -83,7 +83,7 @@ class OrderController extends Controller
         $model = new Order();
         $model->user_id = Yii::$app->user->id;
         $model->status_id = Status::getStatusId('Новый');
-        $model->total_price = 0; 
+        $model->total_price = 0;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'Заказ оформлен!');
