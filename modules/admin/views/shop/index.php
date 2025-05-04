@@ -11,5 +11,6 @@ use yii\bootstrap5\Html;
     <?= Html::a('Категории', ['/admin/category'], ['class' => 'btn btn-outline-primary']) ?>
     <?= Html::a('Товары', ['/admin/product'], ['class' => 'btn btn-outline-success']) ?>
     <?= Html::a('Каталог', ['/shop'], ['class' => 'btn btn-outline-warning']) ?>
+    <?= Html::a('Статистика', ['/admin/statistics'], ['class' => 'btn btn-outline-primary']) ?>
 
 </p>

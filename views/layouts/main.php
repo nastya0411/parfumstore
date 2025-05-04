@@ -14,15 +14,15 @@ use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
-if (!Yii::$app->user->isGuest) {
-    if (Yii::$app->user->identity->isAdmin) {
-        $this->registerCssFile('@web/css/tw.css');
-    } else {
-        $this->registerCssFile('@web/css/tw.css');
-    }
-} else {
-    $this->registerCssFile('@web/css/site.css');
-}
+// if (!Yii::$app->user->isGuest) {
+//     if (Yii::$app->user->identity->isAdmin) {
+//         $this->registerCssFile('@web/css/tw.css');
+//     } else {
+//         $this->registerCssFile('@web/css/tw.css');
+//     }
+// } else {
+//     $this->registerCssFile('@web/css/site.css');
+// }
 
 $this->registerCsrfMetaTags();
 
