@@ -79,7 +79,7 @@ class OrderController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
             $model->status_id = Status::getStatusId('Отменен');
             if ($model->save())
-                Yii::$app->session->setFlash('warning', 'Заказ отменена');
+                Yii::$app->session->setFlash('warning', 'Заказ отменен');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -96,9 +96,9 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost) {
-            $model->status_id = Status::getStatusId('В работе');
+            $model->status_id = Status::getStatusId('В сборке');
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Заказ принят в работу!');
+                Yii::$app->session->setFlash('success', 'Заказ принят в сборку!');
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

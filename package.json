@@ -1,0 +1,24 @@
+{
+  "name": "parfumstore",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r     <a href=\"https://github.com/yiisoft\" target=\"_blank\">\r         <img src=\"https://avatars0.githubusercontent.com/u/993323\" height=\"100px\">\r     </a>\r     <h1 align=\"center\">Yii 2 Basic Project Template</h1>\r     <br>\r </p>",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tw-watch": "npx @tailwindcss/cli -i ./web/css/site.css -o ./web/css/tw.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "daisyui": "^5.0.35"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^4.1.5"
+  }
+}

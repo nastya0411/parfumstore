@@ -5,14 +5,17 @@
 
 /** @var app\models\LoginForm $model */
 
+
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
 $this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="site-login">
     <h3><?= Html::encode($this->title) ?></h3>
+    
 
     <p>Введите ваш логин и пароль:</p>
 

@@ -14,6 +14,18 @@ use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
+if (!Yii::$app->user->isGuest) {
+    if (Yii::$app->user->identity->isAdmin) {
+        $this->registerCssFile('@web/css/tw.css');
+    } else {
+        $this->registerCssFile('@web/css/tw.css');
+    }
+} else {
+    $this->registerCssFile('@web/css/site.css');
+}
+
+$this->registerCsrfMetaTags();
+
 $this->registerCsrfMetaTags();
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
 $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);

@@ -33,7 +33,7 @@ use yii\bootstrap5\Html;
             ?>
 
             <?= $model->status_id == Status::getStatusId('Оплачен онлайн')
-                ? Html::a('В работе', ['work', 'id' => $model->id], ['class' =>
+                ? Html::a('В сборку', ['work', 'id' => $model->id], ['class' =>
                 'btn btn-outline-primary', 'data-method' => 'post', 'data-pjax' => 0])
                 . Html::a('Отменен', ['cancel', 'id' => $model->id], ['class' =>
                 'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
@@ -48,7 +48,7 @@ use yii\bootstrap5\Html;
 
             <?php
             $btn = "";
-            if ($model->status_id == Status::getStatusId('В работе')) {
+            if ($model->status_id == Status::getStatusId('В сборке')) {
                 if ($model->pay_receipt) {
                     $btn = Html::a('Оплата при получении', ['paid', 'id' => $model->id], ['class' => 'btn btn-outline-success', 'data-method' => 'post', 'data-pjax' => 0]);
                 } else {
