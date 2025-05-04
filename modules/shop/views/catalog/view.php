@@ -13,24 +13,18 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="product-view">
-    <p>
+    <div class=" d-flex gap-3">
         <?= Html::a('Назад', ['/shop/catalog/index'], ['class' => 'btn btn-outline-info']) ?>
-    </p>
+        <?= (!Yii::$app->user->identity?->isAdmin)
+            ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
+                'class' => 'btn btn-outline-success btn-add-cart w-auto',
+                'data-pjax' => 0,
+            ])
+            : "" ?>
+    </div>
 
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <!-- <p>
-        <#?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
-        <#?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены, что хотите удалить товар?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p> -->
-
 
     <?= DetailView::widget([
         'model' => $model,
@@ -56,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => Sex::getSexes()[$model->sex_id]
             ],
             'description:html',
+
             [
                 'label' => 'Изображение товара',
                 'format' => 'html',
@@ -113,5 +108,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+
 
 </div>

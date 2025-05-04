@@ -28,11 +28,6 @@ use yii\helpers\Url;
       <?= Yii::$app->formatter->asDecimal($model->price, 2) ?> <span class="ruble-symbol">₽</span>
       <span><?= $model->volume ?> мл</span>
     </div>
-
-    <!-- <div>
-      <? #= Html::a('В корзину', ['cart/add', 'id' => $model->id], ['class' => 'btn btn-outline-success w-100']) 
-      ?>
-    </div> -->
     <div>
       <?= (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin)
         ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
