@@ -15,16 +15,27 @@ use yii\web\JqueryAsset;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, ['mask' => '+7(999)-999-99-99',]) ?>
+    <?= $form->field($model, 'address')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'г. Санкт-Петербург, ул. Ленина, д. 2, кв. 45',
+    ]) ?>
+    
+    <?= $form->field($model, 'phone')->widget(
+        \yii\widgets\MaskedInput::class,
+        [
+            'mask' => '+7(999)-999-99-99',
+            'options' => [
+                'placeholder' => '+7(999)-999-99-99',
+            ],
+        ]
+    ) ?>
 
     <div class="d-flex justify-content-start gap-3">
 
-        <?= $form->field($model, 'date')->textInput(['type' => 'date']) ?>
+        <?= $form->field($model, 'date')->textInput(['type' => 'date', 'value' => date('Y-m-d'),]) ?>
 
-        <?= $form->field($model, 'time')->textInput(['type' => 'time']) ?>
-        
+        <?= $form->field($model, 'time')->textInput(['type' => 'time', 'value' => date('H:i'),]) ?>
+
     </div>
 
     <?= $form->field($model, 'pay_receipt')->checkbox([
@@ -44,6 +55,6 @@ use yii\web\JqueryAsset;
 </div>
 
 <?php
-    
-    $this->registerJsFile("/js/order.js", ['depends' =>JqueryAsset::class]);
+
+$this->registerJsFile("/js/order.js", ['depends' => JqueryAsset::class]);
 ?>

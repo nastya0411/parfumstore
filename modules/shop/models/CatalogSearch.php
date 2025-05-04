@@ -26,6 +26,14 @@ class CatalogSearch extends Product
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'category_id' => 'Категория аромата',
+            'product' => 'Товар',           
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

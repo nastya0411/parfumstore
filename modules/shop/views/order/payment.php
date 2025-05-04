@@ -46,7 +46,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
                     ],
                 ]); ?>
 
-                <div class="card-preview mb-4">
+                <div class="card-preview mb-4"  style="max-width: 350px; margin: 0 auto;">
                     <div class="card-logo">
                         <img src="https://img.icons8.com/color/48/000000/visa.png" id="card-type-img" class="card-logo-img">
                     </div>
@@ -86,13 +86,11 @@ $this->registerCssFile('@web/css/shop/payment.css');
                         ])->label($model->getAttributeLabel('expiry')) ?>
                     </div>
                     <div class="col-md-6">
-                        <?= $form->field($model, 'cvv', [
-                            'inputOptions' => [
-                                'id' => 'card-cvv',
-                                'class' => 'form-control' . ($model->hasErrors('cvv') ? ' is-invalid' : ''),
-                                'placeholder' => 'CVV',
-                                'maxlength' => 3
-                            ]
+                        <?= $form->field($model, 'cvv')->passwordInput([
+                            'id' => 'card-cvv',
+                            'class' => 'form-control' . ($model->hasErrors('cvv') ? ' is-invalid' : ''),
+                            'placeholder' => 'CVV',
+                            'maxlength' => 3
                         ])->label($model->getAttributeLabel('cvv')) ?>
                     </div>
                 </div>
