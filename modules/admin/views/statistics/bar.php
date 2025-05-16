@@ -27,7 +27,7 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
                     'pointHoverBorderColor' => "rgba(179,181,198,1)",
-                    'data' => array_map('intval', $online),
+                    'data' => array_map('intval', $delivered),
                 ],
                 [
                     'label' => "Отмененные заказы",
@@ -37,7 +37,7 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
                     'pointHoverBorderColor' => "rgba(255,99,132,1)",
-                    'data' => array_map('intval', $cash),
+                    'data' => array_map('intval', $cancelled),
                 ]
             ]
         ],

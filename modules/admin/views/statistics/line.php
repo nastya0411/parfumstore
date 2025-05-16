@@ -32,7 +32,7 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                 [
                     'label' => "Заказы с оплатой при получении",
                     'backgroundColor' => "rgba(255,99,132,0.2)",
-                    'borderColor' => "rgba(255,99,132,1)",
+                    'borderColor' => "rgb(255, 99, 132)",
                     'pointBackgroundColor' => "rgba(255,99,132,1)",
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
