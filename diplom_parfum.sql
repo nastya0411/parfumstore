@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 04 2025 г., 21:11
+-- Время создания: Май 16 2025 г., 15:35
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.3.8
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `diplom_parfum`
 --
-CREATE DATABASE IF NOT EXISTS `diplom_parfum` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci;
-USE `diplom_parfum`;
 
 -- --------------------------------------------------------
 
@@ -61,7 +59,7 @@ CREATE TABLE `cart_item` (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -84,7 +82,7 @@ INSERT INTO `category` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `note`;
 CREATE TABLE `note` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,7 +107,7 @@ INSERT INTO `note` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `note_level`;
 CREATE TABLE `note_level` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -130,8 +128,8 @@ INSERT INTO `note_level` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `id` int UNSIGNED NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date` date NOT NULL,
   `time` time NOT NULL,
@@ -140,7 +138,7 @@ CREATE TABLE `order` (
   `user_id` int UNSIGNED NOT NULL,
   `amount` int UNSIGNED NOT NULL DEFAULT '0',
   `cost` decimal(10,2) UNSIGNED NOT NULL DEFAULT '0.00',
-  `other_reason` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `other_reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `pay_receipt` tinyint UNSIGNED DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -149,16 +147,42 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `address`, `phone`, `created_at`, `date`, `time`, `pay_type_id`, `status_id`, `user_id`, `amount`, `cost`, `other_reason`, `pay_receipt`) VALUES
-(25, '1', '+7(111)-111-11-11', '2025-05-02 18:15:50', '0111-11-11', '11:01:00', 3, 10, 16, 2, '6.00', NULL, 1),
-(26, '2', '+7(222)-222-22-22', '2025-05-02 18:16:12', '0022-02-22', '22:02:00', 2, 2, 16, 1, '3.00', NULL, 0),
-(27, '1', '+7(111)-111-11-11', '2025-05-02 18:15:50', '0111-11-11', '11:01:00', 3, 2, 16, 2, '6.00', NULL, 1),
-(28, '2', '+7(222)-222-22-22', '2025-05-02 18:16:12', '0022-02-22', '22:02:00', 2, 6, 16, 1, '3.00', NULL, 0),
-(29, '1', '+7(111)-111-11-11', '2025-05-02 18:15:50', '0111-11-11', '11:01:00', 3, 1, 16, 2, '6.00', NULL, 1),
-(30, '2', '+7(222)-222-22-22', '2025-05-02 18:16:12', '0022-02-22', '22:02:00', 2, 4, 16, 1, '3.00', '5', 0),
-(31, '1', '+7(111)-111-11-11', '2025-05-02 18:15:50', '0111-11-11', '11:01:00', 3, 9, 16, 2, '6.00', NULL, 1),
-(32, '2', '+7(222)-222-22-22', '2025-05-02 18:16:12', '0022-02-22', '22:02:00', 2, 2, 16, 1, '3.00', NULL, 0),
-(33, '1', '+7(111)-111-11-11', '2025-05-03 15:06:41', '0001-01-11', '11:01:00', 2, 4, 16, 2, '4.00', '1', 0),
-(34, '0', '+7(000)-000-00-00', '2025-05-04 11:58:57', '2025-05-04', '14:58:00', 2, 3, 16, 1, '3.00', NULL, 0);
+(25, '1', '+7(111)-111-11-11', '2025-05-15 18:16:12', '0111-11-11', '11:01:00', 3, 10, 16, 2, '6.00', NULL, 1),
+(26, '2', '+7(222)-222-22-22', '2025-05-15 18:16:12', '0022-02-22', '22:02:00', 2, 2, 16, 1, '3.00', NULL, 0),
+(27, '1', '+7(111)-111-11-11', '2025-05-15 18:16:12', '0111-11-11', '11:01:00', 3, 2, 16, 2, '6.00', NULL, 1),
+(28, '2', '+7(222)-222-22-22', '2025-05-15 18:16:12', '0022-02-22', '22:02:00', 2, 6, 16, 1, '3.00', NULL, 0),
+(29, '1', '+7(111)-111-11-11', '2025-05-15 18:16:12', '0111-11-11', '11:01:00', 3, 1, 16, 2, '6.00', NULL, 1),
+(30, '2', '+7(222)-222-22-22', '2025-05-15 18:16:12', '0022-02-22', '22:02:00', 2, 4, 16, 1, '3.00', '5', 0),
+(31, '1', '+7(111)-111-11-11', '2025-05-16 18:16:12', '0111-11-11', '11:01:00', 3, 9, 16, 2, '6.00', NULL, 1),
+(32, '2', '+7(222)-222-22-22', '2025-05-16 18:16:12', '0022-02-22', '22:02:00', 2, 2, 16, 1, '3.00', NULL, 0),
+(33, '1', '+7(111)-111-11-11', '2025-05-16 18:16:12', '0001-01-11', '11:01:00', 2, 4, 16, 2, '4.00', '1', 0),
+(34, '0', '+7(000)-000-00-00', '2025-05-16 18:16:12', '2025-05-04', '14:58:00', 2, 3, 16, 1, '3.00', NULL, 0),
+(35, '1', '+7(111)-111-11-11', '2025-05-16 07:19:34', '2025-05-16', '10:19:00', 2, 6, 17, 1, '3.00', NULL, 0),
+(36, '1', '+7(111)-111-11-11', '2025-05-16 07:19:34', '2025-05-16', '10:19:00', 2, 3, 17, 1, '3.00', NULL, 0),
+(37, '1', '+7(111)-111-11-11', '2025-05-16 07:19:34', '2025-05-16', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(38, '1', '+7(111)-111-11-11', '2025-05-16 07:19:34', '2025-05-16', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(39, '1', '+7(111)-111-11-11', '2025-05-10 07:19:34', '2025-05-16', '10:19:00', 2, 3, 17, 1, '3.00', NULL, 0),
+(40, '1', '+7(111)-111-11-11', '2025-05-10 07:19:34', '2025-05-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(41, '1', '+7(111)-111-11-11', '2025-05-10 07:19:34', '2025-05-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(42, '1', '+7(111)-111-11-11', '2025-05-07 07:19:34', '2025-05-16', '10:19:00', 2, 3, 17, 1, '3.00', NULL, 0),
+(43, '1', '+7(111)-111-11-11', '2025-05-07 07:19:34', '2025-05-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(44, '1', '+7(111)-111-11-11', '2025-05-04 07:19:34', '2025-05-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(45, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-16', '10:19:00', 2, 3, 17, 1, '3.00', NULL, 0),
+(46, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(47, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(48, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-16', '10:19:00', 2, 3, 17, 1, '3.00', NULL, 0),
+(49, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(50, '1', '+7(111)-111-11-11', '2025-04-04 07:19:34', '2025-04-10', '10:19:00', 2, 4, 17, 1, '3.00', 'q', 0),
+(51, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '10:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(52, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '10:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(53, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-16', '11:19:00', 1, 3, 17, 1, '3.00', NULL, 1),
+(54, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-10', '12:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(55, '1', '+7(111)-111-11-11', '2025-04-04 07:19:34', '2025-04-10', '10:19:00', 3, 4, 17, 1, '3.00', 'q', 1),
+(56, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '17:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(57, '1', '+7(111)-111-11-11', '2025-04-10 07:19:34', '2025-04-10', '10:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(58, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-16', '20:19:00', 1, 3, 17, 1, '3.00', NULL, 1),
+(59, '1', '+7(111)-111-11-11', '2025-04-07 07:19:34', '2025-04-10', '11:19:00', 1, 4, 17, 1, '3.00', 'q', 1),
+(60, '1', '+7(111)-111-11-11', '2025-04-04 07:19:34', '2025-04-10', '22:19:00', 3, 4, 17, 1, '3.00', 'q', 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +208,12 @@ INSERT INTO `order_item` (`id`, `order_id`, `product_id`, `amount`, `cost`) VALU
 (35, 26, 7, 1, '3.00'),
 (36, 33, 8, 1, '3.00'),
 (37, 33, 10, 1, '1.00'),
-(38, 34, 7, 1, '3.00');
+(38, 34, 7, 1, '3.00'),
+(39, 35, 7, 1, '3.00'),
+(40, 46, 13, 1, '3.00'),
+(41, 45, 8, 1, '1.00'),
+(42, 50, 11, 1, '3.00'),
+(43, 60, 13, 1, '3.00');
 
 -- --------------------------------------------------------
 
@@ -195,7 +224,7 @@ INSERT INTO `order_item` (`id`, `order_id`, `product_id`, `amount`, `cost`) VALU
 DROP TABLE IF EXISTS `pay_type`;
 CREATE TABLE `pay_type` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `online` tinyint UNSIGNED NOT NULL DEFAULT '0',
   `place` tinyint UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -219,7 +248,7 @@ INSERT INTO `pay_type` (`id`, `title`, `online`, `place`) VALUES
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
   `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `product_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -242,7 +271,7 @@ INSERT INTO `photo` (`id`, `photo`, `product_id`) VALUES
 DROP TABLE IF EXISTS `photo_category`;
 CREATE TABLE `photo_category` (
   `id` int UNSIGNED NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci NOT NULL,
   `category_id` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
@@ -265,12 +294,12 @@ INSERT INTO `photo_category` (`id`, `photo`, `category_id`) VALUES
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` decimal(10,0) UNSIGNED NOT NULL,
   `sex_id` int UNSIGNED NOT NULL,
   `count` int UNSIGNED NOT NULL,
   `volume` int UNSIGNED NOT NULL,
-  `description` text COLLATE utf8mb4_general_ci NOT NULL
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -428,7 +457,7 @@ INSERT INTO `product_note_level_item` (`id`, `product_note_level_id`, `note_id`)
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -448,7 +477,7 @@ INSERT INTO `role` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `sex`;
 CREATE TABLE `sex` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -469,7 +498,7 @@ INSERT INTO `sex` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `id` int UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -496,13 +525,13 @@ INSERT INTO `status` (`id`, `title`) VALUES
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int UNSIGNED NOT NULL,
-  `login` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `full_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role_id` int UNSIGNED NOT NULL,
-  `auth_key` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `auth_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -654,13 +683,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT для таблицы `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT для таблицы `category`
@@ -684,13 +713,13 @@ ALTER TABLE `note_level`
 -- AUTO_INCREMENT для таблицы `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT для таблицы `order_item`
 --
 ALTER TABLE `order_item`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT для таблицы `pay_type`

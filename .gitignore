@@ -31,8 +31,10 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
-
+/web/index.php
 .osp
 .osp/*
 /config/db.php
 config/db.php
+
+.vscode
