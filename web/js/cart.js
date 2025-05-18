@@ -1,24 +1,14 @@
-function showAlert(message) {
-    $('.alert-count').remove();
-
-    $('body').append(
-        `<div class="alert alert-danger alert-count" style="display: none; position: fixed; top: 20px; right: 20px; z-index: 9999;">` +
-        message +
-        `</div>`
-    );
-
+$(() => {
+  const showAlert = () => {
     setTimeout(() => {
-        $('.alert-count').fadeIn(1500);
+      $(".alert-count").fadeIn(1500);
     }, 100);
 
     setTimeout(() => {
-        $('.alert-count').fadeOut(1000, () => {
-            $('.alert-count').remove();
-        });
+      $(".alert-count").fadeOut(2000);
     }, 3000);
-}
+  };
 
-$(() => {
   const cartCountReload = () => {
     $.ajax({
       url: "/shop/cart/count",
@@ -31,21 +21,19 @@ $(() => {
     });
   };
 
-
   const cartReload = () => {
-    $.pjax.reload('#cart-pjax', {
+    $.pjax.reload("#cart-pjax", {
       push: false,
       timeout: 5000,
     });
-  }
+  };
 
   //   $("#catalog-pjax").on("click", ".btn-add-cart", function (e) {
   //     e.preventDefault();
 
   //   });
 
-
-  // const productAdd = (el) => 
+  // const productAdd = (el) =>
   //   $.ajax({
   //     url: el.attr("href"),
   //     success(data) {
@@ -55,7 +43,6 @@ $(() => {
   //     },
   //   });
 
-
   const productAdd = (el) =>
     $.ajax({
       url: el.attr("href"),
@@ -63,7 +50,7 @@ $(() => {
         if (data.success) {
           cartCountReload();
         } else {
-          showAlert('Максимальное количество товара уже в корзине!');
+          showAlert();
         }
       },
       error(xhr, status, error) {
@@ -71,45 +58,48 @@ $(() => {
       },
     });
 
-  $(document).on('click', '#catalog-pjax .btn-add-cart', function (e) {
-    e.preventDefault();
-    productAdd($(this));
-    return false;
-  });
+  $(document).on(
+    "click",
+    "#catalog-pjax .btn-add-cart, #cart-pjax .btn-item-add, .btn-add-cart",
+    function (e) {
+      e.preventDefault();
+      productAdd($(this));
+      return false;
+    }
+  );
 
-  $("#catalog-pjax").on('click', ".product-card", function (e) {
-
-    if ($(e.target).hasClass('btn-add-cart')) {
+  $("#catalog-pjax").on("click", ".product-card", function (e) {
+    if ($(e.target).hasClass("btn-add-cart")) {
       e.preventDefault();
       productAdd($(e.target));
       return false;
     }
 
-    location.assign($(this).data('url'))
-  })
+    location.assign($(this).data("url"));
+  });
 
+  $("#cart-pjax").on(
+    "click",
+    ".btn-item-remove, .btn-item-del, .btn-item-clear, .btn-cart-clear",
+    function (e) {
+      e.preventDefault();
+      $.ajax({
+        url: $(this).attr("href"),
+        success(data) {
+          if (data) {
+            cartReload();
+          }
+        },
+      });
+    }
+  );
 
-
-  $("#cart-pjax").on('click', ".btn-item-remove, .btn-item-add, .btn-item-del, .btn-item-clear, .btn-cart-clear", function (e) {
-    e.preventDefault();
-    $.ajax({
-      url: $(this).attr('href'),
-      success(data) {
-        if (data) {
-          cartReload();
-        }
-      }
-    })
-  })
-
-
-  $("#cart-pjax").on('pjax:end', () => {
+  $("#cart-pjax").on("pjax:end", () => {
     cartCountReload();
     if ($(".alert-cart-empty").length) {
       $(".btn-order-create").addClass("d-none");
     }
-  })
+  });
 
   cartCountReload();
 });
-
