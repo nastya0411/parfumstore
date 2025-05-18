@@ -13,14 +13,20 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="product-view">
-    <div class=" d-flex gap-3">
+    <div class="d-flex gap-3">
         <?= Html::a('Назад', ['/shop/catalog/index'], ['class' => 'btn btn-outline-info']) ?>
-        <?= (!Yii::$app->user->identity?->isAdmin)
-            ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-                'class' => 'btn btn-outline-success btn-add-cart w-auto',
+        <?php if (Yii::$app->user->isGuest): ?>
+            <?= Html::a('В корзину', ['/site/login'], [
+                'class' => 'btn btn-outline-success btn-add-cart',
+                'data-pjax' => 0,
+            ]) ?>
+        <?php elseif (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin): ?>
+            <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], [
+                'class' => 'btn btn-outline-success btn-add-cart',
                 'data-pjax' => 0,
             ])
-            : "" ?>
+            ?>
+        <?php endif ?>
     </div>
 
 

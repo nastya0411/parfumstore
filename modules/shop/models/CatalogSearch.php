@@ -30,7 +30,7 @@ class CatalogSearch extends Product
     {
         return [
             'category_id' => 'Категория аромата',
-            'product' => 'Товар',           
+            'product' => 'Товар',
         ];
     }
 
@@ -53,7 +53,8 @@ class CatalogSearch extends Product
     public function search($params)
     {
         $query = Product::find()
-            ->joinWith("productCategories");
+            ->joinWith("productCategories")
+            ->where([">", "count", 0]);
 
         // add conditions that should always apply here
 
