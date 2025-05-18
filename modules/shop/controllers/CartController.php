@@ -115,7 +115,7 @@ class CartController extends Controller
     public function actionClear($id)
     {
         if ($model = $this->findModel($id)) {
-            $model->delete();            
+            $model->delete();
             return $this->asJson(true);
         }
         return $this->asJson(false);
@@ -141,6 +141,8 @@ class CartController extends Controller
 
     public function actionAdd($id)
     {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
         $model = Cart::findOne(['user_id' => Yii::$app->user->id]);
         $product = Product::findOne($id);
 
@@ -157,9 +159,8 @@ class CartController extends Controller
                 $cartItem->cart_id = $model->id;
                 $cartItem->product_id = $product->id;
             }
-
-            if ($product->count < $cartItem->amount + 1) {
-                return $this->asJson(false);
+            if ($cartItem->amount >= $product->count) {
+                return ['success' => false];
             }
             $cartItem->amount++;
             $cartItem->cost += $product->price;
@@ -168,8 +169,13 @@ class CartController extends Controller
             $model->amount++;
             $model->cost += $product->price;
             $model->save();
-            return $this->asJson(true);
+            // return $this->asJson(true);
+            return ['success' => true];
+            // return $this->redirect(Yii::$app->request->referrer ?: ['catalog/item', 'id' => $id]);
         }
+        return ['success' => false];
+        // return $this->redirect(Yii::$app->request->referrer ?: ['catalog/item', 'id' => $id]);
+
         // return $this->asJson(false);
     }
 

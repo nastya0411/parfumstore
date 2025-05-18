@@ -49,7 +49,7 @@ class CatalogController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'categories' => Category::getCategories()
-        ]);
+        ]); 
     }
 
     /**

@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::begin([
         'id' => 'catalog-pjax',
+        
         // 'enablePushState' => false,
         // 'timeout' => 5000,
     ]); ?>
