@@ -1,0 +1,59 @@
+.product-card {
+    width: 260px;
+    height: auto; 
+    min-height: 500px; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card .card-img-top {
+    height: 250px;
+    width: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.product-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+.product-rating-container {
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.product-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cart-button-container {
+    margin-top: auto; 
+    padding-top: 1rem;
+}
+
+.availability-pill {
+    display: inline-block;
+    background-color: #f8f9fa;
+    border-radius: 50rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.price-volume {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.ruble-symbol {
+    font-family: Arial, sans-serif;
+}

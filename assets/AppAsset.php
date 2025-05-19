@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @link https://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -23,14 +24,14 @@ class AppAsset extends AssetBundle
         'css/site.css',
         // 'css/tw.css',
         'css/style.css',
+        'css/cart.css',
         'css/header.css',
         'css/category-card.css',
         'css/product-cards.css',
 
 
     ];
-    public $js = [
-    ];
+    public $js = [];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap5\BootstrapAsset'

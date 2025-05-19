@@ -30,6 +30,7 @@ class Product extends \yii\db\ActiveRecord
     // public $allNotes;
     public $noteLevels = [];
     public $user_stars;
+    public $stars;
 
 
     /**
@@ -145,7 +146,13 @@ class Product extends \yii\db\ActiveRecord
 
         return $this->hasMany(StarsUser::class, ['product_id' => 'id']);
     }
-
+    
+    public function getAverageRating()
+    {
+        return StarsUser::find()
+            ->where(['product_id' => $this->id])
+            ->average('stars') ?: 0;
+    }
 
     public function upload()
     {

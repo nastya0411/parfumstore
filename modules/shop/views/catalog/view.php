@@ -45,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
         
         <?= $form->field($model, 'user_stars', ["options" => ["data-url" => $url]])->widget(StarRating::class, [
             'pluginOptions' => [
-                // 'readonly' => (bool)(int)$stars,
                 'readonly' => (bool)$stars,
                 'value' => $stars,
                 'showClear' => false,
