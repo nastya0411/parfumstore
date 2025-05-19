@@ -22,10 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'catalog-pjax',
 
         // 'enablePushState' => false,
-        // 'timeout' => 5000,
+        'timeout' => 5000,
     ]); ?>
 
-    <dip>
+    <div>
         <?php $form = ActiveForm::begin([
             // 'id' => 'catalog-search-form',
             'action' => ['index'],
@@ -45,17 +45,17 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
-</div>
-<?= ListView::widget([
-    'dataProvider' => $dataProvider,
-    'itemOptions' => ['class' => 'item my-3 col-md-3 col-sm-6 mb-4'],
-    'layout' => '<div class="row">{items}</div>{pager}',
-    'itemView' => 'item',
-    'pager' => [
-        'class' => LinkPager::class
-    ],
-]) ?>
+    </div>
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemOptions' => ['class' => 'item my-3 col-md-3 col-sm-6 mb-4'],
+        'layout' => '<div class="row">{items}</div>{pager}',
+        'itemView' => 'item',
+        'pager' => [
+            'class' => LinkPager::class
+        ],
+    ]) ?>
 
-<?php Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 
 </div>

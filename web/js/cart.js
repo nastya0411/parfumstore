@@ -40,18 +40,14 @@ $(() => {
           showAlert();
         }
       },
-      error(xhr, status, error) {
-        console.error("Ошибка запроса:", status, error);
-      },
     });
 
   $(document).on(
     "click",
-    "#catalog-pjax .btn-add-cart,  .btn-add-cart",
+    "#catalog-pjax .btn-add-cart, .btn-add-cart",
     function (e) {
       e.preventDefault();
       productAdd($(this));
-      return false;
     }
   );
 
