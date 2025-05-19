@@ -1,5 +1,6 @@
 <?php
 
+use kartik\rating\StarRating;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 
@@ -29,6 +30,22 @@ use yii\helpers\Url;
       <span><?= $model->volume ?> мл</span>
     </div>
     <div>
+      <div>
+        <?=  
+        
+        if($model->stars > 0) {
+          echo StarRating::widget([
+          'value' =>  $model->stars,
+          'pluginOptions' => [
+            'size' => 'md',
+            'readonly' => true,
+            'showClear' => false,
+            'showCaption' => false
+          ]
+        ]) 
+        }
+        ?>
+      </div>
       <?php if (Yii::$app->user->isGuest): ?>
         <?= Html::a('В корзину', ['/site/login'], [
           'class' => 'btn btn-outline-success w-100 btn-add-cart',

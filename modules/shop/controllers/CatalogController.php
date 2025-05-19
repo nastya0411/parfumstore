@@ -4,7 +4,9 @@ namespace app\modules\shop\controllers;
 
 use app\models\Category;
 use app\models\Product;
+use app\models\StarsUser;
 use app\modules\shop\models\CatalogSearch;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,12 +35,43 @@ class CatalogController extends Controller
             ]
         );
     }
+    // public function actionStars($id)
+    // {
+    //     if (Product::findOne(["id" => $id])) {
+    //         if (!StarsUser::findOne(['user_id' => Yii::$app->user->id, 'product_id' => $id])) {
+    //             $model = new StarsUser();
+    //             $model->user_id = Yii::$app->user->id;
+    //             $model->product_id = $id;
+
+    //             $model->stars = $this->request->post('stars');
+    //             return $this->asJson($model->save());
+    //         }
+    //         return $this->asJson(false);
+    //     }
+    // }
+
     public function actionStars($id)
-    {        
-        if ($model = Product::findOne(["id" => $id])) {
-            $model->stars = $this->request->post('stars');
-            return $this->asJson($model->save());
+    {
+        if ($product = Product::findOne(["id" => $id])) {
+            $userId = Yii::$app->user->id;
+            $starsUser = StarsUser::findOne(['user_id' => $userId, 'product_id' => $id]);
+
+            if (!$starsUser) {
+                $model = new StarsUser();
+                $model->user_id = $userId;
+                $model->product_id = $id;
+                $model->stars = $this->request->post('stars');
+                if ($model->save()) {
+                    $avg = StarsUser::find()
+                        ->where(['product_id' => $id])
+                        ->average('stars');
+                    $product->stars = $avg;
+                    return $this->asJson($product->save());
+                }
+            }
+            return $this->asJson(false);
         }
+        return $this->asJson(false);
     }
     /**
      * Lists all Product models.
@@ -56,7 +89,7 @@ class CatalogController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'categories' => Category::getCategories()
-        ]); 
+        ]);
     }
 
     /**
@@ -65,10 +98,39 @@ class CatalogController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
+    // public function actionView($id)
+    // {
+    //     $stars = StarsUser::findOne(['user_id' => Yii::$app->user->id, 'product_id' => $id]);
+
+    //     if ($stars) {
+    //         $stars = (float)$stars->stars;
+    //     } else {
+    //         $stars = 0;
+    //     }
+    //     $model = $this->findModel($id);
+    //     $model->user_stars = $stars;
+
+    //     return $this->render('view', [
+    //         'model' => $model,
+    //         'stars' => $stars
+    //     ]);
+    // }
+
     public function actionView($id)
     {
+        $stars = StarsUser::find()
+            ->where(['user_id' => Yii::$app->user->id, 'product_id' => $id])
+            ->select('stars')
+            ->scalar();
+
+        $stars = $stars ? (float)$stars : 0;
+
+        $model = $this->findModel($id);
+        $model->user_stars = $stars;
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'stars' => $stars
         ]);
     }
 

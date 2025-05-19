@@ -15,6 +15,7 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+
 ?>
 <div class="product-view">
     <div class="d-flex gap-3">
@@ -35,25 +36,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <h1><?= Html::encode($this->title) ?></h1>
-   <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin): ?>
+    <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
         <div class="alert alert-success alert-stars d-none">
             Рейтинг успешно поставлен!
         </div>
-    <?php endif ?>    <?php $form = ActiveForm::begin([]) ?>
-    <?php $url = Url::to(["stars", "id" => $model->id]) ?>
-        <?= $form->field($model, 'stars', ["options" => ["data-url" => $url]])->widget(StarRating::class, [
-                'pluginOptions' => [
-                    'readonly' => (bool)(int)$model->stars,
-                    'value' => $model->stars,
-                    'showClear' => false,
-                    'showCaption' => false,
-                    'min' => 0,
-                    'max' => 5,
-                    'step' => 0.5,
-                ],
-            ]);
-        ?>    
+        <?php $form = ActiveForm::begin([]) ?>
+        <?php $url = Url::to(["stars", "id" => $model->id]) ?>
+        
+        <?= $form->field($model, 'user_stars', ["options" => ["data-url" => $url]])->widget(StarRating::class, [
+            'pluginOptions' => [
+                // 'readonly' => (bool)(int)$stars,
+                'readonly' => (bool)$stars,
+                'value' => $stars,
+                'showClear' => false,
+                'showCaption' => false,
+                'min' => 0,
+                'max' => 5,
+                'step' => 0.5,
+                'hoverEnabled' => !(bool)$stars,
+                'displayOnly' => (bool)$stars,
+            ],
+        ]);
+        ?>
     <?php ActiveForm::end() ?>
+    <?php endif ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -139,5 +145,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 </div>
 <?php
-    $this->registerJsFile("/js/product.js", ["depends" => JqueryAsset::class]);
+$this->registerJsFile("/js/product.js", ["depends" => JqueryAsset::class]);
 ?>

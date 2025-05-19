@@ -96,3 +96,14 @@ a.desc:after {
     margin-bottom: 1rem;
 }
 
+
+
+.rating-disabled .rating-gly-star,
+.rating-disabled .rating-gly-star .rating-unchecked,
+.rating-disabled .rating-gly-star .rating-on {
+    cursor: default;
+}
+
+.rating-disabled .rating-gly-star:hover {
+    transform: none !important;
+}

@@ -83,7 +83,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Order::class, ['user_id' => 'id']);
     }
-
+ 	   public function getStarsUsers()
+		   {
+		       return $this->hasMany(StarsUser::class, ['user_id' => 'id']);
+		   }
     /**
      * Gets query for [[Role]].
      *

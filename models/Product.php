@@ -29,6 +29,7 @@ class Product extends \yii\db\ActiveRecord
     public $categories = [];
     // public $allNotes;
     public $noteLevels = [];
+    public $user_stars;
 
 
     /**
@@ -46,8 +47,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
 
- 	        [['title', 'price', 'sex_id', 'count', 'volume', 'description'], 'required'],
-		    [['stars', 'price'], 'number'],
+            [['title', 'price', 'sex_id', 'count', 'volume', 'description'], 'required'],
+            [['stars', 'user_stars', 'price'], 'number'],
             [['sex_id', 'count', 'volume'], 'integer'],
             [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
@@ -70,7 +71,7 @@ class Product extends \yii\db\ActiveRecord
             'title' => 'Название',
             'price' => 'Цена',
             'sex_id' => 'Для кого',
-            'stars' => 'Звездочки',
+            'stars' => ' Средняя оценка',
             'count' => 'Количество',
             'imageFile' => 'Изображение товара',
             'categories' => 'Категория товара',
@@ -139,6 +140,11 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Sex::class, ['id' => 'sex_id']);
     }
 
+    public function getStarsUsers()
+    {
+
+        return $this->hasMany(StarsUser::class, ['product_id' => 'id']);
+    }
 
 
     public function upload()
