@@ -16,32 +16,19 @@ $(() => {
       success(data) {
         if (data.status) {
           $("#cart-item-count").html(data.value);
+          if ($("#cart-pjax").length) {
+            cartReload();
+          }
         }
       },
     });
   };
 
-  const cartReload = () => {
+  const cartReload = () =>
     $.pjax.reload("#cart-pjax", {
       push: false,
       timeout: 5000,
     });
-  };
-
-  //   $("#catalog-pjax").on("click", ".btn-add-cart", function (e) {
-  //     e.preventDefault();
-
-  //   });
-
-  // const productAdd = (el) =>
-  //   $.ajax({
-  //     url: el.attr("href"),
-  //     success(data) {
-  //       if (data) {
-  //         cartCountReload();
-  //       }
-  //     },
-  //   });
 
   const productAdd = (el) =>
     $.ajax({
@@ -60,7 +47,7 @@ $(() => {
 
   $(document).on(
     "click",
-    "#catalog-pjax .btn-add-cart, #cart-pjax .btn-item-add, .btn-add-cart",
+    "#catalog-pjax .btn-add-cart,  .btn-add-cart",
     function (e) {
       e.preventDefault();
       productAdd($(this));
@@ -80,22 +67,14 @@ $(() => {
 
   $("#cart-pjax").on(
     "click",
-    ".btn-item-remove, .btn-item-del, .btn-item-clear, .btn-cart-clear",
+    ".btn-item-remove, .btn-item-del, .btn-item-add, .btn-item-clear, .btn-cart-clear",
     function (e) {
       e.preventDefault();
-      $.ajax({
-        url: $(this).attr("href"),
-        success(data) {
-          if (data) {
-            cartReload();
-          }
-        },
-      });
+      productAdd($(this));
     }
   );
 
   $("#cart-pjax").on("pjax:end", () => {
-    cartCountReload();
     if ($(".alert-cart-empty").length) {
       $(".btn-order-create").addClass("d-none");
     }
