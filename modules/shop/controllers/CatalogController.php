@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\VarDumper;
 
 /**
  * CatalogController implements the CRUD actions for Product model.
@@ -32,7 +33,13 @@ class CatalogController extends Controller
             ]
         );
     }
-
+    public function actionStars($id)
+    {        
+        if ($model = Product::findOne(["id" => $id])) {
+            $model->stars = $this->request->post('stars');
+            return $this->asJson($model->save());
+        }
+    }
     /**
      * Lists all Product models.
      *

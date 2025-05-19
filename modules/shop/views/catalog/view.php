@@ -1,7 +1,11 @@
 <?php
 
 use app\models\Sex;
+use kartik\rating\StarRating;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\JqueryAsset;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -31,6 +35,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <h1><?= Html::encode($this->title) ?></h1>
+   <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin): ?>
+        <div class="alert alert-success alert-stars d-none">
+            Рейтинг успешно поставлен!
+        </div>
+    <?php endif ?>    <?php $form = ActiveForm::begin([]) ?>
+    <?php $url = Url::to(["stars", "id" => $model->id]) ?>
+        <?= $form->field($model, 'stars', ["options" => ["data-url" => $url]])->widget(StarRating::class, [
+                'pluginOptions' => [
+                    'readonly' => (bool)(int)$model->stars,
+                    'value' => $model->stars,
+                    'showClear' => false,
+                    'showCaption' => false,
+                    'min' => 0,
+                    'max' => 5,
+                    'step' => 0.5,
+                ],
+            ]);
+        ?>    
+    <?php ActiveForm::end() ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -114,6 +137,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
-
-
 </div>
+<?php
+    $this->registerJsFile("/js/product.js", ["depends" => JqueryAsset::class]);
+?>

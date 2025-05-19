@@ -46,8 +46,8 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
 
-            [['title', 'price', 'sex_id', 'count', 'categories', 'volume', 'description'], 'required'],
-            [['price'], 'number'],
+ 	        [['title', 'price', 'sex_id', 'count', 'volume', 'description'], 'required'],
+		    [['stars', 'price'], 'number'],
             [['sex_id', 'count', 'volume'], 'integer'],
             [['description'], 'string'],
             [['title'], 'string', 'max' => 255],
@@ -70,6 +70,7 @@ class Product extends \yii\db\ActiveRecord
             'title' => 'Название',
             'price' => 'Цена',
             'sex_id' => 'Для кого',
+            'stars' => 'Звездочки',
             'count' => 'Количество',
             'imageFile' => 'Изображение товара',
             'categories' => 'Категория товара',
