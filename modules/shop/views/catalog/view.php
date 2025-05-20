@@ -5,6 +5,7 @@ use kartik\rating\StarRating;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 use yii\web\JqueryAsset;
 use yii\widgets\DetailView;
 
@@ -15,11 +16,10 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Каталог', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
-
 ?>
 <div class="product-view">
     <div class="d-flex gap-3">
-        <?= Html::a('Назад', ['/shop/catalog/index'], ['class' => 'btn btn-outline-info']) ?>
+        <?= Html::a('Назад', $_SERVER['HTTP_REFERER'] , ['class' => 'btn btn-outline-info']) ?>        
         <?php if (Yii::$app->user->isGuest): ?>
             <?= Html::a('В корзину', ['/site/login'], [
                 'class' => 'btn btn-outline-success btn-add-cart',

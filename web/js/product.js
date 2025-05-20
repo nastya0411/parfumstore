@@ -29,17 +29,20 @@ $(() => {
       dataType: "json",
       success(data) {
         if (data) {
-          $('.alert-stars').removeClass('d-none');
-          $("#product-user_stars")
-            .rating('update', value)
-            .rating('refresh', { 
-              readonly: true,
-              showClear: false,
-              hoverEnabled: false
-            });
+          $(".alert-stars").removeClass("d-none");
+          $("#product-user_stars").rating("update", value).rating("refresh", {
+            readonly: true,
+            showClear: false,
+            hoverEnabled: false,
+          });
           parent.children(".rating-container").addClass("rating-disabled");
         }
       },
     });
+  });
+
+  $("#productTop8").on("click", ".product-card", function (e) {
+    e.preventDefault();
+    location.assign($(this).data("url"));
   });
 });

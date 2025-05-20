@@ -30,7 +30,7 @@ class Product extends \yii\db\ActiveRecord
     // public $allNotes;
     public $noteLevels = [];
     public $user_stars;
-    public $stars;
+    
 
 
     /**
