@@ -36,7 +36,15 @@ $(() => {
             hoverEnabled: false,
           });
           parent.children(".rating-container").addClass("rating-disabled");
-        }
+          $.pjax.reload({
+            container: "#stars-block-pjax",
+            // url: "",
+            method: "POST",
+            push: false,
+            timeout: 5000,
+
+          });
+        }        
       },
     });
   });

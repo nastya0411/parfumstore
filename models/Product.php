@@ -31,6 +31,7 @@ class Product extends \yii\db\ActiveRecord
     public $noteLevels = [];
     public $user_stars;
     
+    
 
 
     /**
@@ -149,8 +150,13 @@ class Product extends \yii\db\ActiveRecord
     
     public function getAverageRating()
     {
+        return self::getRatingProduct($this->id);
+    }
+
+    public static function getRatingProduct($id)
+    {
         return StarsUser::find()
-            ->where(['product_id' => $this->id])
+            ->where(['product_id' => $id])
             ->average('stars') ?: 0;
     }
 
