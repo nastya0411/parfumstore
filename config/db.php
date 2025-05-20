@@ -5,6 +5,7 @@ if ($_SERVER["SERVER_NAME"] == "parfumstore.infobox.vip") {
         'dsn' => 'mysql:host=localhost;dbname=diplom_parfum',
         // 'username' => 'parfum',
         // 'password' => '5R9-Brq-uth-dda',
+        // scrLwiG6Ec9D7ETn3vLi
         'username' => 'parfum',
         'password' => '5R9-Brq-uth-dda',
         'charset' => 'utf8',

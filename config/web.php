@@ -32,7 +32,19 @@ $config = [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',
             // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'scheme' => 'smtps',
+                'host' => 'smtp.mail.ru',
+                'username' => 'parfumstore_info@mail.ru',
+                'password' => 'scrLwiG6Ec9D7ETn3vLi',
+                'port' => 465,
+                // 'dsn' => 'native://default',
+                // 'options' => [
+                //     'ssl' => true,
+                // ]
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

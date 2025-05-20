@@ -84,8 +84,8 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             Yii::$app->session->setFlash('success', 'Вы успешно авторизованы!');
             return  Yii::$app->user->identity->isAdmin
-            ? $this->redirect('/admin')
-            :$this->redirect('/account');
+                ? $this->redirect('/admin')
+                : $this->redirect('/account');
         }
 
         $model->password = '';
@@ -138,8 +138,8 @@ class SiteController extends Controller
     {
         $model = new \app\models\RegisterForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ( $user = $model->userRegister()) {
-                Yii::$app->user->login($user, 3600*24*30);
+            if ($user = $model->userRegister()) {
+                Yii::$app->user->login($user, 3600 * 24 * 30);
                 Yii::$app->session->setFlash('success', 'Вы успешно зарегистрированы!');
                 return $this->redirect('/account');
             }
@@ -148,5 +148,24 @@ class SiteController extends Controller
         return $this->render('register', [
             'model' => $model,
         ]);
+    }
+
+    public function actionMail()
+    {
+
+        Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
+        
+        if (Yii::$app->mailer
+            ->compose('mail', [])
+            ->setFrom('parfumstore_info@mail.ru')
+            ->setTo('parfumstore_info@mail.ru')
+            ->setSubject('test')
+            ->send()
+        ) {
+            Yii::$app->session->setFlash('success', 'send mail');
+        } else {
+            Yii::$app->session->setFlash('error', 'error send mail');
+        };
+        return $this->redirect('index');
     }
 }
