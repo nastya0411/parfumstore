@@ -19,7 +19,7 @@ use Yii;
  * @property int $amount
  * @property float $cost
  * @property string $other_reason
-* @property int|null $pay_receipt
+ * @property int|null $pay_receipt
 
  * @property OrderItem[] $orderItems
  * @property PayType $payType
@@ -53,7 +53,7 @@ class Order extends \yii\db\ActiveRecord
             [['pay_type_id', 'status_id', 'user_id', 'amount', 'pay_receipt'], 'integer'],
             [['cost'], 'number'],
             ['pay_receipt', 'boolean'],
-            ['phone','match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
+            ['phone', 'match', 'pattern' => '/^\+7\([\d]{3}\)-[\d]{3}-[\d]{2}-[\d]{2}$/', 'message' => 'Телефон в формате +7(XXX)-XXX-XX-XX'],
             [['address', 'phone', 'other_reason'], 'string', 'max' => 255],
             [['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
@@ -85,12 +85,12 @@ class Order extends \yii\db\ActiveRecord
             'amount' => 'Количество товаров в заказе',
             'cost' => 'Полная цена заказа',
             'other_reason' => 'Причина отмены заказа',
-            'pay_receipt' => 'Оплата при получении', 
+            'pay_receipt' => 'Оплата при получении',
             'cardNumber' => 'Номер карты',
             'cvv' => 'CVV',
             'expiry' => 'Срок действия карты',
             'cardHolder' => 'Имя владельца карты',
-            
+
         ];
     }
 
@@ -132,5 +132,70 @@ class Order extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+
+    // public function sendMailTest($id)
+    // {
+    //     $model = $this;
+
+    //     Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
+
+    //     if (Yii::$app->mailer
+    //         ->compose('mail', [])
+    //         ->setFrom('parfumstore_info@mail.ru')
+    //         ->setTo('parfumstore_info@mail.ru')
+    //         ->setSubject('Уведомление о статусе заказа')
+    //         ->send()
+    //     ) {
+    //         Yii::$app->session->setFlash('success', 'send mail');
+    //     } else {
+    //         Yii::$app->session->setFlash('error', 'error send mail');
+    //     };
+    //     return $this->redirect('index');
+    // }
+
+    public function sendMail()
+    {
+        Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
+        $status = Status::findOne($this->status_id);
+        try {
+            $result = Yii::$app->mailer
+            ->compose('mail', [
+                'model' => $this,
+                'status' => $status,
+                'orderDate' => Yii::$app->formatter->asDate($this->date),
+                'orderTime' => Yii::$app->formatter->asTime($this->time),
+                ])
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name])
+                ->setTo($this->user->email)
+                ->setCc('parfumstore_info@mail.ru')
+                ->setSubject("Изменение статуса заказа #{$this->id}")
+                ->send();
+                
+                
+                // die;
+            if (!$result) {
+                Yii::$app->session->setFlash('error', 'error send mail');
+                Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
+            } else {
+                Yii::$app->session->setFlash('info', 'send mail');
+            }
+            return $result;
+        } catch (\Exception $e) {
+            Yii::error("Ошибка при отправке письма: " . $e->getMessage());
+            var_dump($e->getMessage());
+            die;
+            return false;
+        }
+    }
+
+
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $this->sendMail();
     }
 }

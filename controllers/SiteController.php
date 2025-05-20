@@ -9,8 +9,10 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Order;
 use app\models\ProductMainSearch;
 use app\models\ProductSearch;
+use app\models\Status;
 
 class SiteController extends Controller
 {
@@ -152,20 +154,27 @@ class SiteController extends Controller
 
     public function actionMail()
     {
-
         Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
-        
-        if (Yii::$app->mailer
-            ->compose('mail', [])
-            ->setFrom('parfumstore_info@mail.ru')
-            ->setTo('parfumstore_info@mail.ru')
-            ->setSubject('test')
-            ->send()
-        ) {
-            Yii::$app->session->setFlash('success', 'send mail');
-        } else {
-            Yii::$app->session->setFlash('error', 'error send mail');
-        };
+
+        $model = Order::findOne(64);
+        $model->sendMail();
+
+
+        // if (Yii::$app->mailer
+        //     ->compose('mail', [
+        //         'model' => $model,
+        //         'status' => Status::findOne($model->status_id)
+        //     ])
+        //     ->setFrom('parfumstore_info@mail.ru')
+        //     ->setTo('parfumstore_info@mail.ru')
+        //     ->setSubject('Уведомление о статусе заказа')
+        //     ->send()
+        // ) {
+        //     Yii::$app->session->setFlash('success', 'send mail');
+        // } else {
+        //     Yii::$app->session->setFlash('error', 'error send mail');
+        // };
+
         return $this->redirect('index');
     }
 }

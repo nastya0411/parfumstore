@@ -46,31 +46,6 @@ class OrderController extends Controller
         ]);
     }
 
-    // public function actionCreate()
-    // {
-    //     $model = new Order();
-    //     $model->scenario = Order::SCENARIO_DEFAULT; 
-
-    //     if ($this->request->isPost) {
-    //         if ($model->load($this->request->post())) {
-    //             if ($model->isNewRecord) {
-    //                 $model->status_id = Status::getStatusId('Создан');
-    //             }
-
-    //             if ($model->save()) {
-    //                 Yii::$app->session->setFlash('success', 'Заказ успешно создан');
-    //                 return $this->redirect(['view', 'id' => $model->id]);
-    //             }
-    //         }
-    //     } else {
-    //         $model->loadDefaultValues();
-    //     }
-
-    //     return $this->render('create', [
-    //         'model' => $model,
-    //     ]);
-    // }
-
     public function actionCancel($id)
     {
         $model = $this->findModel($id);
@@ -135,10 +110,6 @@ class OrderController extends Controller
         }
     }
 
-
-
-
-
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -151,7 +122,6 @@ class OrderController extends Controller
         if (($model = Order::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('Заказ не найден');
     }
 }
