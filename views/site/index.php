@@ -28,7 +28,7 @@ $products = Product::find()
 $productChunks = array_chunk($products, 4);
 ?>
 
-<div id="productTop8" class="carousel slide " data-bs-ride="carousel" >
+<div id="productTop8" class="carousel "  >
   <div class="carousel-inner">
     <?php foreach ($productChunks as $index => $chunk): ?>
       <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">

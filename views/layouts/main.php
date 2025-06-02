@@ -35,14 +35,14 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>" class="h-100 ">
 
 <head>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 bg-black text-white">
     <?php $this->beginBody() ?>
 
     <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
@@ -56,54 +56,112 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         NavBar::begin([
             'brandLabel' => 'Mon parfum',
             'brandUrl' => Yii::$app->homeUrl,
-            'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
+            'options' => ['class' => 'navbar-expand-md navbar-dark bg-black fixed-top'],
+            'collapseOptions' => [
+                'class' => 'navbar-collapse collapse',
+            ],
+
         ]);
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav'],
-            'items' => [
+
+
+        // echo Nav::widget([
+        //     'options' => ['class' => 'nav-my '],
+        //     'items' => [
+        //         Yii::$app->user->isGuest
+        //             ? ['label' => 'Регистрация', 'url' => ['/site/register']]
+        //             : '',
+
+        //         !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
+        //             ? ['label' => 'Личный кабинет', 'url' => ['/account']]
+        //             : '',
+
+        //         !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
+        //             ? ['label' => 'Мой профиль', 'url' => ['/account/profile/view']]
+        //             : '',
+
+
+        //         !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
+        //             ? ['label' => 'Панель управления', 'url' => ['/admin']]
+        //             : '',
+
+
+
+        //         !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
+        //             ? ['label' => 'Почта', 'url' => ['/site/mail']]
+        //             : '',
+
+
+        //         ['label' => 'Главная', 'url' => ['/site/index']],
+        //         ['label' => 'О нас', 'url' => ['/site/about']],
+        //         ['label' => 'Каталог', 'url' => ['/shop']],
+
+
+
+        //         Yii::$app->user->isGuest
+        //             ? ['label' => 'Вход', 'url' => ['/site/login']]
+        //             : '<li class="nav-item">'
+        //             . Html::beginForm(['/site/logout'])
+        //             . Html::submitButton(
+        //                 'Выход (' . Yii::$app->user->identity->login . ')',
+        //                 ['class' => 'nav-link btn btn-link logout']
+        //             )
+        //             . Html::endForm()
+        //             . '</li>'
+        //     ]
+        // ]); 
+        ?>
+<div class="d-flex flex-grow-1 justify-content-center navbar-nav">
+
+    <div>
+        <?= Html::a(
+            Html::submitButton('Главная', ['class' => 'btn ']),
+            ['/site/index'],
+            ['class' => 'text-decoration-none']
+        )
+        ?>
+    
+        <?= Html::a(
+            Html::submitButton('О нас', ['class' => 'btn ']),
+            ['/site/about'],
+            ['class' => 'text-decoration-none']
+        )
+        ?>
+    
+        <?= Html::a(
+            Html::submitButton('Каталог', ['class' => 'btn ']),
+            ['/shop'],
+            ['class' => 'text-decoration-none']
+        )
+        ?>
+    
+    
+    </div>
+</div>
+
+        <div>
+            <?= Html::a(
                 Yii::$app->user->isGuest
-                    ? ['label' => 'Регистрация', 'url' => ['/site/register']]
-                    : '',
-
-                !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Личный кабинет', 'url' => ['/account']]
-                    : '',
-
-                !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Мой профиль', 'url' => ['/account/profile/view']]
-                    : '',
-
-
-                !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Панель управления', 'url' => ['/admin']]
-                    : '',
-
-                
-
-                !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
-                    ? ['label' => 'Почта', 'url' => ['/site/mail']]
-                    : '',
-
-
-                ['label' => 'Главная', 'url' => ['/site/index']],
-                ['label' => 'О нас', 'url' => ['/site/about']],
-                ['label' => 'Каталог', 'url' => ['/shop']],
-
-
-
-                Yii::$app->user->isGuest
-                    ? ['label' => 'Вход', 'url' => ['/site/login']]
-                    : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
+                    ? Html::submitButton('Вход', ['class' => 'btn'])
+                    : Html::submitButton(
                         'Выход (' . Yii::$app->user->identity->login . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-            ]
-        ]); ?>
+                        ['class' => 'btn btn-link logout']
+                    ),
+                Yii::$app->user->isGuest ? ['/site/login'] : ['/site/logout'],
+                [
+                    'class' => 'text-decoration-none',
+                    'data-method' => Yii::$app->user->isGuest ? null : 'post'
+                ]
+            ) ?>
 
+            <?= Yii::$app->user->isGuest
+                ? Html::a(
+                    Html::submitButton('Регистрация', ['class' => 'btn ']),
+                    ['/site/register'],
+                    ['class' => 'text-decoration-none']
+                )
+                : ''
+            ?>
+        </div>
         <?php
 
         if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
@@ -131,7 +189,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         </div>
     </main>
 
-    <footer id="footer" class="mt-auto py-3 bg-light">
+    <footer id="footer" class="mt-auto py-3 bg-dark">
 
     </footer>
 

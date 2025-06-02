@@ -1,7 +1,7 @@
 .product-card {
     width: 260px;
-    height: auto; 
-    min-height: 500px; 
+    height: auto;
+    min-height: 500px;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -12,6 +12,7 @@
     width: 100%;
     object-fit: contain;
     flex-shrink: 0;
+    background-color: #282828;
 }
 
 .product-card .card-body {
@@ -19,6 +20,8 @@
     flex-direction: column;
     flex-grow: 1;
     padding: 1rem;
+    background-color: #282828;
+
 }
 
 .product-rating-container {
@@ -34,13 +37,13 @@
 }
 
 .cart-button-container {
-    margin-top: auto; 
+    margin-top: auto;
     padding-top: 1rem;
 }
 
 .availability-pill {
     display: inline-block;
-    background-color: #f8f9fa;
+    background-color: #484848;
     border-radius: 50rem;
     padding: 0.25rem 0.75rem;
 }
