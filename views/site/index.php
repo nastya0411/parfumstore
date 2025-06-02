@@ -20,7 +20,7 @@ $this->registerCssFile('@web/css/products-carousel.css', [
 
 $products = Product::find()
   ->where(['>', 'count', 0])
-  ->limit(8) 
+  ->limit(8)
   ->orderBy(['stars' => SORT_DESC])
   ->all();
 
@@ -28,13 +28,29 @@ $products = Product::find()
 $productChunks = array_chunk($products, 4);
 ?>
 
-<div id="productTop8" class="carousel "  >
+
+<div class="bg-block">
+  <div class="left-rectangle justify-content-center text-center">
+    <div>Ощути гармонию <br>и роскошь</div>
+    <div>Mon parfum - твой личный проводник в мир изысканных араматов</div>
+    <?= Html::a(Html::submitButton('Каталог', ['class' => 'btn']),
+      ['/shop'], ['class' => 'text-decoration-none'])?>
+
+  </div>
+  <?= Html::img('@web/img/bottleMain.png', [
+    'class' => 'overlay-photo',
+  ]) ?>
+</div>
+</div>
+
+
+<div id="productTop8" class="carousel slide " data-bs-ride="carousel">
   <div class="carousel-inner">
     <?php foreach ($productChunks as $index => $chunk): ?>
       <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
         <div class="d-flex justify-content-between">
           <?php foreach ($chunk as $product): ?>
-              <div class="item my-3 col-md-3 col-sm-6 mb-4" data-key="<?= $product->id ?>">
+            <div class="item my-3 col-md-3 col-sm-6 mb-4" data-key="<?= $product->id ?>">
               <div class="card text-center product-card" data-url="<?= Url::to(['/shop/catalog/view', 'id' => $product->id]) ?>" data-url-back="/">
                 <img src="<?= $product->getPhotos()->count() ? '/img/' . $product->photos[0]->photo : '/img/no_photo.jpg' ?>"
                   class="card-img-top"
@@ -58,9 +74,9 @@ $productChunks = array_chunk($products, 4);
                     <span><?= $product->volume ?> мл</span>
                   </div>
 
-                  
-                    <?php $num_stars = (float)$product->stars ?>                    
-                    <?php if ($num_stars): ?>
+
+                  <?php $num_stars = (float)$product->stars ?>
+                  <?php if ($num_stars): ?>
                     <div class="product-rating-container">
                       <div class="product-rating">
                         <span><?= $num_stars ?></span>
@@ -78,8 +94,8 @@ $productChunks = array_chunk($products, 4);
                         ]) ?>
                       </div>
                     </div>
-                    <?php endif ?>
-                  
+                  <?php endif ?>
+
                 </div>
               </div>
             </div>

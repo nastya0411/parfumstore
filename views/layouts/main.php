@@ -110,41 +110,68 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         //     ]
         // ]); 
         ?>
-<div class="d-flex flex-grow-1 justify-content-center navbar-nav">
+        <div class="d-flex flex-grow-1 justify-content-center navbar-nav">
 
-    <div>
-        <?= Html::a(
-            Html::submitButton('Главная', ['class' => 'btn ']),
-            ['/site/index'],
-            ['class' => 'text-decoration-none']
-        )
-        ?>
-    
-        <?= Html::a(
-            Html::submitButton('О нас', ['class' => 'btn ']),
-            ['/site/about'],
-            ['class' => 'text-decoration-none']
-        )
-        ?>
-    
-        <?= Html::a(
-            Html::submitButton('Каталог', ['class' => 'btn ']),
-            ['/shop'],
-            ['class' => 'text-decoration-none']
-        )
-        ?>
-    
-    
-    </div>
-</div>
+            <div>
+                <?= Html::a(
+                    Html::submitButton('Главная', ['class' => 'btn navigation-style']),
+                    ['/site/index'],
+                    ['class' => 'text-decoration-none']
+                )
+                ?>
+
+                <?= Html::a(
+                    Html::submitButton('О нас', ['class' => 'btn navigation-style']),
+                    ['/site/about'],
+                    ['class' => 'text-decoration-none']
+                )
+                ?>
+
+                <?= Html::a(
+                    Html::submitButton('Каталог', ['class' => 'btn navigation-style']),
+                    ['/shop'],
+                    ['class' => 'text-decoration-none']
+                )
+                ?>
+
+
+            </div>
+        </div>
 
         <div>
+
+
+            <?= !Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin
+                ? Html::a(
+                    Html::submitButton('Панель управления', ['class' => 'btn navigation-style']),
+                    ['/admin'],
+                    ['class' => 'text-decoration-none']
+                )
+                : ''
+            ?>
+            <?= !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
+                ? Html::a(
+                    Html::submitButton('Личный кабинет', ['class' => 'btn navigation-style']),
+                    ['/account'],
+                    ['class' => 'text-decoration-none']
+                )
+                : ''
+            ?>
+
+            <?= !Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin
+                ? Html::a(
+                    Html::submitButton('Мой профиль', ['class' => 'btn navigation-style']),
+                    ['/account/profile/view'],
+                    ['class' => 'text-decoration-none']
+                )
+                : ''
+            ?>
             <?= Html::a(
                 Yii::$app->user->isGuest
-                    ? Html::submitButton('Вход', ['class' => 'btn'])
+                    ? Html::submitButton('Вход', ['class' => 'btn navigation-style'])
                     : Html::submitButton(
                         'Выход (' . Yii::$app->user->identity->login . ')',
-                        ['class' => 'btn btn-link logout']
+                        ['class' => 'btn btn-link logout navigation-style']
                     ),
                 Yii::$app->user->isGuest ? ['/site/login'] : ['/site/logout'],
                 [
@@ -155,7 +182,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
             <?= Yii::$app->user->isGuest
                 ? Html::a(
-                    Html::submitButton('Регистрация', ['class' => 'btn ']),
+                    Html::submitButton('Регистрация', ['class' => 'btn navigation-style']),
                     ['/site/register'],
                     ['class' => 'text-decoration-none']
                 )
