@@ -73,11 +73,11 @@
 }
 
 .availability-pill .text-muted {
-  color: #cfcfcf !important;
+  color: #707070 !important;
 }
 
 .availability-pill .fw-bold {
-  color: #cfcfcf;
+  color: #707070;
 }
 
 /* Цена и объем */

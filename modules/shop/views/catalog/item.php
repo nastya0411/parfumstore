@@ -52,12 +52,12 @@ $this->registerCssFile('/css/cart.css');
     <div class="cart-button-container">
       <?php if (Yii::$app->user->isGuest): ?>
         <?= Html::a('В корзину', ['/site/login'], [
-          'class' => 'btn btn-outline-success w-100 btn-add-cart',
+          'class' => 'btn btn-orange w-100 btn-add-cart',
           'data-pjax' => 0,
         ]) ?>
       <?php elseif (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin): ?>
         <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-          'class' => 'btn btn-outline-success w-100 btn-add-cart',
+          'class' => 'btn-orange  w-100 btn-add-cart',
           'data-pjax' => 0,
         ]) ?>
       <?php endif ?>

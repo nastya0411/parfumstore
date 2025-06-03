@@ -7,7 +7,7 @@ use yii\bootstrap5\Html;
 
 
 
-<div class="card mb-4">
+<div class="card mb-4 mt-4 text-white ">
   <div class="card-header fw-semibold fs-5">
     № <?= $model->id ?> от <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s') ?>
   </div>

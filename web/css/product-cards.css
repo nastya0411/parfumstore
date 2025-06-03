@@ -1,6 +1,5 @@
 .card {
-    border-color: #000 !important;
-    background-color: #000 !important;
+    background-color: #c15924 !important;
 }
 
 /* Grid container */
@@ -59,7 +58,7 @@
 }
 
 .product-title-link:hover {
-    color: #0d6efd;
+    color: #ffffff;
 }
 
 /* Stock info */
@@ -113,13 +112,13 @@
 
 .btn-add-cart {
     width: 100%;
-    border-color: #198754;
-    color: #198754;
+    border-color: #c15924;
+    color: #ebebeb;
     transition: all 0.2s ease;
 }
 
 .btn-add-cart:hover {
-    background-color: #198754;
+    background-color: #282828;
     color: #fff;
 }
 

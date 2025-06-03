@@ -20,7 +20,7 @@ use yii\bootstrap5\ActiveForm;
         <?= $form->field($model, 'email') ?>
     
         <div class="form-group">
-            <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-outline-primary']) ?>
+            <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-orange']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
