@@ -102,7 +102,7 @@
 
 .overlay-photo {
   position: absolute;
-  right: 100px;
+  right:200px;
   /* Отступ от правого края */
   top: 50%;
   /* Выравнивание по вертикали */
@@ -122,7 +122,7 @@
   position: absolute;
   width: 400px;
   height: 550px;
-  left: 150px;
+  left: 250px;
   /* Отступ слева */
   top: 50%;
   transform: translateY(-50%);
@@ -135,15 +135,23 @@
 
 .left-rectangle div:first-child {
   font-family: 'Playfair Display', serif;
-  /* Шрифт с засечками */
   font-size: 60px;
   font-weight: 700;
-  color: #c15b01;
+  color: #c15924;
+  font-weight: lighter;
   margin-bottom: 20px;
 }
 
+.title-style {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: #c15924;
+  font-weight: lighter;
+}
+
 .left-rectangle div:nth-child(2) {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'TenorSans', sans-serif;
   font-size: 27px;
   color: #cfcfcf;
   margin-bottom: 40px;
@@ -151,7 +159,7 @@
 }
 
 .left-rectangle .btn {
-  background-color: #c15b01;
+  background-color: #c15924;
   color: white;
   padding: 12px 30px;
   font-size: 16px;
@@ -170,4 +178,9 @@
   background-color: #0d0d0d;
   text-decoration: none !important;
   transform: translateY(-2px);
+}
+
+@font-face {
+  font-family: 'TenorSans';
+  src: url('/web/fonts/TenorSans-Regular.ttf');
 }

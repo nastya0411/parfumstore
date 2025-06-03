@@ -46,22 +46,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <?php $this->beginBody() ?>
     
     <?= $this->render("header") ?>
-
+    
     <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
         <div class="alert alert-danger alert-count">
             Максимальное количество товара уже в корзине!
         </div>
     <?php endif ?>
-
-
     <main id="main" class="flex-shrink-0" role="main">
-        <div class="container">
-            <?php if (!empty($this->params['breadcrumbs'])): ?>
-                <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
-            <?php endif ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </div>
+        <?= $content ?>
+        
     </main>
 
     <footer id="footer" class="mt-auto py-3 bg-dark">

@@ -65,6 +65,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = "main-index";
         $dataProvider = (new ProductMainSearch())->search();
         return $this->render('index', [
             "dataProvider" => $dataProvider

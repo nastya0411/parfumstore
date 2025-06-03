@@ -45,6 +45,7 @@ $productChunks = array_chunk($products, 4);
 
 
 <div id="productTop8" class="carousel slide " data-bs-ride="carousel">
+  <h1 class="title-style text-center">Хиты продаж</h1>
   <div class="carousel-inner">
     <?php foreach ($productChunks as $index => $chunk): ?>
       <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">

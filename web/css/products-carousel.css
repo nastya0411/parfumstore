@@ -7,13 +7,13 @@
 .carousel-inner {
   overflow: visible;
   padding: 10px 0;
+
 }
 
 .carousel-item {
   transition: transform 0.6s ease-in-out;
 }
 
-/* Стили карточек товаров (точно по вашему ТЗ) */
 .product-card {
   width: 260px;
   height: auto;
@@ -24,12 +24,12 @@
   /* border: 1px solid #e9ecef; */
   border-radius: 10px;
   transition: all 0.3s ease;
-  margin: 0 10px;
+  margin: 0 2.5px;
   overflow: hidden;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   /* border-color: #dee2e6; */
 }
@@ -51,7 +51,7 @@
 }
 
 .product-card h4 a {
-  color: #212529;
+  color: #cfcfcf;
   font-size: 1.1rem;
   font-weight: 500;
   transition: color 0.2s;
@@ -59,7 +59,7 @@
 }
 
 .product-card h4 a:hover {
-  color: #0d6efd;
+  color: #c15924;
 }
 
 /* Блок наличия товара */
@@ -73,11 +73,11 @@
 }
 
 .availability-pill .text-muted {
-  color: #6c757d !important;
+  color: #cfcfcf !important;
 }
 
 .availability-pill .fw-bold {
-  color: #212529;
+  color: #cfcfcf;
 }
 
 /* Цена и объем */
@@ -88,7 +88,7 @@
   gap: 0.5rem;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #212529;
+  color: #c15924;
   margin-bottom: 10px;
 }
 
@@ -99,7 +99,7 @@
 
 .price-volume span:last-child {
   font-size: 0.85rem;
-  color: #6c757d;
+  color: #cfcfcf;
   font-weight: 400;
 }
 
@@ -116,9 +116,9 @@
   gap: 0.5rem;
 }
 
-.product-rating > span {
+.product-rating>span {
   font-weight: 600;
-  color: #495057;
+  color: #cfcfcf;
 }
 
 /* Кнопки карусели */
@@ -160,15 +160,15 @@
     width: 220px;
     min-height: 480px;
   }
-  
+
   .product-card .card-img-top {
     height: 200px;
   }
-  
+
   .carousel-control-prev {
     left: -10px;
   }
-  
+
   .carousel-control-next {
     right: -10px;
   }
@@ -180,17 +180,17 @@
     min-height: 450px;
     margin: 0 5px;
   }
-  
+
   .product-card .card-img-top {
     height: 160px;
   }
-  
+
   .carousel-control-prev,
   .carousel-control-next {
     width: 30px;
     height: 30px;
   }
-  
+
   .price-volume {
     font-size: 1.1rem;
   }
