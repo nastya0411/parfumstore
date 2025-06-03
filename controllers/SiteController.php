@@ -134,6 +134,7 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        $this->layout = "main-index";
         return $this->render('about');
     }
 

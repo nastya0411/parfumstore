@@ -33,8 +33,11 @@ $productChunks = array_chunk($products, 4);
   <div class="left-rectangle justify-content-center text-center">
     <div>Ощути гармонию <br>и роскошь</div>
     <div>Mon parfum - твой личный проводник в мир изысканных араматов</div>
-    <?= Html::a(Html::submitButton('Каталог', ['class' => 'btn']),
-      ['/shop'], ['class' => 'text-decoration-none'])?>
+    <?= Html::a(
+      Html::submitButton('Каталог', ['class' => 'btn']),
+      ['/shop'],
+      ['class' => 'text-decoration-none']
+    ) ?>
 
   </div>
   <?= Html::img('@web/img/bottleMain.png', [
@@ -42,80 +45,86 @@ $productChunks = array_chunk($products, 4);
   ]) ?>
 </div>
 </div>
+<div class="container">
+  <div id="productTop8" class="carousel slide " data-bs-ride="carousel">
+    <h1 class="title-style text-center">Хиты продаж</h1>
+    <div class="carousel-inner">
+      <?php foreach ($productChunks as $index => $chunk): ?>
+        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+          <div class="d-flex justify-content-between">
+            <?php foreach ($chunk as $product): ?>
+              <div class="item my-3 col-md-3 col-sm-6 mb-4" data-key="<?= $product->id ?>">
+                <div class="card text-center product-card" data-url="<?= Url::to(['/shop/catalog/view', 'id' => $product->id]) ?>" data-url-back="/">
+                  <img src="<?= $product->getPhotos()->count() ? '/img/' . $product->photos[0]->photo : '/img/no_photo.jpg' ?>"
+                    class="card-img-top"
+                    alt="<?= Html::encode($product->title) ?>">
 
-
-<div id="productTop8" class="carousel slide " data-bs-ride="carousel">
-  <h1 class="title-style text-center">Хиты продаж</h1>
-  <div class="carousel-inner">
-    <?php foreach ($productChunks as $index => $chunk): ?>
-      <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-        <div class="d-flex justify-content-between">
-          <?php foreach ($chunk as $product): ?>
-            <div class="item my-3 col-md-3 col-sm-6 mb-4" data-key="<?= $product->id ?>">
-              <div class="card text-center product-card" data-url="<?= Url::to(['/shop/catalog/view', 'id' => $product->id]) ?>" data-url-back="/">
-                <img src="<?= $product->getPhotos()->count() ? '/img/' . $product->photos[0]->photo : '/img/no_photo.jpg' ?>"
-                  class="card-img-top"
-                  alt="<?= Html::encode($product->title) ?>">
-
-                <div class="card-body">
-                  <div class="my-2 mb-3">
-                    <h4><?= Html::a($product->title, ['/shop/catalog/view', 'id' => $product->id], ['class' => 'text-decoration-none']) ?></h4>
-                  </div>
-
-                  <div class="availability-pill">
-                    <i class="bi bi-check-circle-fill text-success me-1"></i>
-                    <span class="text-muted">В наличии:</span>
-                    <span class="fw-bold mx-1"><?= $product->count ?></span>
-                    <span class="text-muted">шт.</span>
-                  </div>
-
-                  <div class="price-volume">
-                    <?= Yii::$app->formatter->asDecimal($product->price, 2) ?>
-                    <span class="ruble-symbol">₽</span>
-                    <span><?= $product->volume ?> мл</span>
-                  </div>
-
-
-                  <?php $num_stars = (float)$product->stars ?>
-                  <?php if ($num_stars): ?>
-                    <div class="product-rating-container">
-                      <div class="product-rating">
-                        <span><?= $num_stars ?></span>
-                        <?= StarRating::widget([
-                          'name' => 'product-rating-' . $product->id,
-                          'value' => $num_stars,
-                          'pluginOptions' => [
-                            'size' => 'xs',
-                            'readonly' => true,
-                            'showClear' => false,
-                            'showCaption' => false,
-                            'hoverEnabled' => false,
-                            'displayOnly' => true
-                          ]
-                        ]) ?>
-                      </div>
+                  <div class="card-body">
+                    <div class="my-2 mb-3">
+                      <h4><?= Html::a($product->title, ['/shop/catalog/view', 'id' => $product->id], ['class' => 'text-decoration-none']) ?></h4>
                     </div>
-                  <?php endif ?>
 
+                    <div class="availability-pill">
+                      <i class="bi bi-check-circle-fill text-success me-1"></i>
+                      <span class="text-muted">В наличии:</span>
+                      <span class="fw-bold mx-1"><?= $product->count ?></span>
+                      <span class="text-muted">шт.</span>
+                    </div>
+
+                    <div class="price-volume">
+                      <?= Yii::$app->formatter->asDecimal($product->price, 2) ?>
+                      <span class="ruble-symbol">₽</span>
+                      <span><?= $product->volume ?> мл</span>
+                    </div>
+
+
+                    <?php $num_stars = (float)$product->stars ?>
+                    <?php if ($num_stars): ?>
+                      <div class="product-rating-container">
+                        <div class="product-rating">
+                          <span><?= $num_stars ?></span>
+                          <?= StarRating::widget([
+                            'name' => 'product-rating-' . $product->id,
+                            'value' => $num_stars,
+                            'pluginOptions' => [
+                              'size' => 'xs',
+                              'readonly' => true,
+                              'showClear' => false,
+                              'showCaption' => false,
+                              'hoverEnabled' => false,
+                              'displayOnly' => true
+                            ]
+                          ]) ?>
+                        </div>
+                      </div>
+                    <?php endif ?>
+
+                  </div>
                 </div>
               </div>
-            </div>
-          <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
         </div>
-      </div>
-    <?php endforeach; ?>
+      <?php endforeach; ?>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#productTop8" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productTop8" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#productTop8" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#productTop8" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>
+
 </div>
+<div></div>
+
+
+
 <div class="order-index">
+  <h1 class="title-style text-center">Категории ароматов</h1>
   <div class="custom-categories-wrapper">
     <?= ListView::widget([
       'dataProvider' => $dataProvider,
@@ -124,9 +133,6 @@ $productChunks = array_chunk($products, 4);
       'itemView' => "item",
     ]) ?>
   </div>
-
-
-
 </div>
 
 <?php

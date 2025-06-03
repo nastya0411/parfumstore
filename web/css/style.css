@@ -100,9 +100,28 @@
   z-index: -1;
 }
 
+.bg-block-about {
+  position: relative;
+  min-height: 670px;
+  overflow: hidden;
+}
+
+.bg-block-about::before {
+  content: '';
+  background-image: url('/web/img/about1.png');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
 .overlay-photo {
   position: absolute;
-  right:200px;
+  right: 200px;
   /* Отступ от правого края */
   top: 50%;
   /* Выравнивание по вертикали */
@@ -150,6 +169,30 @@
   font-weight: lighter;
 }
 
+.text-big-style {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  font-weight: 700;
+  color: #cfcfcf;
+  font-weight: lighter;
+}
+
+.text-middle-style {
+  font-family: 'Playfair Display', serif;
+  font-size: 45px;
+  font-weight: 700;
+  color: #cfcfcf;
+  font-weight: lighter;
+}
+
+.text-mini-style {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #cfcfcf;
+  font-weight: lighter;
+}
+
 .left-rectangle div:nth-child(2) {
   font-family: 'TenorSans', sans-serif;
   font-size: 27px;
@@ -183,4 +226,16 @@
 @font-face {
   font-family: 'TenorSans';
   src: url('/web/fonts/TenorSans-Regular.ttf');
+}
+
+.about-img-style{
+  height: 530px;
+}
+
+.text-mini-about-style {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: #cfcfcf;
+  font-weight: lighter;
 }
