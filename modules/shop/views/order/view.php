@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="d-flex justify-content-start gap-2">
         <?= Html::a('Назад', (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin)
             ? ['/admin']
-            : ['index'], ['class' => 'btn btn-outline-info']) ?>
+            : ['/account'], ['class' => 'btn btn-orange mb-3']) ?>
 
         <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsAdmin()): ?>
             <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')

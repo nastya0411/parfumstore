@@ -1,7 +1,7 @@
 <?php
 
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 
 $this->title = 'Редактирование профиля';
 ?>
@@ -22,7 +22,7 @@ $this->title = 'Редактирование профиля';
     <?= $form->field($model, 'email') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-orange']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

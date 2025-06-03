@@ -44,7 +44,7 @@ class OrderController extends Controller
             'query' => Order::find()->where(['user_id' => Yii::$app->user->id]),
 
             'pagination' => [
-                'pageSize' => 50
+                'pageSize' => 3,
             ],
             'sort' => [
                 'defaultOrder' => [

@@ -9,7 +9,7 @@ $this->title = 'Мой профиль';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Редактировать', ['update'], ['class' => 'btn btn-outline-primary']) ?>
+        <?= Html::a('Редактировать', ['update'], ['class' => 'btn btn-orange']) ?>
     </p>
 
     <div class="card">

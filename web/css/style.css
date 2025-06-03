@@ -16,7 +16,7 @@
   animation: is-invalid 1s ease 1;
 }
 
-.form-control.is-invalid{
+.form-control.is-invalid {
   border-color: #c15924;
 }
 
@@ -243,14 +243,17 @@
   color: #cfcfcf;
   font-weight: lighter;
 }
-.breadcrumb a, .breadcrumb-item + .breadcrumb-item::before {
- color: #cfcfcf !important; 
+
+.breadcrumb a,
+.breadcrumb-item+.breadcrumb-item::before {
+  color: #c15924 !important;
 }
+
 .breadcrumb-item {
   font-family: 'Playfair Display', serif;
   font-size: 20px;
   font-weight: 700;
-  color: #cfcfcf !important;
+  color: #ffffff !important;
   font-weight: lighter;
 }
 
@@ -264,7 +267,7 @@
 }
 
 
-.btn-orange{
+.btn-orange {
   background-color: #c15924;
   color: white;
   padding: 8px 12px;
@@ -278,13 +281,15 @@
 
 .btn-orange:hover {
   border-color: #e4e3e3 !important;
+  color: white;
+
   border-width: 2px;
   background-color: #0d0d0d;
-  text-decoration: none !important;
   transform: translateY(-2px);
 }
 
-.btn-black{
+
+.btn-black {
   background-color: #3f3f3f;
   color: white;
   padding: 8px 12px;
@@ -304,17 +309,34 @@
   transform: translateY(-2px);
 }
 
-.form-check-input:checked{
+.form-check-input:checked {
   border-color: #c15924;
-  background-color:#c15924
+  background-color: #c15924
 }
 
-.bg-style{
+.bg-style {
   background-color: #141414 !important;
 }
 
+.card-style {
+  background-color: #c15924 !important;
 
-.card{
-    background-color: #c15924 !important;
+}
 
+.bg-orange {
+  background-color: #c15924 !important;
+}
+
+.page-link {
+  color: #c15924;
+}
+
+.page-item.active .page-link {
+  background-color: #c15924; 
+  border-color: #c15924;    
+  color: white;         
+}
+
+.page-link:hover{
+    color: #050505;
 }

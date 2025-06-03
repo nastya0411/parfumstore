@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Order;
+use yii\bootstrap5\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -21,8 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => '<div class="card">item</div>'],
-        'itemView' => 'item'
+        'itemOptions' => ['class' => '{pager}<div class="card-style">{items}</div>{pager}'],
+        'itemView' => 'item',
+        'pager' => ['class' => LinkPager::class]
     ]) ?>
 
     <?php Pjax::end(); ?>

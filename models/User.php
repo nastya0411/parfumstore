@@ -54,11 +54,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'login' => 'Login',
-            'password' => 'Password',
-            'full_name' => 'Full Name',
-            'email' => 'Email',
-            'phone' => 'Phone',
+            'login' => 'Логин',
+            'password' => 'Пароль',
+            'full_name' => 'ФИО',
+            'email' => 'Адрес электронной почты',
+            'phone' => 'Телефон',
             'role_id' => 'Role ID',
             'auth_key' => 'Auth Key',
         ];

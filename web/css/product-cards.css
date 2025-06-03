@@ -1,5 +1,6 @@
 .card {
-    background-color: #c15924 !important;
+    border-color: #000 ;
+    background-color: #fdf3ee !important;
 }
 
 /* Grid container */
@@ -58,7 +59,7 @@
 }
 
 .product-title-link:hover {
-    color: #ffffff;
+    color: #c15924;
 }
 
 /* Stock info */
@@ -72,12 +73,12 @@
 }
 
 .stock-icon {
-    color: #198754;
+    color: #c15924;
     margin-right: 0.25rem;
 }
 
 .stock-text {
-    color: #6c757d;
+    color: #52575c;
 }
 
 .stock-count {
@@ -101,7 +102,7 @@
 }
 
 .product-volume {
-    color: #6c757d;
+    color: #52575c;
     font-size: 0.9rem;
 }
 

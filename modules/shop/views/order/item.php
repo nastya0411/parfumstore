@@ -7,10 +7,7 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
 ?>
 
 <div class="card mb-3">
-    <!-- <h5 class="card-header fw-bold"><? #= Html::encode($model['product_title']) 
-                                            ?></h5> -->
     <div class="card-body">
-        <!-- <h5 class="card-title">Состав вашей корзины</h5> -->
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <img src="<?= $photo ?>"

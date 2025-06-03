@@ -125,10 +125,10 @@ $productChunks = array_chunk($products, 4);
 
 <div class="order-index">
   <h1 class="title-style text-center">Категории ароматов</h1>
-  <div class="custom-categories-wrapper">
+  <div class="custom-categories-wrapper gap-5">
     <?= ListView::widget([
       'dataProvider' => $dataProvider,
-      'layout' => "<div class='categories-grid'>{items}</div>",
+      'layout' => "<div class='categories-grid gap-5 '>{items}</div>",
       'itemOptions' => ['class' => 'item'],
       'itemView' => "item",
     ]) ?>
