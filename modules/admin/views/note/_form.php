@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-outline-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-orange']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsAdmin()): ?>
             <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
                 ? Html::a('Выдача заказа', ['apply', 'id' => $model->id], [
-                    'class' => 'btn btn-outline-primary',
+                    'class' => 'btn btn-black text-black',
                     'data-method' => 'post',
                     'data-pjax' => 1
                 ])
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $model->status_id == Status::getStatusId('Создан')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], [
-                    'class' => 'btn btn-outline-primary',
+                    'class' => 'btn btn-black text-black',
                     'data-method' => 'post',
                     'data-pjax' => 1
                 ]) .
                 Html::a('Отменен', ['cancel', 'id' => $model->id], [
-                    'class' => 'btn btn-outline-danger',
+                    'class' => 'btn btn-black text-black',
                     'data-method' => 'post',
                     'data-pjax' => 1
                 ])
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $model->status_id == Status::getStatusId('Оплачен онлайн')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], [
-                    'class' => 'btn btn-outline-primary',
+                    'class' => 'btn btn-black text-black',
                     'data-method' => 'post',
                     'data-pjax' => 1
                 ]) .
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?= $model->status_id == Status::getStatusId('Ожидает оплаты')
                 ? Html::a('Отменен', ['cancel', 'id' => $model->id], [
-                    'class' => 'btn btn-outline-danger',
+                    'class' => 'btn btn-black black',
                     'data-method' => 'post',
                     'data-pjax' => 1
                 ])
@@ -73,12 +73,12 @@ $this->params['breadcrumbs'][] = $this->title;
             if ($model->status_id == Status::getStatusId('В сборке')) {
                 echo $model->pay_receipt
                     ? Html::a('Оплата при получении', ['paid', 'id' => $model->id], [
-                        'class' => 'btn btn-outline-success',
+                        'class' => 'btn btn-black text-black',
                         'data-method' => 'post',
                         'data-pjax' => 1
                     ])
                     : Html::a('Доставлен', ['apply', 'id' => $model->id], [
-                        'class' => 'btn btn-outline-success',
+                        'class' => 'btn btn-black text-orange',
                         'data-method' => 'post',
                         'data-pjax' => 1
                     ]);

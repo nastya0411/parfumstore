@@ -31,12 +31,12 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                 ],
                 [
                     'label' => "Отмененные заказы",
-                    'backgroundColor' => "rgba(255,99,132,0.2)",
-                    'borderColor' => "rgba(255,99,132,1)",
-                    'pointBackgroundColor' => "rgba(255,99,132,1)",
+                    'backgroundColor' => "rgba(255, 116, 9, 0.53)",
+                    'borderColor' => "rgb(255, 110, 20)",
+                    'pointBackgroundColor' => "rgb(183, 111, 56)",
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
-                    'pointHoverBorderColor' => "rgba(255,99,132,1)",
+                    'pointHoverBorderColor' => "rgb(233, 124, 46)",
                     'data' => array_map('intval', $cancelled),
                 ]
             ]

@@ -10,12 +10,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
 <?php Pjax::begin(); ?>
 <div>
-    <?= Html::a('За текущую неделю', ['index', 'period' => 'week'], ['class' => 'btn btn-outline-primary']) ?> 
-    <?= Html::a('За предыдущую неделю', ['index', 'period' => 'next_week'], ['class' => 'btn btn-outline-primary']) ?> 
-    <?= Html::a('За 2 недели', ['index', 'period' => '2weeks'], ['class' => 'btn btn-outline-primary']) ?> 
-    <?= Html::a('За квартал', ['index', 'period' => 'quarter'], ['class' => 'btn btn-outline-primary']) ?> 
-    <?= Html::a('За текущий месяц', ['index', 'period' => 'month'], ['class' => 'btn btn-outline-primary']) ?> 
-    <?= Html::a('За предыдущий месяц', ['index', 'period' => 'next_month'], ['class' => 'btn btn-outline-primary']) ?> 
+    <?= Html::a('За текущую неделю', ['index', 'period' => 'week'], ['class' => 'btn btn-orange']) ?> 
+    <?= Html::a('За предыдущую неделю', ['index', 'period' => 'next_week'], ['class' => 'btn btn-orange']) ?> 
+    <?= Html::a('За 2 недели', ['index', 'period' => '2weeks'], ['class' => 'btn btn-orange']) ?> 
+    <?= Html::a('За квартал', ['index', 'period' => 'quarter'], ['class' => 'btn btn-orange']) ?> 
+    <?= Html::a('За текущий месяц', ['index', 'period' => 'month'], ['class' => 'btn btn-orange']) ?> 
+    <?= Html::a('За предыдущий месяц', ['index', 'period' => 'next_month'], ['class' => 'btn btn-orange']) ?> 
 </div>
 <div class="charts-grid text-center">
     <div class="chart-card">

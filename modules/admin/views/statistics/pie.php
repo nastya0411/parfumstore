@@ -21,12 +21,12 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
             'datasets' => [
                 [
                     'label' => "Заказы с оплатой онлайн",
-                    'backgroundColor' => "rgba(255, 179, 195, 0.7)",
-                    'borderColor' => "rgba(179,181,198,1)",
-                    'pointBackgroundColor' => "rgba(179,181,198,1)",
+                    'backgroundColor' => "rgba(255, 116, 9, 0.53)",
+                    'borderColor' => "rgb(255, 110, 20)",
+                    'pointBackgroundColor' => "rgb(183, 111, 56)",
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
-                    'pointHoverBorderColor' => "rgba(179,181,198,1)",
+                    'pointHoverBorderColor' => "rgb(233, 124, 46)",
                     'data' => array_map('intval', $data),
                 ]
                 

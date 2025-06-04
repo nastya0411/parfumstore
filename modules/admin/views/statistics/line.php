@@ -22,7 +22,7 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                 [
                     'label' => "Заказы с оплатой онлайн",
                     'backgroundColor' => "rgba(179,181,198,0.2)",
-                    'borderColor' => "rgba(179,181,198,1)",
+                    'borderColor' => "rgb(206, 207, 215)",
                     'pointBackgroundColor' => "rgba(179,181,198,1)",
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
@@ -31,12 +31,12 @@ $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAss
                 ],
                 [
                     'label' => "Заказы с оплатой при получении",
-                    'backgroundColor' => "rgba(255,99,132,0.2)",
-                    'borderColor' => "rgb(255, 99, 132)",
-                    'pointBackgroundColor' => "rgba(255,99,132,1)",
+                    'backgroundColor' => "rgba(255, 116, 9, 0.53)",
+                    'borderColor' => "rgb(255, 110, 20)",
+                    'pointBackgroundColor' => "rgb(183, 111, 56)",
                     'pointBorderColor' => "#fff",
                     'pointHoverBackgroundColor' => "#fff",
-                    'pointHoverBorderColor' => "rgba(255,99,132,1)",
+                    'pointHoverBorderColor' => "rgb(233, 124, 46)",
                     'data' => array_map('intval', $cash),
                 ]
             ]

@@ -13,22 +13,22 @@ echo ChartJs::widget([
         'datasets' => [
             [
                 'label' => "Доставка",
-                'backgroundColor' => "rgba(54, 162, 235, 0.2)",
-                'borderColor' => "rgb(54, 162, 235)",
-                'pointBackgroundColor' => "rgb(54, 162, 235)",
+                'backgroundColor' => "rgba(179,181,198,0.2)",
+                'borderColor' => "rgba(179,181,215,1)",
+                'pointBackgroundColor' => "rgba(179,181,198,1)",
                 'pointBorderColor' => "#fff",
                 'pointHoverBackgroundColor' => "#fff",
-                'pointHoverBorderColor' => "rgb(54, 162, 235)",
+                'pointHoverBorderColor' => "rgba(179,181,198,1)",
                 'data' => $deliveryData,
             ],
             [
                 'label' => "Самовывоз",
-                'backgroundColor' => "rgba(255, 99, 132, 0.2)",
-                'borderColor' => "rgb(255, 99, 132)",
-                'pointBackgroundColor' => "rgb(255, 99, 132)",
+                'backgroundColor' => "rgba(255, 116, 9, 0.53)",
+                'borderColor' => "rgb(255, 110, 20)",
+                'pointBackgroundColor' => "rgb(183, 111, 56)",
                 'pointBorderColor' => "#fff",
                 'pointHoverBackgroundColor' => "#fff",
-                'pointHoverBorderColor' => "rgb(255, 99, 132)",
+                'pointHoverBorderColor' => "rgb(233, 124, 46)",
                 'data' => $pickupData,
             ]
         ]

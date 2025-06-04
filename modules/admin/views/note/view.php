@@ -13,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="note-view">
 <p>
-    <?= Html::a('Назад', ['/admin/note'], ['class' => 'btn btn-outline-info']) ?>
+    <?= Html::a('Назад', ['/admin/note'], ['class' => 'btn btn-orange']) ?>
     </p>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-black']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-outline-danger',
             'data' => [

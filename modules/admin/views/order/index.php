@@ -1,7 +1,8 @@
 <?php
  
  use app\models\Order;
- use yii\helpers\Html;
+use yii\bootstrap5\LinkPager;
+use yii\helpers\Html;
  use yii\helpers\Url;
  use yii\grid\ActionColumn;
  use yii\widgets\ListView;
@@ -18,13 +19,14 @@
  
      <?php Pjax::begin(); ?>
      <p>
-     <?= Html::a('Интернет-магазин', ['/admin/shop'], ['class' => 'btn btn-outline-primary'])?>
+     <?= Html::a('Интернет-магазин', ['/admin/shop'], ['class' => 'btn btn-orange'])?>
      </p>
  
      <?= ListView::widget([
          'dataProvider' => $dataProvider,
-         'itemOptions' => ['class' => 'item'],
-         'itemView' => 'item'
+        'itemOptions' => ['class' => '{pager}<div class="card-style">{items}</div>{pager}'],
+        'itemView' => 'item',
+        'pager' => ['class' => LinkPager::class]
      ]) ?>
  
      <?php Pjax::end(); ?>

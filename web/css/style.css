@@ -302,10 +302,9 @@
 }
 
 .btn-black:hover {
-  border-color: #e4e3e3 !important;
+  border-color: #1d1d1d !important;
   border-width: 2px;
-  background-color: #0d0d0d;
-  text-decoration: none !important;
+  background-color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -332,11 +331,11 @@
 }
 
 .page-item.active .page-link {
-  background-color: #c15924; 
-  border-color: #c15924;    
-  color: white;         
+  background-color: #c15924;
+  border-color: #c15924;
+  color: white;
 }
 
-.page-link:hover{
-    color: #050505;
+.page-link:hover {
+  color: #050505;
 }
