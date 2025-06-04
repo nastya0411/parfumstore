@@ -176,10 +176,10 @@ class Order extends \yii\db\ActiveRecord
 
             // die;
             if (!$result) {
-                Yii::$app->session->setFlash('error', 'error send mail');
+                Yii::$app->session->setFlash('error', 'Ошибка отправки электронного письма!');
                 Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
             } else {
-                Yii::$app->session->setFlash('info', 'send mail');
+                Yii::$app->session->setFlash('info', 'На вашу почту отправлена актуальная информация о заказе!');
             }
             return $result;
         } catch (\Exception $e) {
