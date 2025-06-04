@@ -34,7 +34,7 @@ $(() => {
     $.ajax({
       url: el.attr("href"),
       success(data) {
-        if (data.success) {
+        if (data.status) {
           cartCountReload();
         } else {
           showAlert();

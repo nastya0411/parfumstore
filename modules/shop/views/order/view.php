@@ -134,6 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
     Состав заказа:
 </div>
 
+<?php Yii::debug($model) ?>
 <?php foreach ($model->orderItems as $item): ?>
     <?= $this->render('item-view', ['model' => $item])   ?>
 <?php endforeach ?>
