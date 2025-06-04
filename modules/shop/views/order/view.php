@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="order-view">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="d-flex justify-content-start gap-2">
+    <div class="d-flex justify-content-start gap-2 ">
         <?= Html::a('Назад', (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin)
             ? ['/admin']
             : ['/account'], ['class' => 'btn btn-orange mb-3']) ?>
@@ -89,47 +89,50 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
+<div class="bg-white text-black">
 
-<?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'id',
-        'address',
-        'phone',
-        [
-            'attribute' => 'created_at',
-            'value' => Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s')
-        ],
-        [
-            'attribute' => 'date',
-            'value' => Yii::$app->formatter->asDate($model->date, 'php:d.m.Y')
-        ],
-        [
-            'attribute' => 'time',
-            'value' => Yii::$app->formatter->asTime($model->time, 'php:H:i')
-        ],
-        // [
-        //     'attribute' => 'pay_type_id',
-        //     'value' => PayType::getPayTypesOnline()[$model->pay_type_id]
-        // ],
-        [
-            'attribute' => 'status_id',
-            'value' => Status::getStatuses()[$model->status_id]
-        ],
-        'amount',
-        'cost',
-        [
-            'attribute' => 'other_reason',
-            'format' => 'ntext',
-            'value' => $model->other_reason,
-            'visible' => (bool)$model->other_reason,
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'id',
+            'address',
+            'phone',
+            [
+                'attribute' => 'created_at',
+                'value' => Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s')
+            ],
+            [
+                'attribute' => 'date',
+                'value' => Yii::$app->formatter->asDate($model->date, 'php:d.m.Y')
+            ],
+            [
+                'attribute' => 'time',
+                'value' => Yii::$app->formatter->asTime($model->time, 'php:H:i')
+            ],
+            // [
+            //     'attribute' => 'pay_type_id',
+            //     'value' => PayType::getPayTypesOnline()[$model->pay_type_id]
+            // ],
+            [
+                'attribute' => 'status_id',
+                'value' => Status::getStatuses()[$model->status_id]
+            ],
+            'amount',
+            'cost',
+            [
+                'attribute' => 'other_reason',
+                'format' => 'ntext',
+                'value' => $model->other_reason,
+                'visible' => (bool)$model->other_reason,
 
+            ],
+
+
+            // 'pay_receipt',
         ],
+    ]) ?>
+</div>
 
-
-        // 'pay_receipt',
-    ],
-]) ?>
 <div>
     Состав заказа:
 </div>
