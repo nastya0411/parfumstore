@@ -37,11 +37,9 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'scheme' => 'smtps',
-
                 'host' => 'smtp.mail.ru',
-                'host' => 'info@parfumstore.infobox.vip',
-                'username' => 'info@parfumstore.infobox.vip',
-                'password' => 'NCC-ceg-6ke-wR9',
+                'username' => 'parfumstore_info@mail.ru',
+                'password' => 'scrLwiG6Ec9D7ETn3vLi',
                 'port' => 465,
                 // 'dsn' => 'native://default',
                 // 'options' => [
