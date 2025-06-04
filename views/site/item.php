@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 <div class="container">
+
   <a href="<?= Url::to(['/shop/catalog', 'category_id' => $model->id]) ?>" class="category-card">
     <?php
     $categoryPhoto = !empty($model->photo)

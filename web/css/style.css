@@ -339,3 +339,7 @@
 .page-link:hover {
   color: #050505;
 }
+a {
+  color: #c15924;
+  text-decoration: none;
+}

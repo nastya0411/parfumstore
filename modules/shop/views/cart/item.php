@@ -18,11 +18,11 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
                     alt="<?= Html::encode($model['product_title']) ?>"
                     style="height: 80px; width: auto; object-fit: contain;">
             </div>
-            <div class="card-text d-flex flex-column align-items-center text-center">
+            <div class="card-text d-flex flex-column align-items-center text-center text-black">
                 <?= Html::a(
                     Html::encode($model['product_title']),
                     ['/shop/catalog/view', 'id' => $model['product_id']],
-                    ['class' => 'text-decoration-none']
+                    ['class' => 'text-black']
                 ) ?>
                 <div class="my-2 fs-8 fw-bold">
                     <?= $model['product_volume'] ?> мл
@@ -43,9 +43,9 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
                 </span>
             </div>
             <div class="d-flex justify-content-end gap-3">
-                <?= Html::a('-', ['item-del', 'id' => $model['product_id']], ['class' => 'btn btn-danger btn-item-del']) ?>
+                <?= Html::a('-', ['item-del', 'id' => $model['product_id']], ['class' => 'btn btn-black btn-item-del']) ?>
                 <span class='fs-4'><?= $model['item_amount'] ?></span>
-                <?= Html::a('+', ['add', 'id' => $model['product_id']], ['class' => 'btn btn-success btn-item-add']) ?>
+                <?= Html::a('+', ['add', 'id' => $model['product_id']], ['class' => 'btn btn-orange btn-item-add']) ?>
                 <?= Html::a('Удалить', ['item-remove', 'id' => $model['item_id']], ['class' => 'btn btn-outline-danger btn-item-remove']) ?>
             </div>
         </div>

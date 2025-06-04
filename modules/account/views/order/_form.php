@@ -42,7 +42,7 @@ use yii\widgets\Pjax;
         <?= $form->field($model, 'pay_type_id')->dropDownList(PayType::getPayTypes(), ['prompt' => 'Выберете тип оплаты']) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Создать заказ', ['class' => 'btn btn-outline-success']) ?>
+            <?= Html::submitButton('Создать заказ', ['class' => 'btn btn-orange']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

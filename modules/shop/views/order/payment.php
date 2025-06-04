@@ -12,7 +12,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
 
 <div class="payment-page">
     <div class="payment-card">
-        <div class="payment-header">
+        <div class="payment-header bg-orange ">
             <h2 class="payment-title"><?= 'Оплата заказа № ' . $model->id . ' от ' .
                                             Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s') ?></h2>
         </div>
@@ -46,7 +46,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
                     ],
                 ]); ?>
 
-                <div class="card-preview mb-4"  style="max-width: 350px; margin: 0 auto;">
+                <div class="card-preview mb-4 bg-black"  style="max-width: 350px; margin: 0 auto;">
                     <div class="card-logo">
                         <img src="https://img.icons8.com/color/48/000000/visa.png" id="card-type-img" class="card-logo-img">
                     </div>
@@ -105,7 +105,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
 
                 <div class="payment-submit-container mt-4">
                     <?= Html::submitButton('Оплатить ' . $model->cost . ' ₽', [
-                        'class' => 'btn btn-primary w-100',
+                        'class' => 'btn btn-dark text-orange w-100',
                         'id' => 'submit-payment'
                     ]) ?>
                 </div>

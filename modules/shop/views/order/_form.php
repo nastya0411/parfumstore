@@ -47,7 +47,7 @@ use yii\web\JqueryAsset;
     <?= $form->field($model, 'pay_type_id')->dropDownList(PayType::getPayTypesOnline(), ['prompt' => 'Выберете тип оплаты:']) ?>
 
     <div class="form-group d-flex justify-content-end">
-        <?= Html::submitButton('Создать заказа', ['class' => 'btn btn-outline-success']) ?>
+        <?= Html::submitButton('Создать заказа', ['class' => 'btn btn-orange']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

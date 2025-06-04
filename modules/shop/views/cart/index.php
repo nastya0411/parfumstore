@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
 
     <?= $dataProvider->totalCount
-        ? Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-primary btn-order-create my-3'])
+        ? Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-orange btn-order-create my-3'])
         : ''
     ?>
 
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
                 </span>
             </div>
-            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-outline-danger btn-cart-clear', 'data-pjax' => "0"]) ?> 
+            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-danger btn-cart-clear', 'data-pjax' => "0"]) ?> 
         </div>
     <?php else: ?>
         <div class="alert alert-primary mt-3 alert-cart-empty" role="alert">
