@@ -33,9 +33,9 @@ use yii\widgets\Pjax;
         <div class="rating-distribution mt-2">
             <h6 class="mb-2">Распределение оценок:</h6>
             <?php for ($i = 5; $i >= 1; $i--): ?>
-                <div class="d-flex align-self-stretch">
+                <div class="d-flex align-self-stretch ">
                     <div style="width: 70px;">
-                        <span class="text-muted small"><?= $i ?> звезд<?= $i > 1 && $i < 5 ? 'ы' : '' ?></span>
+                        <span class=" small text-white"><?= $i ?> звезд<?= $i > 1 && $i < 5 ? 'ы' : '' ?></span>
                     </div>
                     <div >
                         <?= StarRating::widget([

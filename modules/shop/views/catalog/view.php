@@ -21,15 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
     <div class="d-flex gap-3">
-        <?= Html::a('Назад', $_SERVER['HTTP_REFERER'], ['class' => 'btn btn-outline-info']) ?>
+        <?= Html::a('Назад', $_SERVER['HTTP_REFERER'], ['class' => 'btn btn-black text-black']) ?>
         <?php if (Yii::$app->user->isGuest): ?>
             <?= Html::a('В корзину', ['/site/login'], [
-                'class' => 'btn btn-outline-success btn-add-cart',
+                'class' => 'btn btn-black btn-add-cart',
                 'data-pjax' => 0,
             ]) ?>
         <?php elseif (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin): ?>
             <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-                'class' => 'btn btn-outline-success btn-add-cart',
+                'class' => 'btn btn-orange btn-add-cart w-5',
                 'data-pjax' => 0,
             ])
             ?>
