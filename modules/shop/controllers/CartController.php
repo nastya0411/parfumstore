@@ -116,9 +116,9 @@ class CartController extends Controller
     {
         if ($model = $this->findModel($id)) {
             $model->delete();
-            return $this->asJson(true);
+            return $this->asJson(['status' => true]);
         }
-        return $this->asJson(false);
+        return $this->asJson(['status' => false]);
     }
 
 
@@ -127,7 +127,7 @@ class CartController extends Controller
         if ($model = Cart::findOne(['user_id' => Yii::$app->user->id])) {
             return $this->asJson([
                 'status' => true,
-                'value' => CartItem::find()
+                'value' => (int)CartItem::find()
                     ->where(['cart_id' => $model->id])
                     ->sum('amount')
             ]);
@@ -160,7 +160,7 @@ class CartController extends Controller
                 $cartItem->product_id = $product->id;
             }
             if ($cartItem->amount >= $product->count) {
-                return ['success' => false];
+                return $this->asJson(['status' => false]);
             }
             $cartItem->amount++;
             $cartItem->cost += $product->price;
@@ -169,23 +169,20 @@ class CartController extends Controller
             $model->amount++;
             $model->cost += $product->price;
             $model->save();
-            // return $this->asJson(true);
-            return ['success' => true];
-            // return $this->redirect(Yii::$app->request->referrer ?: ['catalog/item', 'id' => $id]);
-        }
-        return ['success' => false];
-        // return $this->redirect(Yii::$app->request->referrer ?: ['catalog/item', 'id' => $id]);
 
-        // return $this->asJson(false);
+            return $this->asJson(['status' => true]);
+        }
+
+        return $this->asJson(['status' => false]);
     }
 
     public function actionItemRemove($id)
     {
         if ($model = CartItem::findOne($id)) {
             $model->delete();
-            return $this->asJson(true);
+            return $this->asJson(['status' => true]);
         } else {
-            return $this->asJson(false);
+            return $this->asJson(['status' => false]);
         }
     }
 
@@ -221,9 +218,9 @@ class CartController extends Controller
             $model->cost -= $product->price;
             $model->save();
 
-            return $this->asJson(['success' => true]);
+            return $this->asJson(['status' => true]);
         }
-        return $this->asJson(['success' => false]);
+        return $this->asJson(['status' => false]);
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
 use yii\bootstrap5\Html;
-use yii\helpers\Url;
+
 
 $photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/img/no_photo.jpg';
 ?>
 
 <div class="card mb-3">
-    <h5 class="card-header fw-bold"><? $model->product->title ?></h5> 
+    <h5 class="card-header fw-bold"><? $model->product->title ?></h5>
     <div class="card-body">
         <!-- <h5 class="card-title">Состав вашей корзины</h5> -->
         <div class="d-flex justify-content-between align-items-center">
