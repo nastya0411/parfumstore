@@ -27,7 +27,7 @@ use yii\bootstrap5\Html;
             <?= $model->status_id == Status::getStatusId('Создан')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], ['class' =>
                 'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0])
-                . Html::a('Отмененить', ['cancel', 'id' => $model->id], ['class' =>
+                . Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
                 'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
@@ -35,13 +35,13 @@ use yii\bootstrap5\Html;
             <?= $model->status_id == Status::getStatusId('Оплачен онлайн')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], ['class' =>
                 'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0])
-                . Html::a('Отмененить', ['cancel', 'id' => $model->id], ['class' =>
+                . Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
                 'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
 
             <?= $model->status_id == Status::getStatusId('Ожидает оплаты')
-                ? Html::a('Отмененить', ['cancel', 'id' => $model->id], ['class' =>
+                ? Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
                 'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
