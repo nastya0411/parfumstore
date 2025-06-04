@@ -161,20 +161,20 @@ class Order extends \yii\db\ActiveRecord
         $status = Status::findOne($this->status_id);
         try {
             $result = Yii::$app->mailer
-            ->compose('mail', [
-                'model' => $this,
-                'status' => $status,
-                'orderDate' => Yii::$app->formatter->asDate($this->date),
-                'orderTime' => Yii::$app->formatter->asTime($this->time),
+                ->compose('mail', [
+                    'model' => $this,
+                    'status' => $status,
+                    'orderDate' => Yii::$app->formatter->asDate($this->date),
+                    'orderTime' => Yii::$app->formatter->asTime($this->time),
                 ])
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name])
                 ->setTo($this->user->email)
                 ->setCc('parfumstore_info@mail.ru')
                 ->setSubject("Изменение статуса заказа #{$this->id}")
                 ->send();
-                
-                
-                // die;
+
+
+            // die;
             if (!$result) {
                 Yii::$app->session->setFlash('error', 'error send mail');
                 Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
@@ -191,11 +191,75 @@ class Order extends \yii\db\ActiveRecord
     }
 
 
+    public static function make()
+    {
+        $q = "delete o from `order` o "
+            . "left join order_item i on i.order_id = o.id "
+            . "where "
+            . "i.id is null";
 
+        Yii::$app->db->createCommand($q)->execute();
+
+        $users = User::find()->asArray()->all();
+
+        $date_on = time() - 3 * 30 * 24 * 60 * 60;
+        $date_off = time();
+        $pay_type = PayType::find()->select('id')->indexBy('id')->column();
+        $status = Status::find()->select('id')->indexBy('id')->column();
+        for ($i = 0; $i < 100; $i++) {
+            var_dump($i);
+            foreach ($users as $user) {
+                $count = rand(1, 5);
+                for ($c = 0; $c < $count; $c++) {
+                    $order = new self();
+                    $order->user_id = $user["id"];
+                    $p = rand(1, 9);
+                    $order->phone = "+7($p$p$p)-$p$p$p-$p$p-$p$p";
+                    $order->address = "город доставки, улица доставки, N дома N квартиры";
+                    $time = rand($date_on, $date_off);
+                    $order->created_at = Yii::$app->formatter->asDatetime($time, "php:Y-m-d H:m:s");
+                    $order->date = Yii::$app->formatter->asDate($time, "php:Y-m-d");
+                    $order->time = Yii::$app->formatter->asTime($time, "php:H:m:s");
+                    $order->pay_type_id = array_rand($pay_type);
+                    $order->status_id = array_rand($status);
+                    $order->pay_receipt = rand(0, 1);
+                    $order->amount = 0;
+                    $order->cost = 0;
+                    $order->pay_receipt = rand(0, 1);
+                    $order->save();
+
+                    $items = rand(1, 5);
+                    $sum = 0;
+                    $amount = 0;
+                    $products = Product::find()->select('id')->indexBy('id')->column();
+                    for ($item = 0; $item < $items; $item++) {
+                        $i_count = rand(1, 10);
+                        $o_item = new OrderItem();
+                        $o_item->order_id = $order->id;
+                        $o_item->product_id = array_rand($products);
+                        $cost = Product::findOne($o_item->product_id)->price * $i_count;
+                        $o_item->amount = $i_count;
+                        $o_item->cost = $cost;
+                        $amount += $i_count;
+                        $sum += $cost;
+                        $o_item->save();
+                    }
+
+                    $order->amount = $amount;
+                    $order->cost = $sum;
+                    $order->save();
+                }
+            }
+        }
+
+        return "ok";
+    }
 
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
-        $this->sendMail();
+        if (Yii::$app->id !== 'basic-console') {
+            $this->sendMail();
+        }
     }
 }

@@ -25,6 +25,21 @@ $config = [
                 ],
             ],
         ],
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'app\models\User',
+            'enableSession' => false,
+            'enableAutoLogin' => false,
+        ],
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [],
+
+
+        ],
         'db' => $db,
     ],
     'params' => $params,
