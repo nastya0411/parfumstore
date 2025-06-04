@@ -10,7 +10,7 @@ use yii\bootstrap5\Html;
         № <?= $model->id ?> от <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i:s') ?>
         <h5 class="card-title">Клиент: <?= $model->user->full_name ?></h5>
     </div>
-    <div class="card-body">
+    <div class="card-body text-black" >
         <h5 class="card-title">Дата и время получения заказа: <?= Yii::$app->formatter->asDate($model->date, 'php:d.m.Y') . ' ' . $model->time ?></h5>
         <h5 class="card-title">Статус заказа: <?= $model->status->title ?></h5>
         <p class="card-text">Количество товаров: <?= $model->amount ?> </p>
