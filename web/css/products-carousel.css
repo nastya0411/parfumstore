@@ -59,7 +59,7 @@
 }
 
 .product-card h4 a:hover {
-  color: #c15924;
+  color: #ab572d;
 }
 
 /* Блок наличия товара */
@@ -88,7 +88,7 @@
   gap: 0.5rem;
   font-size: 1.25rem;
   font-weight: bold;
-  color: #c15924;
+  color: #ab572d;
   margin-bottom: 10px;
 }
 

@@ -59,7 +59,7 @@
 }
 
 .product-title-link:hover {
-    color: #c15924;
+    color: #ab572d;
 }
 
 /* Stock info */
@@ -73,7 +73,7 @@
 }
 
 .stock-icon {
-    color: #c15924;
+    color: #ab572d;
     margin-right: 0.25rem;
 }
 
@@ -113,7 +113,7 @@
 
 .btn-add-cart {
     width: 100%;
-    border-color: #c15924;
+    border-color: #ab572d;
     color: #ebebeb;
     transition: all 0.2s ease;
 }

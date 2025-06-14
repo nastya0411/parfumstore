@@ -17,7 +17,7 @@
 }
 
 .form-control.is-invalid {
-  border-color: #c15924;
+  border-color: #ab572d;
 }
 
 @keyframes is-invalid {
@@ -76,6 +76,7 @@
   color: rgba(255, 255, 255, 0.7) !important;
   background-color: transparent !important;
   transition: all 0.3s ease !important;
+  font-size: larger;
 }
 
 .navigation-style:hover {
@@ -87,7 +88,7 @@
 
 .bg-block {
   position: relative;
-  min-height: 670px;
+  min-height: 870px;
   overflow: hidden;
 }
 
@@ -101,7 +102,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
 }
 
 .bg-block-about {
@@ -125,64 +125,56 @@
 
 .overlay-photo {
   position: absolute;
-  right: 200px;
-  /* Отступ от правого края */
+  right: 300px;
   top: 50%;
-  /* Выравнивание по вертикали */
-  transform: translateY(-50%);
-  /* Точное центрирование */
-  max-height: 100%;
-  /* Чтобы фото не выходило за границы блока */
+  transform: translateY(-45%);
+  max-height: 95%;
   max-width: 90%;
-  /* Ширина фото относительно блока */
   z-index: 1;
-  /* Чтобы было поверх фона */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  /* Опционально: тень */
 }
 
 .left-rectangle {
   position: absolute;
-  width: 400px;
-  height: 550px;
-  left: 250px;
-  /* Отступ слева */
+  width: 450px;
+  height: 620px;
+  left: 300px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-45%);
   background: rgba(0, 0, 0, 0.280);
-  padding: 30px;
-  /* Отступы внутри прямоугольника */
+  padding: 35px;
   box-sizing: border-box;
-  /* Чтобы padding не увеличивал размеры */
 }
 
 .left-rectangle div:first-child {
-  font-family: 'Playfair Display', serif;
+  font-family: 'TenorSans', serif;
   font-size: 60px;
   font-weight: 700;
-  color: #c15924;
+  letter-spacing: 2px !important;
+  color: #ab572d;
   font-weight: lighter;
   margin-bottom: 20px;
+
 }
 
 .title-style {
-  font-family: 'Playfair Display', serif;
+  font-family: 'TenorSans', serif;
   font-size: 60px;
   font-weight: 700;
-  color: #c15924;
+  color: #ab572d;
   font-weight: lighter;
 }
 
 .text-big-style {
-  font-family: 'Playfair Display', serif;
+  font-family: 'TenorSans', serif;
   font-size: 60px;
   font-weight: 700;
+  letter-spacing: 2px !important;
   color: #cfcfcf;
   font-weight: lighter;
 }
 
 .text-middle-style {
-  font-family: 'Playfair Display', serif;
+  font-family: 'TenorSans', serif;
   font-size: 45px;
   font-weight: 700;
   color: #cfcfcf;
@@ -206,7 +198,7 @@
 }
 
 .left-rectangle .btn {
-  background-color: #c15924;
+  background-color: #ab572d;
   color: white;
   padding: 12px 30px;
   font-size: 16px;
@@ -216,7 +208,8 @@
   letter-spacing: 1px;
   transition: all 0.3s ease;
   align-self: flex-start;
-  /* Выравнивание кнопки по левому краю */
+  margin-top: 15px;
+
 }
 
 .left-rectangle .btn:hover {
@@ -232,6 +225,13 @@
   src: url('/web/fonts/TenorSans-Regular.ttf');
 }
 
+* {
+  font-family: 'TenorSans';
+  letter-spacing: 2px !important;
+}
+
+
+
 .about-img-style {
   height: 530px;
 }
@@ -246,7 +246,7 @@
 
 .breadcrumb a,
 .breadcrumb-item+.breadcrumb-item::before {
-  color: #c15924 !important;
+  color: #ab572d !important;
 }
 
 .breadcrumb-item {
@@ -268,7 +268,7 @@
 
 
 .btn-orange {
-  background-color: #c15924;
+  background-color: #ab572d;
   color: white;
   padding: 8px 12px;
   font-size: 16px;
@@ -308,8 +308,8 @@
 }
 
 .form-check-input:checked {
-  border-color: #c15924;
-  background-color: #c15924
+  border-color: #ab572d;
+  background-color: #ab572d
 }
 
 .bg-style {
@@ -317,28 +317,29 @@
 }
 
 .card-style {
-  background-color: #c15924 !important;
+  background-color: #ab572d !important;
 
 }
 
 .bg-orange {
-  background-color: #c15924 !important;
+  background-color: #ab572d !important;
 }
 
 .page-link {
-  color: #c15924;
+  color: #ab572d;
 }
 
 .page-item.active .page-link {
-  background-color: #c15924;
-  border-color: #c15924;
+  background-color: #ab572d;
+  border-color: #ab572d;
   color: white;
 }
 
 .page-link:hover {
   color: #050505;
 }
+
 a {
-  color: #c15924;
+  color: #ab572d;
   text-decoration: none;
 }
