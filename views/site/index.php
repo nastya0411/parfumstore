@@ -122,9 +122,16 @@ $productChunks = array_chunk($products, 4);
 <div></div>
 <div class="about-main-grid">
   <img src="/web/img/bottleAbout2.png" class="about-grid-image">
-  <img src="/web/img/VectorAbout1.png" class="about-grid-image">
+  
+  <div class="image-about-container text-center">
+    <img src="/web/img/VectorAbout1.png" class="about-grid-image">
+    <div class="image-about">
+      <h1>О нас</h1>
+      <p>Добро пожаловать в мир Mon Parfum - ваш источник роскошных ароматов и непревзойденного качества!</p>
+      <p>Мы гордимся тем, что предлагаем только самые изысканные ароматы от ведущих мировых брендов. Каждая бутылочка наполнена не только элегантностью и стилем, но и неповторимым шармом, способным подчеркнуть вашу уникальность!</p>
+    </div>
+  </div>
 </div>
-
 
 
 <div class="order-index">
