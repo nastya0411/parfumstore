@@ -69,15 +69,15 @@
   border-radius: 50rem;
   padding: 0.25rem 0.75rem;
   font-size: 0.85rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .availability-pill .text-muted {
-  color: #707070 !important;
+  color: #cfcfcf !important;
 }
 
 .availability-pill .fw-bold {
-  color: #707070;
+  color: #cfcfcf;
 }
 
 /* Цена и объем */
@@ -104,18 +104,21 @@
 }
 
 /* Рейтинг */
+
 .product-rating-container {
-  margin: 0.5rem 0;
-  text-align: center;
+  margin-left: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .product-rating {
-  display: inline-flex;
+  display: inline-flex; 
+  gap: 0.3rem;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  position: relative;
+  max-width: 100%;
 }
-
 .product-rating>span {
   font-weight: 600;
   color: #cfcfcf;

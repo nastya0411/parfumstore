@@ -120,6 +120,10 @@ $productChunks = array_chunk($products, 4);
 
 </div>
 <div></div>
+<div class="about-main-grid">
+  <img src="/web/img/bottleAbout2.png" class="about-grid-image">
+  <img src="/web/img/VectorAbout1.png" class="about-grid-image">
+</div>
 
 
 

@@ -1,9 +1,8 @@
 .card {
     border-color: #000 ;
-    background-color: #fdf3ee !important;
+    background-color: #000000 !important;
 }
 
-/* Grid container */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -11,17 +10,14 @@
     padding: 15px;
 }
 
-/* Product card */
 .product-card {
     width: 260px;
     height: 450px;
     cursor: pointer;
-    /* border: 1px solid #dee2e6; */
-    border-radius: 0.375rem;
+    border-radius: 0.75rem;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    /* background: #fff; */
     margin: 0 auto;
     text-align: center;
 }
