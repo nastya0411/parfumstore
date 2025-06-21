@@ -117,29 +117,44 @@ $productChunks = array_chunk($products, 4);
     </button>
   </div>
 </div>
-
 </div>
-<div></div>
+
 <div class="about-main-grid">
   <img src="/web/img/bottleAbout2.png" class="about-grid-image">
-  
+
   <div class="image-about-container text-center">
     <img src="/web/img/VectorAbout1.png" class="about-grid-image">
     <div class="image-about">
-      <h1>О нас</h1>
-      <p>Добро пожаловать в мир Mon Parfum - ваш источник роскошных ароматов и непревзойденного качества!</p>
-      <p>Мы гордимся тем, что предлагаем только самые изысканные ароматы от ведущих мировых брендов. Каждая бутылочка наполнена не только элегантностью и стилем, но и неповторимым шармом, способным подчеркнуть вашу уникальность!</p>
+      <h1 class="">О нас</h1>
+      <p>Mon Parfum - ваш источник роскошных ароматов и непревзойденного качества!</p>
+      <p>Мы гордимся тем, что предлагаем только самые изысканные ароматы. Каждая бутылочка наполнена не
+         только элегантностью и стилем, но и неповторимым шармом, способным подчеркнуть вашу уникальность!</p>
+    </div>
+  </div>
+</div>
+
+<div class="bg-meeting">
+  <div class="meeting-style justify-content-center text-center" >
+    <div>
+      Познакомтесь с миром ароматов
+    </div>
+    <div>
+      Добро пожаловать в Mon parfum, где дух победы и триумфа оживает благодаря ароматам, которые придают силы и
+      вдохновляют. Наша коллекции - это праздник успеха, призванный раскрыть вашу победоносную сущность. Насладитесь
+      сладким вкусом триумфа с пленительными ароматами, рассказывающими о ваших достижениях. <br> В Mon parfum мы считаем,
+      что каждая победа заслуживает фирменного аромата, и мы стремимся создавать незабываемые ароматы, которые поднимут
+      ваш дух и придадут сил вашему путешествию.
     </div>
   </div>
 </div>
 
 
 <div class="order-index">
-  <h1 class="title-style text-center">Категории ароматов</h1>
-  <div class="custom-categories-wrapper gap-5">
+  <h1 class="title-style text-center mt-4">Категории ароматов</h1>
+  <div class="custom-categories-wrapper">
     <?= ListView::widget([
       'dataProvider' => $dataProvider,
-      'layout' => "<div class='categories-grid gap-5 '>{items}</div>",
+      'layout' => "<div class='categories-grid'>{items}</div>",
       'itemOptions' => ['class' => 'item'],
       'itemView' => "item",
     ]) ?>

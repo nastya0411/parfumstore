@@ -15,7 +15,7 @@ use yii\helpers\Url;
     ?>
     <img src="<?= $categoryPhoto ?>" class="card-img-top" alt="<?= Html::encode($model->title) ?>">
     <div class="card-body">
-      <p class="card-text"><?= Html::encode($model->title) ?></p>
+      <p class="card-text "><?= Html::encode($model->title) ?></p>
     </div>
   </a>
 </div>
