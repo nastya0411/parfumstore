@@ -350,7 +350,6 @@ a {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin: 0 auto;
-  gap: 20px;
 }
 
 .about-grid-image {
@@ -375,7 +374,6 @@ a {
   justify-content: center;
   padding: 40px;
   color: white;
-  background: rgba(0, 0, 0, 0.4);
 }
 
 .image-about h1 {

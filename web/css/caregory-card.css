@@ -19,13 +19,19 @@
 
 .category-card:hover {
   transform: translateY(-2px);
-  /* color: #ab572d; */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transform: scale(1.1);
+  opacity: 1.4;
+
 }
 
 .category-card .card-img-top {
   width: 100%;
   object-fit: cover;
+
 }
 
 .category-card .card-body {
