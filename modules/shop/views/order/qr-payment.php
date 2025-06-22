@@ -6,8 +6,6 @@ use yii\web\JqueryAsset;
 $url = urlencode("https://" . $_SERVER['HTTP_HOST'] . Url::to(["order/qr-payment-end", "id" => $model->id]));
 
 $url = "https://api.qrserver.com/v1/create-qr-code/?data=$url&size=250x250";
-Yii::debug($url);
-Yii::debug($_SERVER);
 ?>
 <div class="d-none alert alert-danger m-5" style="transition: all 1s ease" role="alert">
     Время заказа истекло.

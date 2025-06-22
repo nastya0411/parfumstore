@@ -205,11 +205,11 @@ class OrderController extends Controller
 
     public function actionQrPaymentEnd($id)
     {
+        $this->layout = "qr-end";
         $model = $this->findModel($id);
-        if ($model->load($this->request->post())) {
-            $model->status_id = Status::getStatusId("Оплачен онлайн");
-            $model->save();
-        }
+        $model->status_id = Status::getStatusId("Оплачен онлайн");
+        $model->save();
+
         return $this->render('qr-payment-end', ['model' => $model]);
     }
 

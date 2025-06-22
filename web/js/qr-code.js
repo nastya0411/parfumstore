@@ -36,12 +36,12 @@ $(() => {
         url: `/shop/order/qr-payment-hook?id=${id}`,
         success(data) {
           if (data.status) {
-            window.location.replace("/account");
+            window.location.replace(`view?id=${id}`);
           } else {
             const now = new Date();
             const remainingMs = endTime - now;
             if (remainingMs > 0) {
-              setTimeout(hook, 500);
+              setTimeout(hook, 5000);
             }
           }
         },
@@ -51,9 +51,9 @@ $(() => {
     setTimeout(hook(), 500);
   }
 
-  startCountdown(0, 50, ".timer-value", function () {
+  startCountdown(5, 0, ".timer-value", function () {
     $(".alert").removeClass("d-none");
     $(".qr").css("filter", "brightness(0.05) sepia(1) hue-rotate(40deg)");
-    // setTimeout(() => (location.href = "/account"), 15000);
+    setTimeout(() => (location.href = "/account"), 3000000);
   });
 });
