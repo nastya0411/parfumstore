@@ -47,12 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="mb-4">
                     <?php if (Yii::$app->user->isGuest): ?>
                         <?= Html::a('В корзину', ['/site/login'], [
-                            'class' => 'btn btn-outline-light w-100 py-2',
+                            'class' => 'btn btn-add-cart btn-outline-light w-100 py-2',
                             'data-pjax' => 0,
                         ]) ?>
                     <?php elseif (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin): ?>
                         <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-                            'class' => 'btn btn-orange w-100 py-2',
+                            'class' => 'btn btn-orange btn-add-cart w-100 py-2',
                             'data-pjax' => 0,
                         ]) ?>
                     <?php endif ?>
@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </li>
                     </ul>
                 </div>
-                                <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
+                <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
                     <div class="rating-block rating-block p-3 rounded mb-4">
                         <div class="alert alert-success alert-stars d-none text-center">
                             Рейтинг успешно поставлен!

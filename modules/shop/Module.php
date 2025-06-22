@@ -23,8 +23,14 @@ class Module extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
+                        'roles' => ['?'],
+                        'controllers' => ['shop/catalog', 'shop/category']
+                    ],
+                    [
+                        'allow' => true,
                         'roles' => ['@'],
                     ],
+
                 ],
                 'denyCallback' => fn() => Yii::$app->response->redirect('/'),
             ],
