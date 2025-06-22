@@ -44,7 +44,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <body class="d-flex flex-column h-100 bg-style text-white">
     <?php $this->beginBody() ?>
-    
+
     <?= $this->render("header") ?>
 
     <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
@@ -54,8 +54,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <?php endif ?>
 
 
-    <main id="main" class="flex-shrink-0" role="main">
-        <div class="container">
+    <main id="main" class="flex-shrink-0" role="main" style="">
+        <div class="container pt-5 pt-5" style="margin-top: 50px;">
             <?php if (!empty($this->params['breadcrumbs'])): ?>
                 <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
             <?php endif ?>

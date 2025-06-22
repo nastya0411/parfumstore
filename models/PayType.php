@@ -37,7 +37,7 @@ class PayType extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title'], 'string', 'max' => 255],
-            [['online', 'place'], 'integer'], 
+            [['online', 'place'], 'integer'],
         ];
     }
 
@@ -49,8 +49,8 @@ class PayType extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'online' => 'Choice Online', 
-            'place' => 'Choice Place', 
+            'online' => 'Choice Online',
+            'place' => 'Choice Place',
         ];
     }
 
@@ -64,25 +64,41 @@ class PayType extends \yii\db\ActiveRecord
         return $this->hasMany(Order::class, ['pay_type_id' => 'id']);
     }
 
-   
+    public function getPayId(string $title): int|null
+    {
+        return static::findOne(["title" => $title])?->id;
+    }
+
 
     public static function getPayTypesOnline()
     {
         return self::find()
-        ->select('title')
-        ->where(['online' => 1])
-        ->indexBy('id')
-        ->column();
+            ->select('title')
+            ->where(['online' => 1])
+            ->indexBy('id')
+            ->column();
     }
 
     public static function getPayTypesPlace()
     {
         return self::find()
-        ->select('title')
-        ->where(['place' => 1])
-        ->indexBy('id')
-        ->column();
+            ->select('title')
+            ->where(['place' => 1])
+            ->indexBy('id')
+            ->column();
     }
 
-    
+    public static function getPayTypes()
+    {
+        return self::find()
+            ->select('title')
+            ->indexBy('id')
+            ->column();
+    }
+
+
+    public function getIsQR()
+    {
+        return $this->id == $this->getPayId("QR код");
+    }
 }
