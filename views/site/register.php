@@ -1,27 +1,46 @@
 <?php
 
-use yii\bootstrap5\Html;
-use yii\bootstrap5\ActiveForm;
-
 /** @var yii\web\View $this */
 /** @var app\models\RegisterForm $model */
-/** @var ActiveForm $form */
+/** @var yii\bootstrap5\ActiveForm $form */
+
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
+
+$this->title = 'Регистрация';
+$this->params['breadcrumbs'][] = $this->title;
+
+// Подключаем CSS
+$this->registerCssFile('@web/css/register.css');
 ?>
-<div class="site-register">
-<h3>Регистрация</h3>
 
-    <?php $form = ActiveForm::begin(); ?>
+<div class="register-wrapper">
+    <h3><?= Html::encode($this->title) ?></h3>
+    <p>Заполните форму для регистрации:</p>
 
-        <?= $form->field($model, 'login')?>
-        <?= $form->field($model, 'password')->passwordInput()?>
-        <?= $form->field($model, 'full_name') ?>
-        <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, [
-    'mask' => '+7(999)-999-99-99',]) ?>
-        <?= $form->field($model, 'email') ?>
-    
-        <div class="form-group">
-            <?= Html::submitButton('Зарегистрироваться', ['class' => 'btn btn-orange']) ?>
-        </div>
+    <?php $form = ActiveForm::begin([
+        'id' => 'register-form',
+        'layout' => 'horizontal',
+        'fieldConfig' => [
+            'labelOptions' => ['class' => 'col-form-label text-start'],
+            'template' => "<div class=\"row mb-3\">\n<div class=\"col-sm-4\">{label}</div>\n<div class=\"col-sm-8\">{input}\n{error}</div></div>",
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'login')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?= $form->field($model, 'full_name')->textInput() ?>
+    <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, [
+        'mask' => '+7(999)-999-99-99',
+    ]) ?>
+    <?= $form->field($model, 'email')->input('email') ?>
+
+    <div class="text-center mt-3">
+        <?= Html::submitButton('Зарегистрироваться', [
+            'class' => 'btn btn-orange w-auto',
+            'name' => 'register-button'
+        ]) ?>
+    </div>
+
     <?php ActiveForm::end(); ?>
-
-</div><!-- site-register -->
+</div>

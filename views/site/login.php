@@ -20,7 +20,7 @@ $this->registerCssFile('@web/css/login.css');
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
-        'layout' => 'horizontal', // Горизонтальная форма
+        'layout' => 'horizontal',
         'fieldConfig' => [
             'labelOptions' => ['class' => 'col-form-label text-start'],
             'template' => "<div class=\"row mb-3\">\n<div class=\"col-sm-4\">{label}</div>\n<div class=\"col-sm-8\">{input}\n{error}</div></div>",
@@ -33,10 +33,9 @@ $this->registerCssFile('@web/css/login.css');
         'template' => "<div class=\"row mb-3\">\n<div class=\"col-sm-4 offset-sm-0\"></div>\n<div class=\"col-sm-8\">{input} {label}</div>\n</div>",
     ]) ?>
 
-    <!-- Обёртка для кнопки -->
     <div class="text-center mt-3">
         <?= Html::submitButton('Войти', [
-            'class' => 'btn btn-orange w-auto', // w-auto — ширина по содержимому
+            'class' => 'btn btn-orange w-auto',
             'name' => 'login-button'
         ]) ?>
     </div>

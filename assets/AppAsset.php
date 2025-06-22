@@ -31,6 +31,8 @@ class AppAsset extends AssetBundle
         'css/products-carousel.css',
         'css/main.css',
         'css/login.css',
+        'css/register.css',
+
     ];
     public $js = [];
     public $depends = [
