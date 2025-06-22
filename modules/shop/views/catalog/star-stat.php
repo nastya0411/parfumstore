@@ -60,7 +60,7 @@ use yii\widgets\Pjax;
                     </div>
                 </div>
             <?php endfor; ?>
-            <div class="text-ыефке small text-muted mb-2">
+            <div class="text-white small-style  mb-2">
                 Всего оценок: <?= $totalRatings ?>
             </div>
         </div>

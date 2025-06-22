@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     <?php else: ?>
         <div class="mt-5">
-            У Вас пока нет заказов...
+            Заказов не обнаружено
         </div>
     <?php endif ?>
 
