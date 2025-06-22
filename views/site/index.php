@@ -154,7 +154,7 @@ $productChunks = array_chunk($products, 4);
   <div class="custom-categories-wrapper">
     <?= ListView::widget([
       'dataProvider' => $dataProvider,
-      'layout' => "<div class='categories-grid'>{items}</div>",
+      'layout' => "<div class='categories-grid '>{items}</div>",
       'itemOptions' => ['class' => 'item'],
       'itemView' => "item",
     ]) ?>

@@ -1,6 +1,5 @@
 .card {
     border-color: #000 ;
-    background-color: #000000 !important;
 }
 
 .products-grid {
@@ -11,6 +10,7 @@
 }
 
 .product-card {
+    background-color: #1a1a1a !important;
     width: 260px;
     height: 450px;
     cursor: pointer;
@@ -50,8 +50,11 @@
 }
 
 .product-title-link {
-    color: #212529;
-    text-decoration: none;
+  color: #cfcfcf;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.2s;
+  text-decoration: none;
 }
 
 .product-title-link:hover {
@@ -60,12 +63,12 @@
 
 /* Stock info */
 .stock-badge {
-    display: inline-block;
-    background-color: #f8f9fa;
-    border-radius: 50rem;
-    padding: 0.35em 0.65em;
-    font-size: 0.875em;
-    margin-bottom: 1rem;
+  display: inline-block;
+  background-color: #484848;
+  border-radius: 50rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
 }
 
 .stock-icon {
@@ -74,7 +77,7 @@
 }
 
 .stock-text {
-    color: #52575c;
+    color: #cfcfcf;
 }
 
 .stock-count {
@@ -84,13 +87,14 @@
 
 /* Price */
 .price-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
-    font-weight: 700;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #ab572d;
+  margin-bottom: 10px;
 }
 
 .ruble-symbol {
@@ -98,10 +102,29 @@
 }
 
 .product-volume {
-    color: #52575c;
-    font-size: 0.9rem;
+  font-size: 0.85rem;
+  color: #cfcfcf;
+  font-weight: 400;
 }
 
+.product-rating-container-style {
+  margin-left: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-rating-style {
+  display: inline-flex; 
+  gap: 0.3rem;
+  align-items: center;
+  position: relative;
+  max-width: 100%;
+}
+.product-rating-style>span {
+  font-weight: 600;
+  color: #cfcfcf;
+}
 /* Buttons */
 .product-actions {
     margin-top: auto;

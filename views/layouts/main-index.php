@@ -44,9 +44,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <body class="d-flex flex-column h-100 bg-black text-white">
     <?php $this->beginBody() ?>
-    
+
     <?= $this->render("header") ?>
-    
+
     <?php if (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isAdmin): ?>
         <div class="alert alert-danger alert-count">
             Максимальное количество товара уже в корзине!
@@ -54,11 +54,30 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <?php endif ?>
     <main id="main" class="flex-shrink-0" role="main">
         <?= $content ?>
-        
     </main>
 
-    <footer id="footer" class="mt-auto py-3 bg-dark">
+    <footer id="footer">
+        <div class="container py-5">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-4 mb-4">
+                <nav class="footer-nav d-flex flex-wrap gap-4">
+                    <?= Html::a('Главная', ['/site/index'], ['class' => 'footer-link']) ?>
+                    <?= Html::a('О нас', ['/site/about'], ['class' => 'footer-link']) ?>
+                    <?= Html::a('Каталог', ['/shop'], ['class' => 'footer-link']) ?>
+                </nav>
 
+                <div class="footer-contacts">
+                    Контакты: <br>
+                    <?= Html::a('+7 928 282-82-82', 'tel:+79282828282', ['class' => 'footer-contact-link']) ?> <br>
+                    <?= Html::a(
+                        'parfumstore_info@mail.ru',
+                        'https://e.mail.ru/compose/?mailto=parfumstore_info@mail.ru',
+                        ['class' => 'footer-contact-link', 'target' => '_blank', 'rel' => 'noopener noreferrer']
+                    ) ?>
+                </div>
+            </div>
+
+            <div class="footer-copyright">2025 Mon Parfum. Все права защищены</div>
+        </div>
     </footer>
 
     <?php $this->endBody() ?>

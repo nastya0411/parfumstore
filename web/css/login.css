@@ -1,0 +1,39 @@
+.login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202020; /* светло-серый фон */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-wrapper h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-wrapper p {
+    text-align: center;
+    color: #d6d6d6;
+    margin-bottom: 25px;
+}
+
+.login-wrapper .form-control {
+    width: 100%; /* поля занимают всю ширину */
+    margin: 0 auto;
+}
+
+.login-wrapper .form-check-input {
+    margin-top: 5px;
+}
+
+.login-wrapper .btn.btn-orange {
+    min-width: 180px; /* минимальная ширина кнопки */
+    padding-left: 16px;
+    padding-right: 16px;
+}
+

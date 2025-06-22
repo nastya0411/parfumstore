@@ -3,6 +3,11 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* Добавляем общий transition для всех карточек */
+.categories-grid:hover .category-card {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
 .category-card {
   position: relative;
   padding: 50px 14px;
@@ -12,19 +17,26 @@
   text-decoration: none;
   color: inherit;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease; /* Улучшаем плавность */
 }
 
-.category-card:hover {
-  transform: translateY(-2px);
+/* При наведении на сетку, все карточки становятся полупрозрачными */
+.categories-grid:hover .category-card {
+  opacity: 0.4;
+}
+
+/* Но та карточка, на которую навели, остается яркой и увеличивается */
+.categories-grid .category-card:hover {
+  transform: scale(1.1) translateY(-2px); /* Объединяем scale и translateY */
+  opacity: 1 !important; /* Переопределяем opacity */
   color: #ffffff;
   font-weight: 700;
   box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transform: scale(1.1);
-  opacity: 1.4;
+  z-index: 1; /* Чтобы увеличенная карточка была поверх остальных */
 }
 
+/* Остальные стили остаются без изменений */
 .category-card .card-img-top {
   width: 100%;
   object-fit: cover;
@@ -39,14 +51,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 0 17px; */
 }
 
 .card-text:last-child {
   background: rgba(0, 0, 0, 0.525);
   height: 80px;
   width: 100%;
-  max-width: 384px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +65,7 @@
   font-size: 23px;
 }
 
-/* Адаптация */
+/* Адаптация (без изменений) */
 @media (max-width: 2000px) {
   .categories-grid {
     grid-template-columns: repeat(4, 1fr);

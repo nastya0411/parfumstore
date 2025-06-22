@@ -73,17 +73,39 @@
 }
 
 .navigation-style {
-  color: rgba(255, 255, 255, 0.7) !important;
-  background-color: transparent !important;
-  transition: all 0.3s ease !important;
-  font-size: larger;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+    font-size: larger;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease;
+    outline: none;
+    display: inline-block;
+    padding: 8px 12px;
 }
 
-.navigation-style:hover {
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-  text-decoration: none !important;
-  transform: translateY(-1px);
+.navigation-style:hover,
+.navigation-style:focus,
+.navigation-style:focus-visible {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.navigation-style::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+}
+
+.navigation-style:hover::after,
+.navigation-style:focus::after,
+.navigation-style:focus-visible::after {
+    width: 100%;
 }
 
 .bg-block {
@@ -459,4 +481,61 @@ a {
   color: #cfcfcf;
   margin-bottom: 40px;
   line-height: 1.5;
+}
+
+/* === Цвета === */
+:root {
+    --bs-success: #ab572d; 
+    --bs-danger: #d32f2f;  
+}
+
+/* === Валидация полей === */
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: var(--bs-success);
+    padding-right: calc(1.5em + 0.75rem); /* место для иконки валидации */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23ff9800' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.67z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: var(--bs-danger);
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23d32f2f' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linecap='round' stroke-width='2' d='M3.75 3.75l4.5 4.5m0-4.5l-4.5 4.5'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback::before,
+.valid-feedback::before {
+    content: none;
+}
+
+
+.form-control:focus {
+    border-color: var(--bs-success);
+    box-shadow: 0 0 0 0.2rem rgba(255, 152, 0, 0.25);
+}
+
+
+.form-check-input.is-valid ~ .form-check-label::after {
+    background-color: var(--bs-success);
+}
+
+.form-check-input.is-invalid ~ .form-check-label::after {
+    background-color: var(--bs-danger);
+}
+
+
+.valid-feedback {
+    color: var(--bs-success);
+}
+
+.invalid-feedback {
+    color: var(--bs-danger);
 }

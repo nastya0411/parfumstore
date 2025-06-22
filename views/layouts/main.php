@@ -42,7 +42,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <?php $this->head() ?>
 </head>
 
-<body class="d-flex flex-column h-100 bg-style text-white">
+<body class="d-flex flex-column h-100 bg-black text-white">
     <?php $this->beginBody() ?>
 
     <?= $this->render("header") ?>
