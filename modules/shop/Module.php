@@ -2,6 +2,9 @@
 
 namespace app\modules\shop;
 
+use Yii;
+use yii\filters\AccessControl;
+
 /**
  * shop module definition class
  */
@@ -11,6 +14,22 @@ class Module extends \yii\base\Module
      * {@inheritdoc}
      */
     public $controllerNamespace = 'app\modules\shop\controllers';
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+                'denyCallback' => fn() => Yii::$app->response->redirect('/'),
+            ],
+        ];
+    }
 
     /**
      * {@inheritdoc}
