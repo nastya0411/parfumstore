@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -25,6 +26,8 @@ use Yii;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+
+    public ?string $newPassword;
     /**
      * {@inheritdoc}
      */
@@ -41,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['login', 'password', 'full_name', 'email', 'phone', 'role_id'], 'required'],
             [['role_id'], 'integer'],
-            [['login', 'password', 'full_name', 'email', 'phone', 'auth_key'], 'string', 'max' => 255],
+            [['login', 'password', 'full_name', 'email', 'phone', 'auth_key', "newPassword"], 'string', 'max' => 255],
             [['login'], 'unique'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
@@ -83,10 +86,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(Order::class, ['user_id' => 'id']);
     }
- 	   public function getStarsUsers()
-		   {
-		       return $this->hasMany(StarsUser::class, ['user_id' => 'id']);
-		   }
+    public function getStarsUsers()
+    {
+        return $this->hasMany(StarsUser::class, ['user_id' => 'id']);
+    }
     /**
      * Gets query for [[Role]].
      *
@@ -140,18 +143,22 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function findByUsername(string $login): null|object
     {
-        return self::findOne(['login' =>$login]);
-
+        return self::findOne(['login' => $login]);
     }
 
     public function validatePassword(string $password): bool
     {
         return Yii::$app->security->validatePassword($password, $this->password);
-        
     }
 
     public function getIsAdmin(): bool
     {
         return $this->role_id == Role::getRoleId('admin');
-    } 
+    }
+
+
+    public function setPassword(): void
+    {
+        $this->password == Yii::$app->security->generatePasswordHash($this->newPassword);
+    }
 }

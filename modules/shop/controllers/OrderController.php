@@ -103,6 +103,7 @@ class OrderController extends Controller
         $model = new Order();
         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
         $model->user_id = Yii::$app->user->id;
+        $model->phone = $model->user->phone;
         // $model->status_id = Status::getStatusId('Новый');
         $model->cost = 0;
 
@@ -130,16 +131,21 @@ class OrderController extends Controller
                         // VarDumper::dump($cart->attributes, 10, true);    
                     }
                     // $model->status_id = Status::getStatusId('Создан');
-                    $model->save();
+                    // $model->save();
                 } else {
                     VarDumper::dump($model->errors, 10, true);
                     die;
                 }
 
                 $cart->delete();
-                return $isPaymentOnDelivery
-                ? $this->redirect(['view', 'id' => $model->id])
-                : $this->redirect(['payment', 'id' => $model->id]);
+                if ($isPaymentOnDelivery) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    // dd($model->payType->isQR);
+                    return $model->payType->isQR
+                        ? $this->redirect(['qr-payment', 'id' => $model->id])
+                        : $this->redirect(['payment', 'id' => $model->id]);
+                }
 
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -176,18 +182,45 @@ class OrderController extends Controller
     public function actionPayment($id)
     {
         $model = $this->findModel($id);
-        $model->scenario = 'payment'; 
+        $model->scenario = 'payment';
         return $this->render('payment', ['model' => $model]);
     }
-    
+
     public function actionPaymentSuccess($id)
     {
         $model = $this->findModel($id);
         $model->status_id = Status::getStatusId('Оплачен онлайн');
         $model->save();
-        
+
         Yii::$app->session->setFlash('success', 'Платеж успешно проведен!');
         return $this->redirect(['view', 'id' => $model->id]);
+    }
+
+
+    public function actionQrPayment($id)
+    {
+        $model = $this->findModel($id);
+        return $this->render('qr-payment', ['model' => $model]);
+    }
+
+    public function actionQrPaymentEnd($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load($this->request->post())) {
+            $model->status_id = Status::getStatusId("Оплачен онлайн");
+            $model->save();
+        }
+        return $this->render('qr-payment-end', ['model' => $model]);
+    }
+
+    public function actionQrPaymentHook($id)
+    {
+        $model = $this->findModel($id);
+        return $this->asJson([
+            "status" => $model->status_id == Status::getStatusId("Оплачен онлайн")
+        ]);
+
+        // return $this->render('qr-payment', ['model' => $model]);
     }
 
     /**
