@@ -13,11 +13,12 @@ $this->registerCssFile('@web/css/shop/payment.css');
 <div class="payment-page">
     <div class="payment-card">
         <div class="payment-header bg-orange ">
-            <h2 class="payment-title"><?= 'Оплата заказа № ' . $model->id . ' от ' .
-                                            Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s') ?></h2>
+            <h2 class="payment-title">
+                <?= 'Оплата заказа № ' . $model->id . ' от ' .
+                    Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s') ?>
+            </h2>
         </div>
         <div class="payment-body">
-
             <div class="payment-details">
                 <h4 class="payment-details-title">Детали платежа</h4>
                 <div class="payment-details-row">
@@ -46,7 +47,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
                     ],
                 ]); ?>
 
-                <div class="card-preview mb-4 bg-black"  style="max-width: 350px; margin: 0 auto;">
+                <div class="card-preview mb-4 bg-black" style="max-width: 350px; margin: 0 auto;">
                     <div class="card-logo">
                         <img src="https://img.icons8.com/color/48/000000/visa.png" id="card-type-img" class="card-logo-img">
                     </div>
