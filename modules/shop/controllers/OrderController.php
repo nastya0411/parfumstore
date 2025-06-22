@@ -104,6 +104,7 @@ class OrderController extends Controller
         $dataProvider = (new OrderSearch())->orderCreate($cart_id);
         $model->user_id = Yii::$app->user->id;
         $model->phone = $model->user->phone;
+        $model->address = $model->user->address;
         // $model->status_id = Status::getStatusId('Новый');
         $model->cost = 0;
 
