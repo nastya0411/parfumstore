@@ -18,11 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="d-flex justify-content-start gap-2 ">
-        <?= Html::a('Назад', (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin)
-            ? ['/admin']
-            : ['/account'], ['class' => 'btn btn-orange mb-3']) ?>
 
+        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin): ?>
+            <?= Html::a('Назад', ['/account'], ['class' => 'btn btn-orange mb-3']) ?>
+
+        <?php endif ?>
         <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsAdmin()): ?>
+            <?= Html::a('Назад', ['/admin'], ['class' => 'btn btn-orange mb-3']) ?>
+
             <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
                 ? Html::a('Выдача заказа', ['apply', 'id' => $model->id], [
                     'class' => 'btn btn-black text-black',
@@ -115,7 +118,14 @@ $this->params['breadcrumbs'][] = $this->title;
             // ],
             [
                 'attribute' => 'status_id',
-                'value' => Status::getStatuses()[$model->status_id]
+                "format" => "html",
+                'value' => "<div class='d-flex gap-3 align-items-center'>"
+                    . Status::getStatuses()[$model->status_id]
+                    . ($model->payType->isQR &&
+                        Status::getStatusId("Оплачен онлайн") != $model->status_id
+                        ? Html::a('Оплатить по QR', ['qr-payment', "id" => $model->id], ['class' => 'btn btn-orange'])
+                        : "")
+                    . "</div>",
             ],
             'amount',
             'cost',
