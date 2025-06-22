@@ -19,6 +19,7 @@ $this->title = 'Редактирование профиля';
     <?= $form->field($model, 'phone')->widget(\yii\widgets\MaskedInput::class, [
         'mask' => '+7(999)-999-99-99',
     ]) ?>
+    <?= $form->field($model, 'address')->textInput(["value" => "г. Санкт-Петербург, ул. Ленина, д. 2, кв. 45"]) ?>
     <?= $form->field($model, 'email') ?>
 
     <div class="form-group">

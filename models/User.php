@@ -26,8 +26,8 @@ use Yii;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    public ?string $newPassword = null;
 
-    public ?string $newPassword;
     /**
      * {@inheritdoc}
      */
@@ -44,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             [['login', 'password', 'full_name', 'email', 'phone', 'role_id'], 'required'],
             [['role_id'], 'integer'],
-            [['login', 'password', 'full_name', 'email', 'phone', 'auth_key', "newPassword"], 'string', 'max' => 255],
+            [['login', 'password', 'full_name', 'email', 'phone', 'auth_key', "newPassword", "address", "avatar"], 'string', 'max' => 255],
             [['login'], 'unique'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
@@ -62,6 +62,9 @@ class User extends ActiveRecord implements IdentityInterface
             'full_name' => 'ФИО',
             'email' => 'Адрес электронной почты',
             'phone' => 'Телефон',
+            'address' => 'Адрес',
+            'avatar' => '"Автарка" пользователя',
+            'newPassword' => 'Пароль',
             'role_id' => 'Role ID',
             'auth_key' => 'Auth Key',
         ];
