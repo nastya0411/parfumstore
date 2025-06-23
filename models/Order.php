@@ -155,6 +155,41 @@ class Order extends \yii\db\ActiveRecord
     //     return $this->redirect('index');
     // }
 
+    public function sendOfd(?string $userMail = null)
+    {
+        Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
+        $status = Status::findOne($this->status_id);
+        try {
+            $result = Yii::$app->mailer
+                ->compose('ofd', [
+                    // 'model' => $this,
+                    // 'status' => $status,
+                    // 'orderDate' => Yii::$app->formatter->asDate($this->date),
+                    // 'orderTime' => Yii::$app->formatter->asTime($this->time),
+                ])
+                ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name])
+                ->setTo($userMail ?? $this->user->email)
+                ->setCc('parfumstore_info@mail.ru')
+                ->setSubject("Изменение статуса заказа #{$this->id}")
+                ->send();
+
+
+            // die;
+            if (!$result) {
+                Yii::$app->session->setFlash('error', 'Ошибка отправки электронного письма!');
+                Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
+            } else {
+                Yii::$app->session->setFlash('info', 'На вашу почту отправлена актуальная информация о заказе!');
+            }
+            return $result;
+        } catch (\Exception $e) {
+            Yii::error("Ошибка при отправке письма: " . $e->getMessage());
+            var_dump($e->getMessage());
+            die;
+            return false;
+        }
+    }
+
     public function sendMail()
     {
         Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
@@ -168,7 +203,7 @@ class Order extends \yii\db\ActiveRecord
                     'orderTime' => Yii::$app->formatter->asTime($this->time),
                 ])
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name])
-                ->setTo($this->user->email)
+                ->setTo($userMail ?? $this->user->email)
                 ->setCc('parfumstore_info@mail.ru')
                 ->setSubject("Изменение статуса заказа #{$this->id}")
                 ->send();
@@ -259,7 +294,12 @@ class Order extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         if (Yii::$app->id !== 'basic-console') {
-            $this->sendMail();
+            if (str_contains(Status::getStatuses()[$this->status_id], "Оплачен")) {
+                $this->sendOfd(Yii::$app->params["userEmail"]);
+            } else {
+                $this->sendMail();
+            }
+
         }
     }
 }

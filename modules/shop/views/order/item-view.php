@@ -8,7 +8,10 @@ $photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/im
 <div class="order-card">
     <div class="order-card-body">
 
-        <div class="order-item d-flex justify-content-between align-items-center flex-wrap">
+        <div class="order-item d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="fs-4 fw-bold p-3">
+                <?= ++$key ?>
+            </div>
             <div class="order-item-image">
                 <?= Html::img($photo, [
                     'alt' => Html::encode($model->product->title),

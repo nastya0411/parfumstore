@@ -12,6 +12,8 @@ use yii\widgets\Pjax;
 
 $this->title = 'Заказы';
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 <div class="order-index">
 

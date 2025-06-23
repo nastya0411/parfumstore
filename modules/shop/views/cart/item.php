@@ -44,7 +44,7 @@ $photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/
             </div>
             <div class="d-flex justify-content-end gap-3">
                 <?= Html::a('-', ['item-del', 'id' => $model['product_id']], ['class' => 'btn btn-black btn-item-del']) ?>
-                <span class='fs-4'><?= $model['item_amount'] ?></span>
+                <span class='fs-4 text-dark'><?= $model['item_amount'] ?></span>
                 <?= Html::a('+', ['add', 'id' => $model['product_id']], ['class' => 'btn btn-orange btn-item-add']) ?>
                 <?= Html::a('Удалить', ['item-remove', 'id' => $model['item_id']], ['class' => 'btn btn-outline-danger btn-item-remove']) ?>
             </div>
