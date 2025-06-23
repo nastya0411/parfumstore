@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <?= Html::a('Назад', $_SERVER['HTTP_REFERER'], ['class' => 'btn btn-outline-light']) ?>
+        <?= Html::a('Назад', $_SERVER['HTTP_REFERER'], ['class' => 'btn btn-black-style']) ?>
     </div>
 
     <div class="container mt-4">
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]) ?>
                     <?php elseif (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin): ?>
                         <?= Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-                            'class' => 'btn btn-orange btn-add-cart w-100 py-2',
+                            'class' => 'btn btn-orange-style btn-add-cart w-100 py-2',
                             'data-pjax' => 0,
                         ]) ?>
                     <?php endif ?>

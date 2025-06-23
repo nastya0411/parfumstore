@@ -25,7 +25,7 @@ $sum = 0;
 
         <?php if (!Yii::$app->user->isGuest): ?>
             <?php if (Yii::$app->user->identity->getIsAdmin()): ?>
-                <?= Html::a('Назад', ['/admin'], ['class' => 'btn btn-orange-style mb-3']) ?>
+                <?= Html::a('Назад', ['/admin'], ['class' => 'btn btn-black-style mb-3']) ?>
                 <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
                     ? Html::a('Выдача заказа', ['apply', 'id' => $model->id], [
                         'class' => 'btn btn-black text-black',
@@ -88,7 +88,7 @@ $sum = 0;
                 }
                 ?>
             <?php else: ?>
-                <?= Html::a('Назад', ['/account'], ['class' => 'btn btn-orange-style mb-3']) ?>
+                <?= Html::a('Назад', ['/account'], ['class' => 'btn btn-black-style mb-3']) ?>
             <?php endif; ?>
         <?php endif; ?>
 
@@ -123,7 +123,7 @@ $sum = 0;
                     . Status::getStatuses()[$model->status_id]
                     . ($model->payType->isQR &&
                         Status::getStatusId("Оплачен онлайн") != $model->status_id
-                        ? Html::a('Оплатить по QR', ['qr-payment', "id" => $model->id], ['class' => 'btn btn-orange'])
+                        ? Html::a('Оплатить по QR', ['qr-payment', "id" => $model->id], ['class' => 'btn btn-orange-style'])
                         : "")
                     . "</div>",
             ],

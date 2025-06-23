@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if ($dataProvider->totalCount): ?>
         <div class="d-flex justify-content-end mb-3">
-            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-danger btn-cart-clear', 'data-pjax' => "0"]) ?>
+            <?= Html::a('Очистить корзину', ['clear', 'id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-red-style
+             btn-cart-clear', 'data-pjax' => "0"]) ?>
         </div>
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
@@ -45,7 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
                 </span>
             </div>
-            <?= Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn btn-orange btn-order-create']) ?>
+            <?= Html::a('Оформить заказ', ['order/create', 'cart_id' => $dataProvider->models[0]['cart_id']], ['class' => 'btn
+             btn-orange-style btn-order-create']) ?>
         </div>
     <?php else: ?>
         <div class="alert alert-primary alert-cart-empty" role="alert">

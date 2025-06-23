@@ -329,6 +329,24 @@
   transform: translateY(-2px);
 }
 
+.btn-black-style {
+  background-color: #3f3f3f;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-black-style:hover {
+  border-color: #e4e3e3 !important;
+  color: white;
+  background-color: #0d0d0d;
+}
+
 .form-check-input:checked {
   border-color: #ab572d;
   background-color: #ab572d
@@ -590,6 +608,13 @@ a {
   --bs-alert-link-color: #b93e00;
 }
 
+.alert-info {
+  --bs-alert-color: #ffa81c; 
+  --bs-alert-bg: #f4cd90;
+  --bs-alert-border-color: #ffa81c; 
+  --bs-alert-link-color: #ffa81c;
+}
+
 
 .btn-orange-style {
   background-color: #ab572d;
@@ -609,6 +634,24 @@ a {
 }
 
 
+.btn-red-style {
+  background-color: #9d002c;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.btn-red-style:hover {
+  border-color: #e4e3e3 !important;
+  color: white;
+  background-color: #0d0d0d;
+}
+
+
 .btn-show-style {
   background-color: #ab572d;
   color: white;
@@ -622,4 +665,12 @@ a {
 
 .btn-show-style:hover {
   background-color: #000000;
+}
+
+.border-orange-style{
+  border-color: #ab572d !important;
+}
+
+.text-orange{
+  color: #ab572d;
 }

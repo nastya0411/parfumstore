@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($searchModel, 'category_id')->dropDownList($categories, ['prompt' => "Выберете категорию"]) ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Поиск', ['class' => 'btn btn-orange']) ?>
-            <?= Html::a('Сброс', ['index'], ['class' => 'btn btn-black']) ?>
+            <?= Html::submitButton('Поиск', ['class' => 'btn btn-orange-style']) ?>
+            <?= Html::a('Сброс', ['index'], ['class' => 'btn btn-black-style']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

@@ -36,7 +36,7 @@ use yii\helpers\Url;
     <div>
       <?= (!Yii::$app->user->isGuest && !Yii::$app->user->identity?->isAdmin)
         ? Html::a('В корзину', ['cart/add', 'id' => $model->id], [
-          'class' => 'btn btn-outline-success w-100 btn-add-cart',
+          'class' => 'btn btn-orange-style w-100 btn-add-cart',
           'data-pjax' => 0,
         ])
         : "" ?>
