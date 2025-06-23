@@ -23,9 +23,15 @@ class Module extends \yii\base\Module
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?'],                        
                         'controllers' => ['shop/catalog', 'shop/category']
                     ],
+                    [
+                        'allow' => true,
+                        'roles' => ['?'],                        
+                        "actions" => ["qr-payment-end"],
+                        'controllers' => ['shop/order']
+                    ],                    
                     [
                         'allow' => true,
                         'roles' => ['@'],
