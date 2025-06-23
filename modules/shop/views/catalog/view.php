@@ -144,3 +144,4 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $this->registerJsFile("/js/product.js", ["depends" => JqueryAsset::class]);
 ?>
+

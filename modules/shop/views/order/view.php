@@ -8,6 +8,8 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Order $model */
 
+$this->registerCssFile('@web/css/view-style.css', ['depends' => [\yii\bootstrap5\BootstrapAsset::class]]); 
+
 $this->title = 'Заказ № ' . $model->id . ' от ' .
     Yii::$app->formatter->asDatetime($model->created_at, 'php:d.m.Y H:i.s');
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
@@ -19,14 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="d-flex justify-content-start gap-2 ">
 
-        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->isAdmin): ?>
-            <?= Html::a('Назад', ['/account'], ['class' => 'btn btn-orange mb-3']) ?>
-
-        <?php endif ?>
-        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsAdmin()): ?>
-            <?= Html::a('Назад', ['/admin'], ['class' => 'btn btn-orange mb-3']) ?>
-
-            <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
+<?php if (!Yii::$app->user->isGuest): ?>
+    <?php if (Yii::$app->user->identity->getIsAdmin()): ?>
+        <?= Html::a('Назад', ['/admin'], ['class' => 'btn btn-orange-style mb-3']) ?>
+         <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
                 ? Html::a('Выдача заказа', ['apply', 'id' => $model->id], [
                     'class' => 'btn btn-black text-black',
                     'data-method' => 'post',
@@ -87,14 +85,18 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
             }
             ?>
-        <?php endif; ?>
+    <?php else: ?>
+        <?= Html::a('Назад', ['/account'], ['class' => 'btn btn-orange-style mb-3']) ?>
+    <?php endif; ?>
+<?php endif; ?>
+
+           
     </div>
 </div>
 
-
-<div class="bg-white text-black">
-
+<div class=" text-black detail-view-container">
     <?= DetailView::widget([
+        'options' => ['class' => 'detail-view table-borderless'],
         'model' => $model,
         'attributes' => [
             'id',
@@ -112,10 +114,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'time',
                 'value' => Yii::$app->formatter->asTime($model->time, 'php:H:i')
             ],
-            // [
-            //     'attribute' => 'pay_type_id',
-            //     'value' => PayType::getPayTypesOnline()[$model->pay_type_id]
-            // ],
             [
                 'attribute' => 'status_id',
                 "format" => "html",
@@ -134,16 +132,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'ntext',
                 'value' => $model->other_reason,
                 'visible' => (bool)$model->other_reason,
-
             ],
-
-
-            // 'pay_receipt',
         ],
     ]) ?>
 </div>
 
-<div>
+<div class="mt-4 ml-5">
     Состав заказа:
 </div>
 

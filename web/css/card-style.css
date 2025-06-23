@@ -1,0 +1,80 @@
+.card {
+    border: none;
+    border-radius: 15px; /* Теперь такой же, как у кнопки */
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 8px solid linear-gradient(180deg, #a74311, #ab572d);
+    padding-left: 0;
+}
+
+/* Градиентная линия слева */
+.card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 10px;
+    background: linear-gradient(90deg, #a74311, #ab572d);
+    z-index: 1;
+    transition: width 0.3s ease;
+}
+
+.card:hover::before {
+    width: 15px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: transparent !important;
+    color: #fff;
+    font-weight: 600;
+    padding: 1rem 1.5rem;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(135deg, #a74311, #ab572d);
+    border-bottom: none;
+}
+
+.card-body {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+    color: #2c2c2c;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+}
+
+.card-text {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-show-style {
+    background: linear-gradient(45deg, #a74311, #ab572d);
+    border: none;
+    padding: 0.45rem 1.2rem;
+    font-weight: 600;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 111, 97, 0.2);
+}
+
+.btn-show-style:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 111, 97, 0.3);
+    background: linear-gradient(45deg, #a74311, #ab572d);
+}

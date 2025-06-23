@@ -582,3 +582,45 @@ a {
   outline: none; 
   box-shadow: 0 0 0 0.2rem rgba(171, 87, 45, 0.3) !important;
 }
+
+.alert-success {
+  --bs-alert-color: #c04000; 
+  --bs-alert-bg: #facbb3f0;
+  --bs-alert-border-color: #b04b19ff; 
+  --bs-alert-link-color: #b93e00;
+}
+
+
+.btn-orange-style {
+  background-color: #ab572d;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.btn-orange-style:hover {
+  border-color: #e4e3e3 !important;
+  color: white;
+  border-width: 2px;
+  background-color: #0d0d0d;
+}
+
+
+.btn-show-style {
+  background-color: #ab572d;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.btn-show-style:hover {
+  background-color: #000000;
+}

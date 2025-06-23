@@ -2,50 +2,47 @@
 
 use yii\bootstrap5\Html;
 
-
 $photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/img/no_photo.jpg';
 ?>
 
-<div class="card mb-3 text-orange">
-    <h5 class="card-header fw-bold"><? $model->product->title ?></h5>
-    <div class="card-body">
-        <!-- <h5 class="card-title">Состав вашей корзины</h5> -->
-        <div class="d-flex justify-content-between align-items-center gap-5">
-            <div>
-                <img src="<?= $photo ?>"
-                    class="card-img-top"
-                    alt="<?= Html::encode($model->product->title) ?>"
-                    style="height: 80px; width: auto; object-fit: contain;">
+<div class="order-card">
+    <div class="order-card-body">
+
+        <div class="order-item d-flex justify-content-between align-items-center flex-wrap">
+            <div class="order-item-image">
+                <?= Html::img($photo, [
+                    'alt' => Html::encode($model->product->title),
+                    'class' => 'order-img',
+                ]) ?>
             </div>
-            <div class="card-text d-flex flex-column align-items-start">
+
+            <!-- Блок с центрированным текстом -->
+            <div class="order-item-details text-center flex-fill">
                 <?= Html::a(
                     Html::encode($model->product->title),
                     ['/shop/catalog/view', 'id' => $model->product->id],
-                    ['class' => 'text-decoration-none fs-5']
+                    ['class' => 'text-decoration-none order-title d-block']
                 ) ?>
-                <div class="my-2 fs-6 fw-bold">
+                <div class="order-volume my-2 fw-bold d-block">
                     <?= $model->product->volume ?> мл
                 </div>
             </div>
 
-            <div class="my-2 fs-5 fw-bold flex-fill d-flex justify-content-end">
+            <div class="order-item-price d-flex justify-content-end">
                 <?= Yii::$app->formatter->asDecimal($model->product->price, 2) ?> ₽
             </div>
         </div>
 
-        <div class="d-flex justify-content-between gap-3 mt-3 fs-5">
-
-
-            <div>Итого:</div>
+        <div class="order-summary d-flex justify-content-between mt-3 pt-3 border-top">
             <div>
-                количество -
-                <span class="fw-bold"><?= $model->amount ?></span>
-                <span class="fs-6">шт.</span>
+                Количество:
+                <span class="fw-bold ms-1"><?= $model->amount ?></span>
+                <span class="ms-1">шт.</span>
             </div>
-            <div class="fw-bold flex-fill d-flex justify-content-end fs-4 text-warning">
+            <div class="order-total fw-bold fs-4">
                 <?= Yii::$app->formatter->asDecimal($model->cost, 2) ?> ₽
             </div>
-
         </div>
+
     </div>
 </div>

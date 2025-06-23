@@ -14,16 +14,6 @@ use yii\widgets\Pjax;
 
 AppAsset::register($this);
 
-// if (!Yii::$app->user->isGuest) {
-//     if (Yii::$app->user->identity->isAdmin) {
-//         $this->registerCssFile('@web/css/tw.css');
-//     } else {
-//         $this->registerCssFile('@web/css/tw.css');
-//     }
-// } else {
-//     $this->registerCssFile('@web/css/site.css');
-// }
-
 $this->registerCsrfMetaTags();
 
 $this->registerCsrfMetaTags();
@@ -63,10 +53,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <?= $content ?>
         </div>
     </main>
-
-    <footer id="footer" class="mt-auto py-3 bg-dark">
-
-    </footer>
+    
 
     <?php $this->endBody() ?>
 </body>
