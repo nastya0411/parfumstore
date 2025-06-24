@@ -44,8 +44,8 @@ $productChunks = array_chunk($products, 4);
     'class' => 'overlay-photo',
   ]) ?>
 </div>
-</div>
-<div class="container">
+
+<div class="container d-lg-block  d-none">
   <div id="productTop8" class="carousel slide " data-bs-ride="carousel">
     <h1 class="title-style text-center">Хиты продаж</h1>
     <div class="carousel-inner">
@@ -117,7 +117,7 @@ $productChunks = array_chunk($products, 4);
     </button>
   </div>
 </div>
-</div>
+
 
 <div class="about-main-grid">
   <img src="/web/img/bottleAbout2.png" class="about-grid-image">

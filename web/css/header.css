@@ -13,7 +13,7 @@
     height: 24px;
 }
 
-#cart-item-count {
+#cart-item-count { 
     position: absolute;
     top: -8px;
     right: -16px;

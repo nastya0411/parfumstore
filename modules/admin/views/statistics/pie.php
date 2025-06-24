@@ -8,16 +8,16 @@ use yii\web\View;
 
 $this->registerCssFile('@web/css/statistics.css', ['depends' => [\yii\web\YiiAsset::class]]);
 
-// Более интересная палитра серо-оранжевых оттенков
+// Серо-оранжевые оттенки для разных секторов
 $backgroundColors = [
-    'rgba(255, 165, 75, 0.8)',
-    'rgba(250, 145, 60, 0.8)',
-    'rgba(240, 130, 50, 0.8)',
-    'rgba(225, 115, 40, 0.8)',
-    'rgba(210, 100, 30, 0.8)',
-    'rgba(195, 85, 25, 0.8)',
-    'rgba(180, 75, 20, 0.8)',
-    'rgba(160, 65, 15, 0.8)',
+    'rgba(250, 160, 80, 0.8)',
+    'rgba(245, 140, 70, 0.8)',
+    'rgba(235, 125, 60, 0.8)',
+    'rgba(220, 110, 50, 0.8)',
+    'rgba(200, 95, 40, 0.8)',
+    'rgba(180, 85, 35, 0.8)',
+    'rgba(160, 75, 30, 0.8)',
+    'rgba(140, 65, 25, 0.8)',
 ];
 
 $borderColors = [
@@ -32,43 +32,27 @@ $borderColors = [
 ];
 ?>
 
-<div class="chart-container">
+<div class="chart-container-pie">
     <?= ChartJs::widget([
         'type' => 'pie',
         'options' => [
-            'height' => 300,
-            'width' => '100%',
+            'height' => 420,
+            'width' => 900,
             'plugins' => [
                 'legend' => [
                     'labels' => [
-                        'color' => '#444',
-                        'font' => ['size' => 13],
-                        'padding' => 15,
-                    ],
-                    'position' => 'right',
-                    'align' => 'center',
+                        'color' => '#333',
+                        'font' => [
+                            'size' => 14
+                        ]
+                    ]
                 ],
                 'tooltip' => [
-                    'backgroundColor' => 'rgba(30, 30, 30, 0.9)',
+                    'backgroundColor' => 'rgba(50, 50, 50, 0.8)',
                     'titleColor' => '#fff',
-                    'bodyColor' => '#fff',
-                    'borderWidth' => 1,
-                    'borderColor' => 'rgba(255, 255, 255, 0.3)',
-                    'padding' => 10,
-                    'boxPadding' => 5,
-                ],
-                'title' => [
-                    'display' => true,
-                    'text' => 'Распределение заказов по категориям',
-                    'color' => '#333',
-                    'font' => ['size' => 16],
-                    'padding' => 20
+                    'bodyColor' => '#fff'
                 ]
-            ],
-            'hover' => [
-                'mode' => 'nearest',
-                'intersect' => true
-            ],
+            ]
         ],
         'data' => [
             'labels' => $labels,
@@ -79,25 +63,18 @@ $borderColors = [
                     'borderColor' => $borderColors,
                     'borderWidth' => 2,
                     'hoverBorderColor' => "#ffffff",
-                    'hoverBorderWidth' => 3,
                     'data' => array_map('intval', $data),
                 ]
             ]
         ],
         'clientOptions' => [
             'maintainAspectRatio' => false,
-            'animation' => [
-                'animateRotate' => true,
-                'animateScale' => true,
-                'duration' => 1000,
-                'easing' => 'easeOutQuart'
-            ],
             'plugins' => [
-                'tooltip' => [
-                    'enabled' => true
-                ],
-                'legend' => [
-                    'display' => true
+                'title' => [
+                    'display' => true,
+                    'text' => 'Распределение заказов по категориям',
+                    'font' => ['size' => 18],
+                    'color' => '#444'
                 ]
             ]
         ]

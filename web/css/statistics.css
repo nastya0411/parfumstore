@@ -14,6 +14,14 @@
     padding: 20px;
 }
 
+.chart-container-pie {
+    width: 700px; 
+    max-width: 95%;
+    height: 00px; 
+    margin: 0 auto;
+    padding: 20px;
+}
+
 canvas#paymentTypeChart {
     max-width: 100% !important;
     height: 600px !important;
@@ -25,3 +33,4 @@ canvas#paymentTypeChart {
     margin: 0 auto;
     padding: 20px;
 }
+
