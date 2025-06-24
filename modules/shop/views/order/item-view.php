@@ -1,8 +1,8 @@
 <?php
 
 use yii\bootstrap5\Html;
-
-$photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/img/no_photo.jpg';
+//dd($model->product?->photos->photo);
+$photo = $model->product?->photos ? '/img/' . $model->product->photos[0]->photo : '/img/no_photo.jpg';
 ?>
 
 <div class="order-card">
