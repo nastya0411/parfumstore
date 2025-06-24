@@ -33,7 +33,7 @@ $this->title = 'Редактирование профиля';
     </div>
 
     <div class="form-group mt-3">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-orange']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-orange-style']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -7,7 +7,7 @@ use yii\web\JqueryAsset;
 /** @var yii\web\View $this */
 /** @var app\models\Order $model */
 
-$this->registerCssFile('@web/css/shop/payment.css');
+$this->registerCssFile('@web/css/payment.css');
 ?>
 
 <div class="payment-page">
@@ -106,7 +106,7 @@ $this->registerCssFile('@web/css/shop/payment.css');
 
                 <div class="payment-submit-container mt-4">
                     <?= Html::submitButton('Оплатить ' . $model->cost . ' ₽', [
-                        'class' => 'btn btn-dark text-orange w-100',
+                        'class' => 'btn btn-orange-style w-100',
                         'id' => 'submit-payment'
                     ]) ?>
                 </div>

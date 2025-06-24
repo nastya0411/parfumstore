@@ -17,7 +17,7 @@ use yii\bootstrap5\Html;
     <p class="card-text">Количество товаров: <?= $model->amount ?> </p>
     <p class="card-text">Сумма заказа: <?= $model->cost ?> Р </p>
     <div class="d-flex justify-content-end">
-      <?= Html::a('Просмотреть заказ',['/shop/order/view', 'id' => $model->id],['class' => 'btn btn-show-style text-white']) ?>
+      <?= Html::a('Просмотреть заказ',['/shop/order/view', 'id' => $model->id],['class' => 'btn btn-shows-style  fw-semibold text-bold']) ?>
     </div>
   </div>
 </div>

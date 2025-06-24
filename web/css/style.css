@@ -685,3 +685,21 @@ a {
 .text-orange{
   color: #ab572d;
 }
+
+.btn-pay {
+  background-color: #ab572d;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.btn-pay:hover {
+  border-color: #ab572d !important;
+  border-width: 2px;
+  color: #ab572d;
+  background-color: #ffffff;
+}
