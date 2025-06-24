@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+            'tableOptions' => [
+        'class' => 'table table-bordered', // добавляет границы, если нужно
+        'style' => 'background-color: white; color: black;'
+    ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 

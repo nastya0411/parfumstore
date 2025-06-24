@@ -29,24 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); 
     ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'pager' => [
-            'class' => \yii\bootstrap5\LinkPager::class
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'pager' => [
+        'class' => \yii\bootstrap5\LinkPager::class
+    ],
+    'tableOptions' => [
+        'class' => 'table table-bordered', // добавляет границы, если нужно
+        'style' => 'background-color: white; color: black;'
+    ],
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'id',
+        'title',
+        [
+            'class' => ActionColumn::className(),
+            'urlCreator' => function ($action, Note $model, $key, $index, $column) {
+                return Url::toRoute([$action, 'id' => $model->id]);
+            }
         ],
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
-            'title',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Note $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                }
-            ],
-        ],
-    ]); ?>
+    ],
+]); ?>
 
     <?php Pjax::end(); ?>
 

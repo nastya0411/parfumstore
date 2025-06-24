@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+            'options' => [
+        'class' => 'table table-bordered', // добавляет границы
+        'style' => 'background-color: white; color: black;'
+    ],
         'attributes' => [
             'id',
             'title',
