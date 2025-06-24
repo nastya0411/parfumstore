@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Note;
+use yii\bootstrap5\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -19,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Назад', ['/admin/shop'], ['class' => 'btn btn-orange']) ?>
+        <?= Html::a('Назад', ['/admin/shop'], ['class' => 'btn btn-black-style']) ?>
 
-        <?= Html::a('Создать ноту', ['create'], ['class' => ' btn btn-black text-black']) ?>
+        <?= Html::a('Создать ноту', ['create'], ['class' => ' btn btn-orange-style']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -31,9 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'class' => \yii\bootstrap5\LinkPager::class
+        ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             [

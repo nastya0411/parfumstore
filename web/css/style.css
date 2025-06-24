@@ -645,8 +645,48 @@ a {
 }
 
 
+
+.btn-red {
+  background-color: #cc2b2b;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+.btn-red:hover {
+  border-color: #cc2b2b !important;
+  border-width: 2px;
+  color: #cc2b2b;
+  background-color: #ffffff;
+}
+
+
+.btn-orange-last {
+  background-color: #ab572d ;
+  color: white;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  align-self: flex-start;
+}
+
+
+.btn-orange-last:hover {
+  border-color: #ab572d !important;
+  border-width: 2px;
+  color: #ab572d ;
+  background-color: #ffffff;
+}
+
+
 .btn-red-style {
-  background-color: #a30c0c;
+  background-color: #cc2b2b;
   color: white;
   padding: 8px 12px;
   font-size: 16px;
@@ -711,3 +751,5 @@ a {
   color: #ab572d;
   background-color: #ffffff;
 }
+
+

@@ -19,7 +19,7 @@ use yii\helpers\Html;
  
      <?php Pjax::begin(); ?>
      <p>
-     <?= Html::a('Интернет-магазин', ['/admin/shop'], ['class' => 'btn btn-orange'])?>
+     <?= Html::a('Интернет-магазин', ['/admin/shop'], ['class' => 'btn btn-orange-style'])?>
      </p>
  
      <?= ListView::widget([

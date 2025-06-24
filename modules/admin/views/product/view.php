@@ -14,16 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-view">
     <p>
-        <?= Html::a('Назад', ['/admin/product'], ['class' => 'btn btn-outline-info']) ?>
+        <?= Html::a('Назад', ['/admin/product'], ['class' => 'btn btn-orange-style']) ?>
     </p>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-black-style']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-outline-danger',
+            'class' => 'btn btn-red-style',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить товар?',
                 'method' => 'post',

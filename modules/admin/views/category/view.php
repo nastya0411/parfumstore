@@ -12,16 +12,16 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
     <p>
-    <?= Html::a('Назад', ['/admin/category'], ['class' => 'btn btn-outline-info']) ?>
+    <?= Html::a('Назад', ['/admin/category'], ['class' => 'btn btn-orange-style']) ?>
     </p>
 <div class="category-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-outline-primary']) ?>
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-black-style']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-outline-danger',
+            'class' => 'btn btn-red-style',
             'data' => [
                 'confirm' => 'Вы уверены, что хотите удалить категорию?',
                 'method' => 'post',

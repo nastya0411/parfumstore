@@ -74,7 +74,7 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-outline-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-orange-style']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

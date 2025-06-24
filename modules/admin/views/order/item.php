@@ -19,30 +19,30 @@ use yii\bootstrap5\Html;
 
             <?= $model->status_id == Status::getStatusId('Оплачен оффлайн')
                 ? Html::a('Выдача заказа', ['apply', 'id' => $model->id], ['class' =>
-                'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-orange-last', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
 
 
             <?= $model->status_id == Status::getStatusId('Создан')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], ['class' =>
-                'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-orange-last', 'data-method' => 'post', 'data-pjax' => 0])
                 . Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
-                'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-red', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
 
             <?= $model->status_id == Status::getStatusId('Оплачен онлайн')
                 ? Html::a('В сборку', ['work', 'id' => $model->id], ['class' =>
-                'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-orange-last', 'data-method' => 'post', 'data-pjax' => 0])
                 . Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
-                'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-red', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
 
             <?= $model->status_id == Status::getStatusId('Ожидает оплаты')
                 ? Html::a('Отменить', ['cancel', 'id' => $model->id], ['class' =>
-                'btn btn-outline-danger', 'data-method' => 'post', 'data-pjax' => 0])
+                'btn btn-red', 'data-method' => 'post', 'data-pjax' => 0])
                 : ''
             ?>
 
@@ -50,9 +50,9 @@ use yii\bootstrap5\Html;
             $btn = "";
             if ($model->status_id == Status::getStatusId('В сборке')) {
                 if ($model->pay_receipt) {
-                    $btn = Html::a('Оплата при получении', ['paid', 'id' => $model->id], ['class' => 'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0]);
+                    $btn = Html::a('Оплата при получении', ['paid', 'id' => $model->id], ['class' => 'btn btn-orange-last', 'data-method' => 'post', 'data-pjax' => 0]);
                 } else {
-                    $btn = Html::a('Доставлен', ['apply', 'id' => $model->id], ['class' => 'btn btn-orange', 'data-method' => 'post', 'data-pjax' => 0]);
+                    $btn = Html::a('Доставлен', ['apply', 'id' => $model->id], ['class' => 'btn btn-orange-last', 'data-method' => 'post', 'data-pjax' => 0]);
                 }
             }
             echo $btn;

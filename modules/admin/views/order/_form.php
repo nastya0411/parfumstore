@@ -16,7 +16,7 @@
   
 
       <div class="form-group">
-          <?= Html::submitButton('Отменить заказ', ['class' => 'btn btn-orange']) ?>
+          <?= Html::submitButton('Отменить заказ', ['class' => 'btn btn-red-style']) ?>
       </div>
   
       <?php ActiveForm::end(); ?>

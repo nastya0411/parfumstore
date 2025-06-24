@@ -19,9 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Назад', ['/admin/shop'], ['class' => 'btn btn-outline-info']) ?>
+        <?= Html::a('Назад', ['/admin/shop'], ['class' => 'btn btn-black-style']) ?>
 
-        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-outline-success']) ?>
+        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-orange-style']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
