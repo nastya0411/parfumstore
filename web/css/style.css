@@ -601,18 +601,29 @@ a {
   box-shadow: 0 0 0 0.2rem rgba(171, 87, 45, 0.3) !important;
 }
 
+
+.form-select:focus {
+  outline: none; 
+  box-shadow: 0 0 0 0.2rem rgba(171, 87, 45, 0.3) !important;
+}
+
+.was-validated .form-select:valid:focus,
+.form-select.is-valid:focus  {
+  box-shadow: 0 0 0 0.2rem rgba(171, 87, 45, 0.3) !important;
+}
+
+
 .alert-success {
   --bs-alert-color: #c04000; 
   --bs-alert-bg: #facbb3f0;
   --bs-alert-border-color: #b04b19ff; 
   --bs-alert-link-color: #b93e00;
 }
-
 .alert-info {
-  --bs-alert-color: #ffa81c; 
-  --bs-alert-bg: #f4cd90;
-  --bs-alert-border-color: #ffa81c; 
-  --bs-alert-link-color: #ffa81c;
+  --bs-alert-color: #ffa20d !important;
+  --bs-alert-bg: #faedd8 !important;
+  --bs-alert-border-color: #ffa20d !important;
+  --bs-alert-link-color: #ffa20d !important;
 }
 
 

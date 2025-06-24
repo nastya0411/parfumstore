@@ -9,15 +9,19 @@ use yii\widgets\ListView;
 $this->title = 'Создание заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerCssFile('@web/css/view-style.css', [
+    'depends' => [\yii\bootstrap5\BootstrapAsset::class]
+]);
 ?>
 <div class="order-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <div class="d-flex justify-content-end gap-3 fs-4 my-3">
+    <div class="d-flex justify-content-end gap-3 fs-2 my-3 order-total">
         <div>
             <span>
                 Итого:
-                количество - <span class="fw-bold"><?= $dataProvider->models[0]['cart_amount'] ?></span>
+                количество - <span class="fw-bold "><?= $dataProvider->models[0]['cart_amount'] ?></span>
                 сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
             </span>
         </div>
@@ -38,11 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
     
 
-    <div class="d-flex justify-content-end gap-3 fs-4 my-3">
+    <div class="d-flex justify-content-end gap-3 fs-2 my-3 order-total">
         <div>
             <span>
                 Итого:
-                количество - <span class="fw-bold"><?= $dataProvider->models[0]['cart_amount'] ?></span>
+                количество - <span class="fw-bold "><?= $dataProvider->models[0]['cart_amount'] ?></span>
                 сумма - <span class="fw-bold"><?= $dataProvider->models[0]['cart_cost'] ?></span>
             </span>
         </div>

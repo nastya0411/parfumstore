@@ -2,7 +2,7 @@
 
 use yii\bootstrap5\Html;
 
-$photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/img/no_photo.jpg';
+$photo = isset($model['product_photo']) ? '/img/' . $model['product_photo'] : '/img/no_photo.jpg';
 ?>
 
 <div class="order-card">
@@ -13,13 +13,12 @@ $photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/im
                 <?= ++$key ?>
             </div>
             <div class="order-item-image">
-                <?= Html::img($photo, [
+                <?= Html::img($photo, [ 
                     'alt' => Html::encode($model->product->title),
                     'class' => 'order-img',
                 ]) ?>
             </div>
 
-            <!-- Блок с центрированным текстом -->
             <div class="order-item-details text-center flex-fill">
                 <?= Html::a(
                     Html::encode($model->product->title),
@@ -45,7 +44,7 @@ $photo = isset($model->product->photo) ? '/img/' . $model->product->photo : '/im
             <div class="order-total fw-bold fs-4">
                 <?= Yii::$app->formatter->asDecimal($model->cost, 2) ?> ₽
             </div>
-        </div>
+        </div> 
 
     </div>
 </div>
