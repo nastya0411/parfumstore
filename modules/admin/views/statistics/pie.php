@@ -56,16 +56,16 @@ $borderColors = [
         ],
         'data' => [
             'labels' => $labels,
-            'datasets' => [ 
-                [
-                    'label' => "Заказы с оплатой онлайн",
-                    'backgroundColor' => $backgroundColors,
-                    'borderColor' => $borderColors,
-                    'borderWidth' => 2,
-                    'hoverBorderColor' => "#ffffff",
-                    'data' => array_map('intval', $data),
-                ]
-            ]
+'datasets' => [ 
+    [
+        'label' => "Заказы с оплатой онлайн",
+        'backgroundColor' => array_slice($backgroundColors, 0, count($data)),
+        'borderColor' => array_slice($borderColors, 0, count($data)),
+        'borderWidth' => 2,
+        'hoverBorderColor' => "#ffffff",
+        'data' => array_map('intval', $data),
+    ]
+]
         ],
         'clientOptions' => [
             'maintainAspectRatio' => false,
