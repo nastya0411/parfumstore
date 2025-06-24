@@ -1,7 +1,6 @@
 <?php
-
 use yii\bootstrap5\Html;
-//dd($model->product?->photos->photo);
+
 $photo = $model->product?->photos ? '/img/' . $model->product->photos[0]->photo : '/img/no_photo.jpg';
 ?>
 

@@ -157,24 +157,21 @@ class Order extends \yii\db\ActiveRecord
 
     public function sendOfd(?string $userMail = null)
     {
-        Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';
-        $status = Status::findOne($this->status_id);
+        Yii::$app->mailer->htmlLayout = '@app/mail/layouts/html';        
         try {
             $result = Yii::$app->mailer
                 ->compose('ofd', [
-                    // 'model' => $this,
-                    // 'status' => $status,
-                    // 'orderDate' => Yii::$app->formatter->asDate($this->date),
-                    // 'orderTime' => Yii::$app->formatter->asTime($this->time),
+                    'model' => $this,                    
+                    'orderDate' => Yii::$app->formatter->asDate($this->date),
+                    'orderTime' => Yii::$app->formatter->asTime($this->time),
+                    "items" => $this->orderItems
                 ])
                 ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->name])
                 ->setTo($userMail ?? $this->user->email)
                 ->setCc('parfumstore_info@mail.ru')
-                ->setSubject("Изменение статуса заказа #{$this->id}")
+                ->setSubject("Чек оплаты заказа #{$this->id} от " 
+                    . Yii::$app->formatter->asDate($this->date, "php:m.d.Y"))
                 ->send();
-
-
-            // die;
             if (!$result) {
                 Yii::$app->session->setFlash('error', 'Ошибка отправки электронного письма!');
                 Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
@@ -208,8 +205,6 @@ class Order extends \yii\db\ActiveRecord
                 ->setSubject("Изменение статуса заказа #{$this->id}")
                 ->send();
 
-
-            // die;
             if (!$result) {
                 Yii::$app->session->setFlash('error', 'Ошибка отправки электронного письма!');
                 Yii::error("Не удалось отправить письмо для заказа #{$this->id}");
@@ -219,8 +214,7 @@ class Order extends \yii\db\ActiveRecord
             return $result;
         } catch (\Exception $e) {
             Yii::error("Ошибка при отправке письма: " . $e->getMessage());
-            var_dump($e->getMessage());
-            die;
+            var_dump($e->getMessage());            
             return false;
         }
     }
@@ -234,9 +228,7 @@ class Order extends \yii\db\ActiveRecord
             . "i.id is null";
 
         Yii::$app->db->createCommand($q)->execute();
-
         $users = User::find()->asArray()->all();
-
         $date_on = time() - 3 * 30 * 24 * 60 * 60;
         $date_off = time();
         $pay_type = PayType::find()->select('id')->indexBy('id')->column();
@@ -294,12 +286,10 @@ class Order extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         if (Yii::$app->id !== 'basic-console') {
+            $this->sendMail();
             if (str_contains(Status::getStatuses()[$this->status_id], "Оплачен")) {
                 $this->sendOfd(Yii::$app->params["userEmail"]);
-            } else {
-                $this->sendMail();
             }
-
         }
     }
 }
