@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <div class="chart-card">
-        <div style="height: 45px;">
+        <div style="height: 20px;">
             <h5>Топ 5 товаров за <?= $title ?></h5>
         </div>
         <?php
